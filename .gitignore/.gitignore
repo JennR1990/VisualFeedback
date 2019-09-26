@@ -1,0 +1,15 @@
+*.pdf
+*.html
+*.svg
+*.xlsx
+lit/*.pdf
+doc/
+data/*
+*.doc
+*.docx
+*.tex
+# History files
+.Rhistory
+.Rapp.history
+# Session Data files
+.RData
