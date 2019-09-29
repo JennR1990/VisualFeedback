@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1569799428264.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E75CDBDB",
+    "lastKnownWriteTime" : 1569799660,
+    "last_content_update" : 1569799660267,
+    "path" : "E:/Jenn/Documents/VisualFeedback/R/shared.R",
+    "project_path" : "R/shared.R",
+    "properties" : {
+        "cursorPosition" : "36,74",
+        "scrollLine" : "20"
+    },
+    "relative_order" : 1,
+    "source_on_save" : true,
+    "source_window" : "",
+    "type" : "r_source"
+}
