@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "2535855510",
     "id" : "E75CDBDB",
-    "lastKnownWriteTime" : 1569810751,
-    "last_content_update" : 1569810751063,
+    "lastKnownWriteTime" : 1569968388,
+    "last_content_update" : 1569968388560,
     "path" : "E:/Jenn/Documents/VisualFeedback/R/shared.R",
     "project_path" : "R/shared.R",
     "properties" : {
-        "cursorPosition" : "3,32",
-        "scrollLine" : "0"
+        "cursorPosition" : "41,74",
+        "scrollLine" : "24"
     },
     "relative_order" : 1,
     "source_on_save" : true,

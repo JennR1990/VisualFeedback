@@ -23,6 +23,7 @@ loadalldata<- function () {
   exposure_localization<<- Loaddata(group='exposure', task = 'localization')
   terminal_localization<<- Loaddata(group='terminal', task = 'localization')
   terminal_reaches<<- Loaddata(group='terminal')
+  exposure_reaches<<- Loaddata(group='exposure')
 }
 
 downloadOSFdata <- function(update=FALSE) {
@@ -39,6 +40,7 @@ downloadOSFdata <- function(update=FALSE) {
              'pause_reaches.csv'        = 'https://osf.io/q59b3/download',
              'terminal_reaches.csv'     = 'https://osf.io/2vdxr/download',
              'terminal_localization.csv'= 'https://osf.io/s3p2x/download',
+             'exposure_reaches.csv'     = 'https://osf.io/pvebr/download',
              'exposure_localization.csv'= 'https://osf.io/428tx/download'
 )
 

@@ -607,7 +607,7 @@ CompareModel<- function(groups = c('active', 'passive','pause', 'nocursor', 'noc
 mmed <- function(x,n=5){runmed(x,n)}
 
 
-fitPropModel<- function(reachdata, locadata, color, title) {
+fitPropModel<- function(reachdata, locadata) {
   
   localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
   meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
@@ -635,41 +635,15 @@ fitPropModel<- function(reachdata, locadata, color, title) {
   } 
   # get lowest MSE, and pars that go with that
   bestpar <- order(pargrid[,2])[1]
-  # plot(localizations, type = 'l',  ylim = c(-15,15), axes = FALSE, main = title, ylab = 'Change in Hand Localizations [°]', xlab = "Trial", col = color, cex.lab = 1.5, cex.main = 1.5)
-  # axis(
-  #   1,
-  #   at = c(1, 64, 224, 240, 288),
-  #   cex.axis = 1.5,
-  #   las = 2
-  # )
-  # axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
+
   output<- PropModel(unlist(pargrid[bestpar]), schedule)
-  # lines(output, col = "black")
-  # lines(localizations, col = color)
-  # proportion<- sprintf('Proportion = %f', unlist(pargrid[bestpar]))
-  # print(proportion)
-  # legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
-  #text(144, 0, labels = proportion)
-  
-  reaches <- getreachesformodel(reachdata)
-  reach_par <-
-    fitTwoRateReachModel(
-      reaches = reaches$meanreaches,
-      schedule = schedule,
-      oneTwoRates = 2,
-      checkStability = TRUE
-    )
-  reach_model <-
-    twoRateReachModel(par = reach_par, schedule = schedule)
-  Average<- mean(localizations[182:224], na.rm = TRUE)
-  Scale<- Average/30
-  reach_model$slow<- reach_model$slow*Scale
-  reach_model$fast<- reach_model$fast*Scale
-  # lines(reach_model$slow * -1, col = color,lty = 2)
-  # lines(reach_model$fast * -1, col = color,lty = 3)
+
   
   # return(those pars)
-  return(unlist(pargrid[bestpar]))
+  #return(unlist(pargrid[bestpar]))
+  
+  #return the output to use for plots
+  return(output)
   
 }
 
