@@ -48,7 +48,7 @@ ReachAfterEffectReaches <- function (acd, ncd, ncdI) {
 }
 
 Localizations <- function (pl, tl , expl) {
-  PlotoutLine(pl, 11:13, 5:7, "Hand Localizations")
+  PlotoutLine(pl, 6:8, 5:7, "Hand Localizations")
   PlotData(pl, 5, 5,1)
   PlotData(tl, 6, 6,1)
   PlotData(expl, 7, 7,1)
@@ -62,6 +62,45 @@ ReachAfterEffects <- function (acd,ncd_NC, ncdI) {
   PlotData(ncdI, 4, 4, x =  c(c(33:288), rev(c(33:288))))
 }
 
+RAEPlots <- function (acd, ncd, ncdI, ncnc, ncinc) {
+  PlotoutLine(acd, 4:5, 3:4, "Instructed & Uninstructed No-Cursors")
+  PlotData(ncd, 3, 3)
+  PlotData(ncdI, 4, 4)
+  PlotData(ncnc, 3, 3, x =  c(c(33:288), rev(c(33:288))), line = 5)
+  PlotData(ncinc, 4, 4, x =  c(c(33:288), rev(c(33:288))), line = 5)
+}
+
+
+plotpropmodels<- function (){
+  output1<-fitPropModel(passive_reaches, passive_localization)
+  output2<-fitPropModel(terminal_reaches, terminal_localization)
+  output3<-fitPropModel(exsposure_reaches, exposure_localization)
+  
+  plot(
+    output1,
+    ylim = c(-15, 15),
+    xlab = "Proportional Model",
+    lwd = 2,
+    ylab = "Change in Hand Estimates [°]",
+    col = colorPA,
+    axes = FALSE,
+    main = title,
+    type = 'l', 
+    cex.lab = 1.5,
+    cex.main = 1.5
+  )
+  axis(
+    1,
+    at = c(1, 64, 224, 240, 288),
+    cex.axis = 1.5,
+    las = 2
+  )
+  axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
+  lines(output2, col = colorT)
+  lines(output3, col = colorE)
+  
+  
+}
 
 PlotallreachesCI <-
   function (acd = dataset1,
@@ -429,7 +468,7 @@ RegressionPLotchange <- function() {
 ##this plots reach, localization and no-cursor data.
 
 
-PlotData <- function(dataset, color, trans, rotate = -1, x =  c(c(1:288), rev(c(1:288)))) {
+PlotData <- function(dataset, color, trans, rotate = -1, x =  c(c(1:288), rev(c(1:288))), line = 1) {
   colorlist <- c(colorA, colorNL, colorNC, colorNNC,colorPA,colorT,colorE)
   translist <-
     c(colorA_trans,
@@ -447,7 +486,7 @@ PlotData <- function(dataset, color, trans, rotate = -1, x =  c(c(1:288), rev(c(
   x <- x
   y <- c(dataCIs[, 1], rev(dataCIs[, 2]))
   polygon(x, y, col = translist[trans], border = NA)
-  lines(x[1:length(dataset$Mean)],dataset$Mean * rotate, col = colorlist[color], lwd = 1.5)
+  lines(x[1:length(dataset$Mean)],dataset$Mean * rotate, col = colorlist[color], lwd = 1.5, lty = line )
 }
 
 Plotschedule <- function(dataset) {
@@ -493,12 +532,7 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'Terminal Group (N=32)', #Red
       'Exposure Group (N=32)', #Yellow
       'Active Localizations (N=32)',
-      'Passive Localizations (N=32)',
-      'Continous Localizations (N=32)',
-      'Terminal Localizations (N=32)',
-      'Exposure Localizations (N=32)'
-
-    )
+      'Passive Localizations (N=32)')
   colorlist <- list(colorA, colorNL, colorNC, colorNNC,colorPA, colorT, colorE)
   label <- labels[exp]
   colors <- colorlist[color]
@@ -891,11 +925,12 @@ plotfitPropModel<- function(reachdata, locadata, color, title) {
   )
   axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
   output<- PropModel(unlist(pargrid[bestpar]), schedule)
-  lines(output, col = "black")
-  lines(localizations, col = color)
+  lines(output, col = 'black')
+  #lines(localizations, col = color)
   proportion<- sprintf('Proportion = %f', unlist(pargrid[bestpar]))
   print(proportion)
-  legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
+  legend(0,-5, legend = c('Localization data', 'Proportional output'), col = c(color, 'black'), lty = 1,lwd = 2, bty = 'n')
+  #legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
   #text(144, 0, labels = proportion)
   
   reaches <- getreachesformodel(reachdata)
@@ -912,8 +947,8 @@ plotfitPropModel<- function(reachdata, locadata, color, title) {
   Scale<- Average/30
   reach_model$slow<- reach_model$slow*Scale
   reach_model$fast<- reach_model$fast*Scale
-  lines(reach_model$slow * -1, col = color,lty = 2)
-  lines(reach_model$fast * -1, col = color,lty = 3)
+  #lines(reach_model$slow * -1, col = color,lty = 2)
+  #lines(reach_model$fast * -1, col = color,lty = 3)
   
   # return(those pars)
   return(unlist(pargrid[bestpar]))
