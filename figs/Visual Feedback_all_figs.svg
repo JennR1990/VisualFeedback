@@ -288,8 +288,10 @@
 <polyline points='456.82,1615.25 536.89,1615.25 ' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' clip-path='url(#cpMzguOTY2NHw1NTYuMDQyfDE3NTEuNTN8MTQ3OC45Nw==)' />
 <line x1='50.46' y1='1647.53' x2='71.84' y2='1647.53' style='stroke-width: 1.50; stroke: #00B300;' clip-path='url(#cpMzguOTY2NHw1NTYuMDQyfDE3NTEuNTN8MTQ3OC45Nw==)' />
 <line x1='50.46' y1='1661.79' x2='71.84' y2='1661.79' style='stroke-width: 1.50; stroke: #1A4D80;' clip-path='url(#cpMzguOTY2NHw1NTYuMDQyfDE3NTEuNTN8MTQ3OC45Nw==)' />
+<line x1='50.46' y1='1676.04' x2='71.84' y2='1676.04' style='stroke-width: 1.50; stroke-dasharray: 14.00,6.00;' clip-path='url(#cpMzguOTY2NHw1NTYuMDQyfDE3NTEuNTN8MTQ3OC45Nw==)' />
 <g clip-path='url(#cpMzguOTY2NHw1NTYuMDQyfDE3NTEuNTN8MTQ3OC45Nw==)'><text x='82.54' y='1651.78' style='font-size: 11.88px; font-family: Arial;' textLength='131.05px' lengthAdjust='spacingAndGlyphs'>No-Cursor Group (N=32)</text></g>
 <g clip-path='url(#cpMzguOTY2NHw1NTYuMDQyfDE3NTEuNTN8MTQ3OC45Nw==)'><text x='82.54' y='1666.04' style='font-size: 11.88px; font-family: Arial;' textLength='186.52px' lengthAdjust='spacingAndGlyphs'>No-Cursor Instructed Group (N=16)</text></g>
+<g clip-path='url(#cpMzguOTY2NHw1NTYuMDQyfDE3NTEuNTN8MTQ3OC45Nw==)'><text x='82.54' y='1680.29' style='font-size: 11.88px; font-family: Arial;' textLength='83.18px' lengthAdjust='spacingAndGlyphs'>No-Cursor Data</text></g>
 <defs>
   <clipPath id='cpMHw1NzZ8MTgwMHww'>
     <rect x='0.00' y='0.00' width='576.00' height='1800.00' />

@@ -63,7 +63,7 @@ ReachAfterEffects <- function (acd,ncd_NC, ncdI) {
 }
 
 RAEPlots <- function (acd, ncd, ncdI, ncnc, ncinc) {
-  PlotoutLine(acd, 4:5, 3:4, "Instructed & Uninstructed No-Cursors")
+  PlotRAEoutLine(acd, 4:6, 3:5, "Instructed & Uninstructed No-Cursors")
   PlotData(ncd, 3, 3)
   PlotData(ncdI, 4, 4)
   PlotData(ncnc, 3, 3, x =  c(c(33:288), rev(c(33:288))), line = 5)
@@ -138,7 +138,6 @@ ReachmodelCTs <- function() {
 
 }
 
-
 PlotoutLine <- function(dataset, exp, color,title) {
   labels <-
     list (
@@ -157,7 +156,7 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'Exposure Localizations (N=32)'
       
     )
-  colorlist <- list(colorA, colorNL, colorNC, colorNNC,colorPA, colorT, colorE)
+  colorlist <- list(colorA, colorNL, colorNC, colorNNC, colorPA, colorT, colorE)
   label <- labels[exp]
   colors <- colorlist[color]
   dataCIs <- trialCI(data = dataset)
@@ -189,6 +188,68 @@ PlotoutLine <- function(dataset, exp, color,title) {
     legend = c(label),
     col = c(unlist(colors)),
     lty = c(1),
+    lwd = c(2),
+    bty = 'n', 
+    cex = 1.5
+  )
+  axis(2, at = c(-30, -15, 0, 15, 30), cex.axis = 1.5,
+       las = 2)
+  axis(1, at = c(1, 64, 224, 240, 288), cex.axis = 1.5, las = 2)
+}
+
+
+
+PlotRAEoutLine <- function(dataset, exp, color,title) {
+  labels <-
+    list (
+      'Active Localization Group (N=32)', #orange
+      'Passive Localization Group (N=32)', #purple
+      'Pause Group (N=32)', #steel blue
+      'No-Cursor Group (N=32)', #blue
+      'No-Cursor Instructed Group (N=16)', #Green
+      'No-Cursor Data',
+      'Continous Group (N=32)',
+      'Terminal Group (N=32)', #Red
+      'Exposure Group (N=32)', #Yellow
+      'Active Localizations (N=32)',
+      'Passive Localizations (N=32)',
+      'Continous Localizations (N=32)',
+      'Terminal Localizations (N=32)',
+      'Exposure Localizations (N=32)'
+      
+    )
+  colorlist <- list(colorA, colorNL, colorNC, colorNNC, 'Black', colorPA, colorT, colorE)
+  label <- labels[exp]
+  colors <- colorlist[color]
+  dataCIs <- trialCI(data = dataset)
+  dataset["distortion"][is.na(dataset["distortion"])] <- 0
+  dataset$Mean <-
+    rowMeans(dataset[, 2:length(dataset)], na.rm = TRUE)
+  plot(
+    dataset$Mean,
+    ylim = c(-35, 35),
+    xlab = "Trial",
+    ylab = "Hand Direction [°]",
+    axes = F,
+    main = title,
+    type = 'l',
+    col = 'white', 
+    cex.lab = 1.5,
+    cex.main = 1.5
+  )
+  lines(c(1, 64, 64, 224, 224, 240, 240),
+        c(0, 0, 30, 30, -30, -30, 0),
+        col = rgb(0., 0., 0.))
+  lines(c(240, 288),
+        c(0, 0),
+        lty = 2,
+        col = rgb(0., 0., 0.))
+  legend(
+    -10,
+    -5,
+    legend = c(label),
+    col = c(unlist(colors)),
+    lty = c(1,1,5),
     lwd = c(2),
     bty = 'n', 
     cex = 1.5
