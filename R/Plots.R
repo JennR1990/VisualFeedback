@@ -74,17 +74,16 @@ RAEPlots <- function (acd, ncd, ncdI, ncnc, ncinc) {
 plotpropmodels<- function (){
   output1<-fitPropModel(passive_reaches, passive_localization)
   output2<-fitPropModel(terminal_reaches, terminal_localization)
-  output3<-fitPropModel(exsposure_reaches, exposure_localization)
+  output3<-fitPropModel(exposure_reaches, exposure_localization, exp = 2)
   
-  plot(
-    output1,
+  plot(output1,
     ylim = c(-15, 15),
-    xlab = "Proportional Model",
-    lwd = 2,
+    xlab = "Trial",
+    lwd = 1,
     ylab = "Change in Hand Estimates [°]",
     col = colorPA,
     axes = FALSE,
-    main = title,
+    main = 'Proportional Models',
     type = 'l', 
     cex.lab = 1.5,
     cex.main = 1.5
@@ -96,11 +95,110 @@ plotpropmodels<- function (){
     las = 2
   )
   axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
-  lines(output2, col = colorT)
-  lines(output3, col = colorE)
-  
-  
+  legend(0, -5, legend = c('Continous Group', 'Terminal Group', 'Exposure Group'), col = c(colorPA, colorT, colorE), 
+         lty = c(1,1,1), lwd = 2, bty = 'n', cex = 1.5)
+  lines(output2, col = colorT, lwd = 1)
+  lines(output3, col = colorE, lwd = 1)
 }
+
+
+
+ReachmodelCTs <- function() {
+  grid <- 'restricted'
+  reaches <- getreachesformodel(passive_reaches)
+  reach_par <-
+    fitTwoRateReachModel(
+      reaches = reaches$meanreaches,
+      schedule = reaches$distortion,
+      oneTwoRates = 2,
+      grid = grid,
+      checkStability = TRUE
+    )
+  reach_model <- twoRateReachModel(par = reach_par, schedule = reaches$distortion)
+  PlotCToutLine(active_reaches, 7:11, 6:10, 'Reaches')
+    lines(reach_model$total * -1, col = colorPA,lty = 4)
+    lines(reach_model$slow * -1, col = colorPA,lty = 2)
+    lines(reach_model$fast * -1, col = colorPA,lty = 3)
+    
+    reaches1 <- getreachesformodel(terminal_reaches)
+    reach_par1 <-
+      fitTwoRateReachModel(
+        reaches = reaches1$meanreaches,
+        schedule = reaches1$distortion,
+        oneTwoRates = 2,
+        grid = grid,
+        checkStability = TRUE
+      )
+    reach_model1 <- twoRateReachModel(par = reach_par1, schedule = reaches1$distortion)
+    lines(reach_model1$total * -1, col = colorT,lty = 4)
+    lines(reach_model1$slow * -1, col = colorT,lty = 2)
+    lines(reach_model1$fast * -1, col = colorT,lty = 3)
+    
+
+
+}
+
+
+PlotoutLine <- function(dataset, exp, color,title) {
+  labels <-
+    list (
+      'Active Localization Group (N=32)', #orange
+      'Passive Localization Group (N=32)', #purple
+      'Pause Group (N=32)', #steel blue
+      'No-Cursor Group (N=32)', #blue
+      'No-Cursor Instructed Group (N=16)', #Green
+      'Continous Group (N=32)',
+      'Terminal Group (N=32)', #Red
+      'Exposure Group (N=32)', #Yellow
+      'Active Localizations (N=32)',
+      'Passive Localizations (N=32)',
+      'Continous Localizations (N=32)',
+      'Terminal Localizations (N=32)',
+      'Exposure Localizations (N=32)'
+      
+    )
+  colorlist <- list(colorA, colorNL, colorNC, colorNNC,colorPA, colorT, colorE)
+  label <- labels[exp]
+  colors <- colorlist[color]
+  dataCIs <- trialCI(data = dataset)
+  dataset["distortion"][is.na(dataset["distortion"])] <- 0
+  dataset$Mean <-
+    rowMeans(dataset[, 2:length(dataset)], na.rm = TRUE)
+  plot(
+    dataset$Mean,
+    ylim = c(-35, 35),
+    xlab = "Trial",
+    ylab = "Hand Direction [°]",
+    axes = F,
+    main = title,
+    type = 'l',
+    col = 'white', 
+    cex.lab = 1.5,
+    cex.main = 1.5
+  )
+  lines(c(1, 64, 64, 224, 224, 240, 240),
+        c(0, 0, 30, 30, -30, -30, 0),
+        col = rgb(0., 0., 0.))
+  lines(c(240, 288),
+        c(0, 0),
+        lty = 2,
+        col = rgb(0., 0., 0.))
+  legend(
+    -10,
+    -5,
+    legend = c(label),
+    col = c(unlist(colors)),
+    lty = c(1),
+    lwd = c(2),
+    bty = 'n', 
+    cex = 1.5
+  )
+  axis(2, at = c(-30, -15, 0, 15, 30), cex.axis = 1.5,
+       las = 2)
+  axis(1, at = c(1, 64, 224, 240, 288), cex.axis = 1.5, las = 2)
+}
+
+
 
 PlotallreachesCI <-
   function (acd = dataset1,
@@ -520,7 +618,7 @@ Plotschedule <- function(dataset) {
   axis(2, at = c(-30, -15, 0, 15, 30), cex.axis = 1.5, las = 2)
   axis(1, at = c(1, 64, 224, 240, 288), cex.axis = 1.5, las = 2)
 }
-PlotoutLine <- function(dataset, exp, color,title) {
+PlotCToutLine <- function(dataset, exp, color,title) {
   labels <-
     list (
       'Active Localization Group (N=32)', #orange
@@ -528,12 +626,15 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'Pause Group (N=32)', #steel blue
       'No-Cursor Group (N=32)', #blue
       'No-Cursor Instructed Group (N=16)', #Green
+      'Exposure Group (N=32)', #Yellow
       'Continous Group (N=32)',
       'Terminal Group (N=32)', #Red
-      'Exposure Group (N=32)', #Yellow
+      'fast',
+      'slow',
+      'output',
       'Active Localizations (N=32)',
       'Passive Localizations (N=32)')
-  colorlist <- list(colorA, colorNL, colorNC, colorNNC,colorPA, colorT, colorE)
+  colorlist <- list(colorA, colorNL, colorNC, colorNNC, colorE,colorPA, colorT, 'black','black','black')
   label <- labels[exp]
   colors <- colorlist[color]
   dataCIs <- trialCI(data = dataset)
@@ -561,10 +662,10 @@ PlotoutLine <- function(dataset, exp, color,title) {
         col = rgb(0., 0., 0.))
   legend(
     -10,
-    0,
+    -5,
     legend = c(label),
     col = c(unlist(colors)),
-    lty = c(1),
+    lty = c(1,1,3,2,4),
     lwd = c(2),
     bty = 'n', 
     cex = 1.5
@@ -888,13 +989,20 @@ plotRegressionWithCI <-
 
 
 
-plotfitPropModel<- function(reachdata, locadata, color, title) {
+plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'con') {
   
   localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
+  if ('exp' == 'exp'){
+    meanreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)
+    distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
+    schedule<- c(distortion,meanreaches)
+  } else {
   meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
   meanreaches<- meanreaches*-1
   reachdata$distortion[241:288]<- as.numeric(meanreaches)
   schedule<- reachdata$distortion
+  }
+
   
   
   #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse. 
