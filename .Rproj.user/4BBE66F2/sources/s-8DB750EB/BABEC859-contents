@@ -607,14 +607,19 @@ CompareModel<- function(groups = c('active', 'passive','pause', 'nocursor', 'noc
 mmed <- function(x,n=5){runmed(x,n)}
 
 
-fitPropModel<- function(reachdata, locadata) {
+fitPropModel<- function(reachdata, locadata, exp = 1) {
   
   localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
-  meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
-  meanreaches<- meanreaches*-1
-  reachdata$distortion[241:288]<- as.numeric(meanreaches)
-  schedule<- reachdata$distortion
-  
+  if (exp == 2){
+    meanreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)
+    distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
+    schedule<- c(distortion,meanreaches)
+  } else {
+    meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+    #meanreaches<- meanreaches*-1
+    reachdata$distortion[241:288]<- as.numeric(meanreaches)
+    schedule<- reachdata$distortion
+  }
   
   #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse. 
   pargrid <- gridsearch(localizations, schedule, nsteps = 7, topn = 4)

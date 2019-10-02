@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1569980604981.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DCEC2025",
+    "lastKnownWriteTime" : 30399714104246387,
+    "last_content_update" : 1569980604981,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "22d087da89b34d2eaad6d838d90f5f53",
+        "name" : "colorlist",
+        "title" : "colorlist"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}
