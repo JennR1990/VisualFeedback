@@ -1,3 +1,6 @@
+figs/*
+
+
 # History files
 .Rhistory
 .Rapp.history
