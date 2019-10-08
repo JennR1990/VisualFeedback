@@ -1,5 +1,6 @@
 figs/*
 *.svg
+*.pdf
 
 
 # History files
