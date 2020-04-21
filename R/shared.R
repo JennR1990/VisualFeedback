@@ -11,19 +11,21 @@ Loaddata<- function (group='passive', task='reaches') {
 }
  
 loadalldata<- function () {
-  pause_reaches<<- Loaddata(group='pause')
-  active_reaches<<- Loaddata(group='active')
-  passive_reaches<<- Loaddata()
-  nocursor_reaches<<- Loaddata(group='nocursor')
-  nocursorI_reaches<<- Loaddata(group='nocursor', task = 'NI_reaches')
-  passive_localization<<- Loaddata(task = 'localization')
-  active_localization<<- Loaddata(group='active', task = 'localization')
-  nocursor_nocursors<<- Loaddata(group='nocursor', task = 'nocursors')
-  nocursorI_nocursors<<- Loaddata(group='nocursor', task = 'NI_nocursors')
-  exposure_localization<<- Loaddata(group='exposure', task = 'localization')
-  terminal_localization<<- Loaddata(group='terminal', task = 'localization')
-  terminal_reaches<<- Loaddata(group='terminal')
-  exposure_reaches<<- Loaddata(group='exposure')
+  pause_reaches<<- removeReachOutliers(Loaddata(group='pause'))
+  active_reaches<<- removeReachOutliers(Loaddata(group='active'))
+  passive_reaches<<- removeReachOutliers(Loaddata())
+  nocursor_reaches<<- removeReachOutliers(Loaddata(group='nocursor'))
+  nocursorI_reaches<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_reaches'))
+  passive_localization<<- removeReachOutliers(Loaddata(task = 'localization'))
+  active_localization<<- removeReachOutliers(Loaddata(group='active', task = 'localization'))
+  nocursor_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'nocursors'))
+  nocursorI_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_nocursors'))
+  exposure_localization<<- removeReachOutliers(Loaddata(group='exposure', task = 'localizations'))
+  terminal_localization<<- removeReachOutliers(Loaddata(group='terminal', task = 'localizations'))
+  terminal_reaches<<- removeReachOutliers(Loaddata(group='terminal'))
+  exposure_reaches<<- removeReachOutliers(Loaddata(group='exposure'))
+  newnocursor_reaches<<- cbind(nocursor_reaches, nocursorI_reaches[2:ncol(nocursorI_reaches)])
+  newnocursor_nocursors<<- cbind(nocursor_nocursors, nocursorI_nocursors[2:ncol(nocursorI_nocursors)])
 }
 
 downloadOSFdata <- function(update=FALSE) {
@@ -38,10 +40,10 @@ downloadOSFdata <- function(update=FALSE) {
              'passive_localization.csv' = 'https://osf.io/27v54/download',
              'passive_reaches.csv'      = 'https://osf.io/mq5av/download',
              'pause_reaches.csv'        = 'https://osf.io/q59b3/download',
-             'terminal_reaches.csv'     = 'https://osf.io/2vdxr/download',
-             'terminal_localization.csv'= 'https://osf.io/s3p2x/download',
-             'exposure_reaches.csv'     = 'https://osf.io/pvebr/download',
-             'exposure_localization.csv'= 'https://osf.io/428tx/download'
+             'terminal_reaches.csv'     = 'https://osf.io/qdk9y/download',
+             'terminal_localizations.csv'= 'https://osf.io/6r4bx/download',
+             'exposure_reaches.csv'     = 'https://osf.io/6cmns/download',
+             'exposure_localizations.csv'= 'https://osf.io/er6u2/download'
 )
 
   # check if data directory exists and create if necessary:
@@ -69,4 +71,43 @@ downloadOSFdata <- function(update=FALSE) {
 
 percentNAs <- function (df) {
   return((sum(is.na(df))/prod(dim(df)))*100)
+}
+
+# OUTLIER REMOVAL ---------------------------------------------------------
+
+removeSDoutliers <- function(values, sds=3) {
+  
+  avg <- mean(values, na.rm=TRUE)
+  std <- sd(values, na.rm=TRUE) * sds
+  
+  values[values > avg + std] <- NA
+  values[values < avg - std] <- NA
+  
+  return(values)
+  
+}
+
+removeIQRoutliers <- function(values, range=3) {
+  
+  bp <- boxplot(values, range=3, plot=FALSE)
+  
+  values[values %in% bp$out] <- NA
+  
+  return(values)
+  
+}
+
+
+removeReachOutliers <- function(data) {
+  
+  ntrials <- nrow(data)
+  
+  for (trialn in c(1:ntrials)) {
+    
+    data[trialn,2:ncol(data)] <- removeSDoutliers(as.numeric(data[trialn,2:ncol(data)]))
+    
+  }
+  
+  return(data)
+  
 }

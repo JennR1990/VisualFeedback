@@ -22,11 +22,11 @@ When you save the notebook, an HTML file containing the code and output will be 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 ```{r}
 
-svglite('figs/Visual Feedback_all_figs.svg', width = 8, height = 25, system_fonts=list(sans = "Arial"))
+svglite('figs/Visual Feedback_Poster_figs.svg', width = 8, height = 25, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,2,3,4,5), nrow = 5), heights = c(2,2,2,2,2))
 VisualFeedbackReaches(active_reaches, passive_reaches, terminal_reaches)
 ReachmodelCTs()
-Localizations(passive_localization,terminal_localization, exposure_localization)
+Localizations(passive_localization,terminal_localization, exposure_localization, active_localization)
 plotpropmodels()
 RAEPlots(active_reaches, nocursor_reaches[33:320,], nocursorI_reaches[33:320,], nocursor_nocursors, nocursorI_nocursors)
 dev.off()
@@ -43,12 +43,37 @@ ReachAfterEffectReaches(active_reaches, nocursor_reaches[33:320,], nocursorI_rea
 ReachAfterEffects(active_reaches, nocursor_nocursors, nocursorI_nocursors)
 dev.off()
 
+
+
+
+svglite('figs/Implicit learning.svg', width = 12, height = 4, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2), nrow = 1), heights = c(2,2))
+ReachAfterEffects(active_reaches, nocursor_nocursors, nocursorI_nocursors)
+Localizations(passive_localization,terminal_localization, exposure_localization, active_localization)
+dev.off()
+
+svglite('figs/Implicit learning Zoomed in.svg', width = 12, height = 4, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2), nrow = 1), heights = c(2,2))
+plotreapoints()
+plotproppoints()
+dev.off()
+
+svglite('figs/Model Fits.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2,3,4), nrow = 2), heights = c(2,2))
+ActivePars<-Reachmodel(active_reaches, 'Active', color = colorA)
+PassivePars<-Reachmodel(passive_reaches, 'Passive', color = colorPA)
+TerminalPars<-Reachmodel(terminal_reaches, 'Terminal', color = colorT)
+NoCIPars<-Reachmodel(newnocursor_reaches[33:320,], 'No-Cursor', grid = 'skewed', color = colorNC)
+dev.off()
+
+
+
 ```
 
 ```{r}
 PausePars<-Reachmodel(pause_reaches[33:320,], 'Pause', color = colorNL)
 NoCPars<-Reachmodel(nocursor_reaches[33:320,], 'No-Cursor', color = colorNC)
-NoCIPars<-Reachmodel(nocursorI_reaches[33:320,], 'No-Cursor', grid = 'skewed', color = colorNNC)
+NoCIPars<-Reachmodel(newnocursor_reaches[33:320,], 'No-Cursor', grid = 'skewed', color = colorNC)
 ActivePars<-Reachmodel(active_reaches, 'Active', color = colorA)
 PassivePars<-Reachmodel(passive_reaches, 'Passive', color = colorPA)
 TerminalPars<-Reachmodel(terminal_reaches, 'Terminal', color = colorT)
@@ -67,9 +92,20 @@ metrics$group<- groups
 ```
 
 ```{r}
-LocalizationModelCompare(passive_localization, passive_reaches, colorPA)
-LocalizationModelCompare(active_localization, active_reaches, colorA)
-LocalizationModelCompare(terminal_localization, terminal_reaches, colorT)
+Passive_PropMetrics<-LocalizationModelCompare(passive_localization, passive_reaches, colorPA)
+Active_PropMetrics<-LocalizationModelCompare(active_localization, active_reaches, colorA)
+Exposure_PropMetrics<-ExpoLocalizationModelCompare(exposure_localization, exposure_reaches, colorE)
+Terminal_PropMetrics<-LocalizationModelCompare(terminal_localization, terminal_reaches, colorT)
+```
+
+
+```{r}
+ANOVAdata<- PrepdataforANOVA(active_reaches, passive_reaches, pause_reaches[33:320,], nocursor_reaches[33:320,], nocursorI_reaches[33:320,], nocursor_nocursors, nocursorI_nocursors, terminal_reaches)
+ANOVAPdata<- PrepdataforPropANOVA(active_localization,passive_localization)
+TtestPdata<- PrepdataforPropT(active_localization, passive_localization, terminal_localization, exposure_localization)
+Ttestdata<- PrepdataforT(active_reaches, passive_reaches, pause_reaches[33:320,], nocursor_reaches[33:320,], nocursor_nocursors, nocursorI_reaches[33:320,], nocursorI_nocursors, terminal_reaches)
+
+
 ```
 
 

@@ -47,11 +47,19 @@ ReachAfterEffectReaches <- function (acd, ncd, ncdI) {
   PlotData(ncdI, 4, 4)
 }
 
-Localizations <- function (pl, tl , expl) {
+Localizations1 <- function (pl, tl , expl) {
   PlotoutLine(pl, 6:8, 5:7, "Hand Localizations")
   PlotData(pl, 5, 5,1)
   PlotData(tl, 6, 6,1)
   PlotData(expl, 7, 7,1)
+}
+
+Localizations <- function (pl, tl , expl, al) {
+  PlotoutLine(pl, 10:13, c(1,5:7), "Hand Localizations")
+  PlotData(pl,5, 5,1)
+  PlotData(tl, 6, 6,1)
+  PlotData(expl, 7, 7,1)
+  PlotData(al, 1, 1,1)
 }
 
 
@@ -95,7 +103,7 @@ plotpropmodels<- function (){
     las = 2
   )
   axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
-  legend(0, -5, legend = c('Continous Group', 'Terminal Group', 'Exposure Group'), col = c(colorPA, colorT, colorE), 
+  legend(0, -5, legend = c('Continous Group (21%)', 'Terminal Group (19%)', 'Exposure Group (16%)'), col = c(colorPA, colorT, colorE), 
          lty = c(1,1,1), lwd = 2, bty = 'n', cex = 1.5)
   lines(output2, col = colorT, lwd = 1)
   lines(output3, col = colorE, lwd = 1)
@@ -144,16 +152,16 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'Active Localization Group (N=32)', #orange
       'Passive Localization Group (N=32)', #purple
       'Pause Group (N=32)', #steel blue
-      'No-Cursor Group (N=32)', #blue
-      'No-Cursor Instructed Group (N=16)', #Green
+      'No-Cursor(N=32)', #blue
+      'No-Cursor Instructed(N=16)', #Green
       'Continous Group (N=32)',
       'Terminal Group (N=32)', #Red
       'Exposure Group (N=32)', #Yellow
-      'Active Localizations (N=32)',
       'Passive Localizations (N=32)',
-      'Continous Localizations (N=32)',
-      'Terminal Localizations (N=32)',
-      'Exposure Localizations (N=32)'
+      'Active (N=32)',
+      'Continous(N=32)',
+      'Terminal(N=32)',
+      'Exposure (N=32)'
       
     )
   colorlist <- list(colorA, colorNL, colorNC, colorNNC, colorPA, colorT, colorE)
@@ -184,13 +192,13 @@ PlotoutLine <- function(dataset, exp, color,title) {
         col = rgb(0., 0., 0.))
   legend(
     -10,
-    -5,
+    0,
     legend = c(label),
     col = c(unlist(colors)),
     lty = c(1),
     lwd = c(2),
     bty = 'n', 
-    cex = 1.5
+    cex = 1
   )
   axis(2, at = c(-30, -15, 0, 15, 30), cex.axis = 1.5,
        las = 2)
