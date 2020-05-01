@@ -25,6 +25,7 @@ The preview shows you a rendered HTML copy of the contents of the editor. Conseq
 svglite('figs/Visual Feedback_Poster_figs.svg', width = 8, height = 25, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,2,3,4,5), nrow = 5), heights = c(2,2,2,2,2))
 VisualFeedbackReaches(active_reaches, passive_reaches, terminal_reaches)
+
 ReachmodelCTs()
 Localizations(passive_localization,terminal_localization, exposure_localization, active_localization)
 plotpropmodels()
@@ -46,9 +47,10 @@ dev.off()
 
 
 
-svglite('figs/Implicit learning.svg', width = 12, height = 4, system_fonts=list(sans = "Arial"))
+svglite('figs/all reaches.svg', width = 12, height = 4, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,2), nrow = 1), heights = c(2,2))
-ReachAfterEffects(active_reaches, nocursor_nocursors, nocursorI_nocursors)
+VisualFeedbackReaches()
+#ReachAfterEffects(active_reaches, nocursor_nocursors, nocursorI_nocursors)
 Localizations(passive_localization,terminal_localization, exposure_localization, active_localization)
 dev.off()
 
@@ -58,9 +60,10 @@ plotreapoints()
 plotproppoints()
 dev.off()
 
-svglite('figs/Model Fits.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
+svglite('figs/Model Fits1.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,2,3,4), nrow = 2), heights = c(2,2))
-ActivePars<-Reachmodel(active_reaches, 'Active', color = colorA)
+VisualFeedbackReaches()
+#ActivePars<-Reachmodel(active_reaches, 'Active', color = colorA)
 PassivePars<-Reachmodel(passive_reaches, 'Passive', color = colorPA)
 TerminalPars<-Reachmodel(terminal_reaches, 'Terminal', color = colorT)
 NoCIPars<-Reachmodel(newnocursor_reaches[33:320,], 'No-Cursor', grid = 'skewed', color = colorNC)

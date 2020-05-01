@@ -34,11 +34,13 @@ loadcolors <- function() {
 }
 
 
-VisualFeedbackReaches <- function (acd, pad, trm) {
-  PlotoutLine(acd, 6:7, 5:6, "Reach Trials")
-  PlotData(pad, 5, 5 )
-  PlotData(trm, 6, 6)
-
+VisualFeedbackReaches <- function () {
+  PlotoutLine(active_reaches, 10:14, c(1,5,6,3,2), "Reach Trials")
+  PlotData(passive_reaches, 5, 5 )
+  PlotData(terminal_reaches, 6, 6)
+  PlotData(active_reaches, 1, 1 )
+  PlotData(pause_reaches[33:320,], 2, 2)
+  PlotData(newnocursor_reaches[33:320,], 3, 3)
 }
 
 ReachAfterEffectReaches <- function (acd, ncd, ncdI) {
@@ -159,9 +161,10 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'Exposure Group (N=32)', #Yellow
       'Passive Localizations (N=32)',
       'Active (N=32)',
-      'Continous(N=32)',
+      'Passive(N=32)',
       'Terminal(N=32)',
-      'Exposure (N=32)'
+      'No-Cursor (N=48)',
+      'Pause (N=32)'
       
     )
   colorlist <- list(colorA, colorNL, colorNC, colorNNC, colorPA, colorT, colorE)

@@ -26,7 +26,9 @@ loadalldata<- function () {
   exposure_reaches<<- removeReachOutliers(Loaddata(group='exposure'))
   newnocursor_reaches<<- cbind(nocursor_reaches, nocursorI_reaches[2:ncol(nocursorI_reaches)])
   newnocursor_nocursors<<- cbind(nocursor_nocursors, nocursorI_nocursors[2:ncol(nocursorI_nocursors)])
-}
+  variation_reaches<<- removeReachOutliers(Loaddata(group='variation'))
+  variation_localization<<- removeReachOutliers(Loaddata(group='variation', task = 'localizations'))
+  }
 
 downloadOSFdata <- function(update=FALSE) {
   
@@ -43,7 +45,9 @@ downloadOSFdata <- function(update=FALSE) {
              'terminal_reaches.csv'     = 'https://osf.io/qdk9y/download',
              'terminal_localizations.csv'= 'https://osf.io/6r4bx/download',
              'exposure_reaches.csv'     = 'https://osf.io/6cmns/download',
-             'exposure_localizations.csv'= 'https://osf.io/er6u2/download'
+             'exposure_localizations.csv'= 'https://osf.io/er6u2/download',
+             'variation_reaches.csv'     = 'https://osf.io/pk5fy/download',
+             'variation_localizations.csv'= 'https://osf.io/txgwj/download'
 )
 
   # check if data directory exists and create if necessary:
