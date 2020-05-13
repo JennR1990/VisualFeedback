@@ -844,8 +844,8 @@ plotavereapoints<- function(){
   points(y=Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, pch= 16, x= samp1,col = colorNC_trans)
   points(y=Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, pch= 16,x= samp2,col = colorNC_trans)
   points(y=Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1,pch= 16, x= samp3,col = colorNC_trans)
-  segments(x0 = samp1, y0 = Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, x1 = samp2, y1 = Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, col = colorNC_trans)
-  segments(x0 = samp2, y0 = Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, x1 = samp3, y1 = Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, col = colorNC_trans)
+  #segments(x0 = samp1, y0 = Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, x1 = samp2, y1 = Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, col = colorNC_trans)
+  segments(x0 = samp2, y0 = Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, x1 = samp3, y1 = Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, col = rgb(0.0, 0.7, 0.0, 0.1))
   
   lines(c(1, 1.90, 1.90, 3.1, 3.1),
         c(0, 0, 30, 30, 30),
@@ -966,16 +966,16 @@ plotpassiveproppoints<- function(){
   points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(.9, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
   points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(1.9, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
   points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(2.9, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
-  segments(x0 = .9, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], x1 = 1.9, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], col = colorPA_trans)
-  segments(x0 = 1.9, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], x1 = 2.9, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], col = colorPA_trans)
+  #segments(x0 = .9, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], x1 = 1.9, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], col = colorPA_trans)
+  segments(x0 = 1.9, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], x1 = 2.9, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], col = rgb(0.7, 0.0, 0.7, 0.1))
   
   points(y=PTmean[1:3]*1,x = c(1.0,2.0,3.0), pch = 15,  col = colorT)
   arrows(x0 = c(1.0,2.0,3.0), y0 = (PTmean[1:3]) - PTSE[1:3]*2, x1 = c(1.0,2.0,3.0), y1 = (PTmean[1:3]) + PTSE[1:3]*2, code = 3, angle = 90, length = .02, col = colorT)
   points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(1.0, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
   points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(2.0, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  segments(x0 = 1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], x1 = 2, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], col = colorT_trans)
+  #segments(x0 = 1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], x1 = 2, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], col = colorT_trans)
   points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(3.0, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  segments(x0 = 2, y0 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], x1 = 3, y1 = TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], col = colorT_trans)
+  segments(x0 = 2, y0 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], x1 = 3, y1 = TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], col = rgb(1, 0.0, 0., 0.1))
   
   
   points(PEmean[1:3]*1, x = c(1.1,2.1,3.1),pch = 15,  col = colorE)
@@ -983,8 +983,8 @@ plotpassiveproppoints<- function(){
   points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(1.1, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
   points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'],pch= 16, x = c(rep(2.1, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
   points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(3.1, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
-  segments(x0 = 1.1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], x1 = 2.1, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], col = colorE_trans)
-  segments(x0 = 2.1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], x1 = 3.1, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], col = colorE_trans)
+  #segments(x0 = 1.1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], x1 = 2.1, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], col = colorE_trans)
+  segments(x0 = 2.1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], x1 = 3.1, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], col = rgb(0.85, 0.65, 0.12, 0.1))
   
   
   lines(c(1, 1.80, 1.80, 3.2, 3.2),
