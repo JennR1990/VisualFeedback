@@ -43,6 +43,23 @@ VisualFeedbackReaches <- function () {
   PlotData(newnocursor_reaches[33:320,], 3, 3)
 }
 
+neuromatchReaches <- function () {
+  PlotoutLine(passive_reaches, c(11,12,15), c(5,6,7), "Reach Trials")
+  PlotData(passive_reaches, 5, 5 )
+  PlotData(terminal_reaches, 6, 6)
+  
+  dataCIs <- trialCI(data = exposure_reaches)
+  dataCIs <- dataCIs * 1
+  exposure_reaches["distortion"][is.na(exposure_reaches["distortion"])] <- 0
+  exposure_reaches$Mean <-
+    rowMeans(exposure_reaches[, 2:ncol(exposure_reaches)], na.rm = TRUE)
+  x <- c(c(241:288),rev(241:288))
+  y <- c(dataCIs[, 1], rev(dataCIs[, 2]))
+  polygon(x, y, col = colorE_trans, border = NA)
+  lines(x=241:288,y=exposure_reaches$Mean * 1, col = colorE, lwd = 1.5, lty = 1 )
+  
+}
+
 ReachAfterEffectReaches <- function (acd, ncd, ncdI) {
   PlotoutLine(acd, 4:5, 3:4, "Reach Trials")
   PlotData(ncd, 3, 3)
@@ -50,11 +67,30 @@ ReachAfterEffectReaches <- function (acd, ncd, ncdI) {
 }
 
 Localizations1 <- function (pl, tl , expl) {
-  PlotoutLine(pl, 6:8, 5:7, "Hand Localizations")
+  PlotoutLine(pl, c(11,12,15), 5:7, "Hand Localizations")
   PlotData(pl, 5, 5,1)
   PlotData(tl, 6, 6,1)
   PlotData(expl, 7, 7,1)
 }
+
+
+ExposureDatas <- function (expl, exprr) {
+  PlotoutLine(expl, 16:17,c(7,7), "Hand Localizations")
+
+  
+  dataCIs <- trialCI(data = exprr)
+  dataCIs <- dataCIs * 1
+  exprr["distortion"][is.na(exprr["distortion"])] <- 0
+  exprr$Mean <-
+    rowMeans(exprr[, 2:ncol(exprr)], na.rm = TRUE)
+  x <- c(c(241:288),rev(241:288))
+  y <- c(dataCIs[, 1], rev(dataCIs[, 2]))
+  polygon(x, y, col = rgb(0.44, 0.51, 0.57,0.2), border = NA)
+  lines(x=241:288,y=exprr$Mean * 1, col = rgb(0.44, 0.51, 0.57), lwd = 1.5, lty = 1 )
+  PlotData(expl, 7, 7, 1)
+
+}
+
 
 Localizations <- function (pl, tl , expl, al) {
   PlotoutLine(pl, 10:13, c(1,5:7), "Hand Localizations")
@@ -63,6 +99,14 @@ Localizations <- function (pl, tl , expl, al) {
   PlotData(expl, 7, 7,1)
   PlotData(al, 1, 1,1)
 }
+
+
+RAENewPlots <- function (acd, ncnc) {
+  PlotRAEoutLine(acd, 4, 3, "Instructed & Uninstructed No-Cursors")
+  PlotData(ncnc, 3, 3, x =  c(c(33:288), rev(c(33:288))))
+}
+
+
 
 
 
@@ -158,13 +202,17 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'No-Cursor Instructed(N=16)', #Green
       'Continous Group (N=32)',
       'Terminal Group (N=32)', #Red
-      'Exposure Group (N=32)', #Yellow
+      'Exposure', #Yellow
       'Passive Localizations (N=32)',
       'Active (N=32)',
-      'Passive(N=32)',
-      'Terminal(N=32)',
+      'Passive (N=32)',
+      'Terminal (N=32)',
       'No-Cursor (N=48)',
-      'Pause (N=32)'
+      'Pause (N=32)',
+      'Exposure (N=32)',
+      'reaches',
+      'localizations'
+      
       
     )
   colorlist <- list(colorA, colorNL, colorNC, colorNNC, colorPA, colorT, colorE)
@@ -175,7 +223,7 @@ PlotoutLine <- function(dataset, exp, color,title) {
   dataset$Mean <-
     rowMeans(dataset[, 2:length(dataset)], na.rm = TRUE)
   plot(
-    dataset$Mean,
+    NULL,
     ylim = c(-35, 35),
     xlab = "Trial",
     ylab = "Hand Direction [°]",
@@ -184,7 +232,7 @@ PlotoutLine <- function(dataset, exp, color,title) {
     type = 'l',
     col = 'white', 
     cex.lab = 1.5,
-    cex.main = 1.5
+    cex.main = 1.5, xlim = c(0,288)
   )
   lines(c(1, 64, 64, 224, 224, 240, 240),
         c(0, 0, 30, 30, -30, -30, 0),
@@ -216,7 +264,7 @@ PlotRAEoutLine <- function(dataset, exp, color,title) {
       'Active Localization Group (N=32)', #orange
       'Passive Localization Group (N=32)', #purple
       'Pause Group (N=32)', #steel blue
-      'No-Cursor Group (N=32)', #blue
+      'No-Cursor (N=32)', #blue
       'No-Cursor Instructed Group (N=16)', #Green
       'No-Cursor Data',
       'Continous Group (N=32)',
@@ -652,7 +700,7 @@ PlotData <- function(dataset, color, trans, rotate = -1, x =  c(c(1:288), rev(c(
   dataCIs <- dataCIs * rotate
   dataset["distortion"][is.na(dataset["distortion"])] <- 0
   dataset$Mean <-
-    rowMeans(dataset[, 2:length(dataset)], na.rm = TRUE)
+    rowMeans(dataset[, 2:ncol(dataset)], na.rm = TRUE)
   x <- x
   y <- c(dataCIs[, 1], rev(dataCIs[, 2]))
   polygon(x, y, col = translist[trans], border = NA)

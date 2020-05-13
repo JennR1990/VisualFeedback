@@ -56,20 +56,29 @@ dev.off()
 
 svglite('figs/Implicit learning Zoomed in.svg', width = 12, height = 4, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,2), nrow = 1), heights = c(2,2))
-plotreapoints()
+#plotreapoints()
+plotavereapoints()
 plotproppoints()
 dev.off()
 
-svglite('figs/Model Fits1.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
+svglite('figs/Model Fits3.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,2,3,4), nrow = 2), heights = c(2,2))
-VisualFeedbackReaches()
+#VisualFeedbackReaches()
 #ActivePars<-Reachmodel(active_reaches, 'Active', color = colorA)
-PassivePars<-Reachmodel(passive_reaches, 'Passive', color = colorPA)
+RAENewPlots(active_reaches, newnocursor_nocursors)
+ExposureDatas(exposure_localization, exposure_reaches)
+#PassivePars<-Reachmodel(passive_reaches, 'Passive', color = colorPA)
 TerminalPars<-Reachmodel(terminal_reaches, 'Terminal', color = colorT)
 NoCIPars<-Reachmodel(newnocursor_reaches[33:320,], 'No-Cursor', grid = 'skewed', color = colorNC)
 dev.off()
 
 
+svglite('figs/neuromatchfigs.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2,3,4), nrow = 2), heights = c(2,2))
+neuromatchReaches()
+Localizations1(passive_localization, terminal_localization, exposure_localization)
+plotpassiveproppoints()
+dev.off()
 
 ```
 
@@ -106,7 +115,7 @@ Terminal_PropMetrics<-LocalizationModelCompare(terminal_localization, terminal_r
 ANOVAdata<- PrepdataforANOVA(active_reaches, passive_reaches, pause_reaches[33:320,], nocursor_reaches[33:320,], nocursorI_reaches[33:320,], nocursor_nocursors, nocursorI_nocursors, terminal_reaches)
 ANOVAPdata<- PrepdataforPropANOVA(active_localization,passive_localization)
 TtestPdata<- PrepdataforPropT(active_localization, passive_localization, terminal_localization, exposure_localization)
-Ttestdata<- PrepdataforT(active_reaches, passive_reaches, pause_reaches[33:320,], nocursor_reaches[33:320,], nocursor_nocursors, nocursorI_reaches[33:320,], nocursorI_nocursors, terminal_reaches)
+Ttestdata<- PrepdataforT(active_reaches, passive_reaches, pause_reaches[33:320,], nocursor_reaches[33:320,], nocursor_nocursors, nocursorI_reaches[33:320,], nocursorI_nocursors, terminal_reaches, newnocursor_reaches, newnocursor_nocursors)
 
 
 ```
