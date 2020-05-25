@@ -996,5 +996,5 @@ plotpassiveproppoints<- function(){
   #    col = rgb(0., 0., 0.))
   axis(2, at = c(-5,0,5,10, 15,20,25, 30), cex.axis = 1.5, las = 2)
   axis(1, at = c(1,2,3),labels = c("aligned", "R1_Early", "R1_Final"), cex.axis = 1.5)
-  legend(.3,33, legend = c("Passive", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.5, bty = "n")
+  legend(.3,33, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.5, bty = "n")
 }

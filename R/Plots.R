@@ -44,7 +44,7 @@ VisualFeedbackReaches <- function () {
 }
 
 neuromatchReaches <- function () {
-  PlotoutLine(passive_reaches, c(11,12,15), c(5,6,7), "Reach Trials")
+  PlotoutLine(passive_reaches, c(6,12,15, 18:20), c(5,6,7, 8,8,8), "Reach Trials", type = c(1,1,1,4,2,3))
   PlotData(passive_reaches, 5, 5 )
   PlotData(terminal_reaches, 6, 6)
   
@@ -58,6 +58,35 @@ neuromatchReaches <- function () {
   polygon(x, y, col = colorE_trans, border = NA)
   lines(x=241:288,y=exposure_reaches$Mean * 1, col = colorE, lwd = 1.5, lty = 1 )
   
+  reaches <- getreachesformodel(passive_reaches)
+  reach_par <-
+    fitTwoRateReachModel(
+      reaches = reaches$meanreaches,
+      schedule = reaches$distortion,
+      oneTwoRates = 2,
+      grid = 'restricted',
+      checkStability = TRUE
+    )
+  reach_model <- twoRateReachModel(par = reach_par, schedule = reaches$distortion)
+   lines(reach_model$total * -1, col = colorPA,lty = 4)
+  lines(reach_model$slow * -1, col = colorPA,lty = 2)
+  lines(reach_model$fast * -1, col = colorPA,lty = 3)
+  
+  
+  reaches <- getreachesformodel(terminal_reaches)
+  reach_par <-
+    fitTwoRateReachModel(
+      reaches = reaches$meanreaches,
+      schedule = reaches$distortion,
+      oneTwoRates = 2,
+      checkStability = TRUE, grid = 'restricted'
+    )
+  reach_model <- twoRateReachModel(par = reach_par, schedule = reaches$distortion)
+    lines(reach_model$total * -1, col = colorT,lty = 4)
+  lines(reach_model$slow * -1, col = colorT,lty = 2)
+  lines(reach_model$fast * -1, col = colorT,lty = 3)
+  
+  
 }
 
 ReachAfterEffectReaches <- function (acd, ncd, ncdI) {
@@ -67,10 +96,25 @@ ReachAfterEffectReaches <- function (acd, ncd, ncdI) {
 }
 
 Localizations1 <- function (pl, tl , expl) {
-  PlotoutLine(pl, c(11,12,15), 5:7, "Hand Localizations")
+  PlotoutLine(pl, c(6,12,15), 5:7, "Hand Localizations")
   PlotData(pl, 5, 5,1)
   PlotData(tl, 6, 6,1)
   PlotData(expl, 7, 7,1)
+  
+  reaches <- getreachesformodel(passive_reaches)
+  reach_par <-
+    fitTwoRateReachModel(
+      reaches = reaches$meanreaches,
+      schedule = reaches$distortion,
+      oneTwoRates = 2,
+      grid = 'restricted',
+      checkStability = TRUE
+    )
+  reach_model <- twoRateReachModel(par = reach_par, schedule = reaches$distortion)
+  lines(reach_model$total * -1, col = colorPA,lty = 4)
+  lines(reach_model$slow * -1, col = colorPA,lty = 2)
+  lines(reach_model$fast * -1, col = colorPA,lty = 3)
+  
 }
 
 
@@ -192,7 +236,7 @@ ReachmodelCTs <- function() {
 
 }
 
-PlotoutLine <- function(dataset, exp, color,title) {
+PlotoutLine <- function(dataset, exp, color,title, type = c(1)) {
   labels <-
     list (
       'Active Localization Group (N=32)', #orange
@@ -200,8 +244,8 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'Pause Group (N=32)', #steel blue
       'No-Cursor(N=32)', #blue
       'No-Cursor Instructed(N=16)', #Green
-      'Continous Group (N=32)',
-      'Terminal Group (N=32)', #Red
+      'Continous (N=32)',
+      'Terminal(N=32)', #Red
       'Exposure', #Yellow
       'Passive Localizations (N=32)',
       'Active (N=32)',
@@ -211,11 +255,14 @@ PlotoutLine <- function(dataset, exp, color,title) {
       'Pause (N=32)',
       'Exposure (N=32)',
       'reaches',
-      'localizations'
+      'localizations',
+      'model',
+      'slow',
+      'fast'
       
       
     )
-  colorlist <- list(colorA, colorNL, colorNC, colorNNC, colorPA, colorT, colorE)
+  colorlist <- list(colorA, colorNL, colorNC, colorNNC, colorPA, colorT, colorE, 'black')
   label <- labels[exp]
   colors <- colorlist[color]
   dataCIs <- trialCI(data = dataset)
@@ -246,7 +293,7 @@ PlotoutLine <- function(dataset, exp, color,title) {
     0,
     legend = c(label),
     col = c(unlist(colors)),
-    lty = c(1),
+    lty = c(type),
     lwd = c(2),
     bty = 'n', 
     cex = 1
