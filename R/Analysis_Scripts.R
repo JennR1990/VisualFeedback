@@ -638,7 +638,7 @@ fitPropModel<- function(reachdata, locadata, exp = 1) {
     schedule<- c(distortion,meanreaches)
   } else {
     meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
-    #meanreaches<- meanreaches*-1
+    meanreaches<- meanreaches*-1
     reachdata$distortion[241:288]<- as.numeric(meanreaches)
     schedule<- reachdata$distortion
   }
@@ -662,6 +662,7 @@ fitPropModel<- function(reachdata, locadata, exp = 1) {
   } 
   # get lowest MSE, and pars that go with that
   bestpar <- order(pargrid[,2])[1]
+  print(unlist(pargrid[bestpar]))
 
   output<- PropModel(unlist(pargrid[bestpar]), schedule)
 
@@ -997,4 +998,59 @@ plotpassiveproppoints<- function(){
   axis(2, at = c(-5,0,5,10, 15,20,25, 30), cex.axis = 1.5, las = 2)
   axis(1, at = c(1,2,3),labels = c("aligned", "R1_Early", "R1_Final"), cex.axis = 1.5)
   legend(.3,33, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.5, bty = "n")
+}
+
+
+
+
+
+
+GroupModelAICs <- function(data, group, grid = 'restricted') {
+  
+  df<- getreachesformodel(data)
+  #group='active'# add this to the function call when i use the commented line below
+  #df <- read.csv(sprintf('data/%s_reaches.csv', group), stringsAsFactors = FALSE)
+  
+  schedule <- df$distortion
+  
+  #Reaches <- as.matrix(df[,2:dim(df)[2]])
+  Reaches<- df$meanreaches
+  
+  twoRateFit <- fitTwoRateReachModel(reaches=Reaches, schedule=schedule, oneTwoRates=2, grid=grid, checkStability=TRUE)
+  oneRateFit <- fitTwoRateReachModel(reaches=Reaches, schedule=schedule, oneTwoRates=1, grid=grid, checkStability=TRUE)
+  #twoRateFit<- fittworatemodel(Reaches, schedule)
+  #oneRateFit<- fitoneratemodel(Reaches, schedule)
+  
+  
+  print(oneRateFit)
+  print(twoRateFit)
+  
+  twoRateMSE <- twoRateReachModelErrors(par=twoRateFit, reaches=Reaches, schedule=schedule)
+  oneRateMSE <- twoRateReachModelErrors(par=oneRateFit, reaches=Reaches, schedule=schedule)
+  #twoRateMSE <- twoRateReachModelError(par=twoRateFit, reaches=Reaches, distortions =schedule)
+  #oneRateMSE <- oneRateReachModelError(par=oneRateFit, reaches=Reaches, distortions =  schedule)
+  
+  #preparing the AIC stuff
+  N <- dim(df)[2] - 1
+  # the median length of a phase is 40 trials,
+  # and there are 7.2 of those in 288 trials
+  InOb <- seriesEffectiveSampleSize(Reaches, method='ac_lag95%CI')
+  print(InOb)
+  # this is then used for C:
+  #C <- InOb*(log(2*pi)+1)
+  #twoRateAIC <- (2*4) + InOb*log(twoRateMSE) + C
+  #oneRateAIC <- (2*2) + InOb*log(oneRateMSE) + C
+  
+  twoRateAIC<-(InOb * log(twoRateMSE)) + (2 * 4)
+  oneRateAIC<-(InOb * log(oneRateMSE)) + (2 * 2)
+  
+  cat(sprintf('1-rate AIC: %0.2f  %s  2-rate AIC: %0.2f\n',oneRateAIC,c('>=', ' <')[as.numeric(oneRateAIC<twoRateAIC)+1],twoRateAIC))
+  likelihood<-exp((min(c(twoRateAIC, oneRateAIC))-c(twoRateAIC, oneRateAIC))/2)
+  print(likelihood)
+  #pars<- data.frame(twoRateFit)
+  metrics<- data.frame(twoRateAIC, oneRateAIC, likelihood[1], likelihood[2])
+  names(metrics)<- c('twoRateAIC', 'oneRateAIC', 'twoRatelikelihood', 'oneratelikelihood')
+  #write.csv(AICs, sprintf("ana/AICs/Group AICs for %s Reaches.csv", group), row.names = TRUE, quote = FALSE)
+  
+  return(metrics)
 }

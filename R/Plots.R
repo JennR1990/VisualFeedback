@@ -119,7 +119,7 @@ Localizations1 <- function (pl, tl , expl) {
 
 
 ExposureDatas <- function (expl, exprr) {
-  PlotoutLine(expl, 16:17,c(7,7), "Hand Localizations")
+  PlotoutLine(expl, 16:17,c(7,7), "Exposure Testing Trial")
 
   
   dataCIs <- trialCI(data = exprr)
@@ -173,6 +173,7 @@ plotpropmodels<- function (){
   output1<-fitPropModel(passive_reaches, passive_localization)
   output2<-fitPropModel(terminal_reaches, terminal_localization)
   output3<-fitPropModel(exposure_reaches, exposure_localization, exp = 2)
+  output4<-fitPropModel(active_reaches, active_localization)
   
   plot(output1,
     ylim = c(-15, 15),
@@ -193,10 +194,11 @@ plotpropmodels<- function (){
     las = 2
   )
   axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
-  legend(0, -5, legend = c('Continous Group (21%)', 'Terminal Group (19%)', 'Exposure Group (16%)'), col = c(colorPA, colorT, colorE), 
+  legend(0, 3, legend = c('Continous Group (21%)', 'Terminal Group (19%)', 'Exposure Group (16%)', 'Active Group (31%)'), col = c(colorPA, colorT, colorE, colorA), 
          lty = c(1,1,1), lwd = 2, bty = 'n', cex = 1.5)
   lines(output2, col = colorT, lwd = 1)
   lines(output3, col = colorE, lwd = 1)
+  lines(output4, col = colorA, lwd = 1)
 }
 
 
@@ -289,7 +291,7 @@ PlotoutLine <- function(dataset, exp, color,title, type = c(1)) {
         lty = 2,
         col = rgb(0., 0., 0.))
   legend(
-    -10,
+    -20,
     0,
     legend = c(label),
     col = c(unlist(colors)),
@@ -973,7 +975,7 @@ Plotmodel <- function(dataset, name, color) {
         col = rgb(0., 0., 0.))
   legend(
     -10,
-    3,
+    0,
     legend = c('Reach data', 'model', 'fast', 'slow'),
     col = c(
       rgb(0.44, 0.51, 0.57),
@@ -1023,7 +1025,7 @@ Plotncmodel <- function(dataset, name, color) {
         lty = 2,
         col = rgb(0., 0., 0.))
   legend(
-  -10,3,
+  -10,0,
     legend = c('Reach data', 'No-cursor data', 'model', 'fast', 'slow'),
     col = c(
       rgb(0.44, 0.51, 0.57),
@@ -1074,7 +1076,7 @@ Plotlocmodel <- function(dataset, name, color) {
         col = rgb(0., 0., 0.))
   legend(
     -10,
-    3,
+    0,
     legend = c('Reach data', 'Localization data', 'model', 'fast', 'slow'),
     col = c(
       rgb(0.44, 0.51, 0.57),
@@ -1156,19 +1158,14 @@ plotRegressionWithCI <-
 
 
 
-plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'con') {
+plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'exp') {
   
   localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
-  if ('exp' == 'exp'){
-    meanreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)
-    distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
-    schedule<- c(distortion,meanreaches)
-  } else {
-  meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
-  meanreaches<- meanreaches*-1
-  reachdata$distortion[241:288]<- as.numeric(meanreaches)
-  schedule<- reachdata$distortion
-  }
+  distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
+  clampreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+  clampreaches<- clampreaches*-1
+  schedule<- c(distortion,clampreaches)
+
 
   
   
@@ -1208,20 +1205,20 @@ plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'con') {
   #legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
   #text(144, 0, labels = proportion)
   
-  reaches <- getreachesformodel(reachdata)
-  reach_par <-
-    fitTwoRateReachModel(
-      reaches = reaches$meanreaches,
-      schedule = schedule,
-      oneTwoRates = 2,
-      checkStability = TRUE
-    )
-  reach_model <-
-    twoRateReachModel(par = reach_par, schedule = schedule)
-  Average<- mean(localizations[182:224], na.rm = TRUE)
-  Scale<- Average/30
-  reach_model$slow<- reach_model$slow*Scale
-  reach_model$fast<- reach_model$fast*Scale
+  # reaches <- getreachesformodel(reachdata)
+  # reach_par <-
+  #   fitTwoRateReachModel(
+  #     reaches = reaches$meanreaches,
+  #     schedule = schedule,
+  #     oneTwoRates = 2,
+  #     checkStability = TRUE
+  #   )
+  # reach_model <-
+  #   twoRateReachModel(par = reach_par, schedule = schedule)
+  # Average<- mean(localizations[182:224], na.rm = TRUE)
+  # Scale<- Average/30
+  # reach_model$slow<- reach_model$slow*Scale
+  # reach_model$fast<- reach_model$fast*Scale
   #lines(reach_model$slow * -1, col = color,lty = 2)
   #lines(reach_model$fast * -1, col = color,lty = 3)
   
@@ -1323,4 +1320,12 @@ averagedprepost<- function (dataset = c('Pause', 'NoCursor', 'NewNoC')) {
   }
   dev.off()
 }
+
+
+
+
+
+
+
+
 
