@@ -25,9 +25,9 @@ RegressionPLot3P()
 RegressionPLotec()
 dev.off()
 
-svglite(file='doc/MLMCnocursor.svg', width=17, height=10,pointsize = 13, system_fonts=list(sans = "Arial"))
+svglite(file='figs/MLMCnocursor_2020.svg', width=17, height=10,pointsize = 13, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,1,2,2,0,0,3,3,4,4,5,6), nrow=2, byrow=TRUE) )
-fi3outLine(nocursor_reaches,1:6, 1:2, ' Reach Aftereffects', nocursorI_reaches, grid = 'skewed', nocursor_nocursors, nocursorI_nocursors)
+fi3outLine(nocursor_reaches,exp = 1:6, color = 1:2, ' Reach Aftereffects', nocursorI_reaches, grid = 'skewed', nocursor_nocursors, nocursorI_nocursors)
 dev.off()
 
 
@@ -89,8 +89,8 @@ fi3outLine <- function(dataset1, exp, color,title, dataset2, grid, ncdata1, ncda
   axis(2, at = c(-30, -15, 0, 15, 30), cex.axis = 1.5,
        las = 2)
   axis(1, at = c(1, 64, 224, 240, 288), cex.axis = 1.5, las = 2)
-  PlotData(nocursor_reaches[33:320,], 4, 4)
-  PlotData(nocursorI_reaches[33:320,], 5, 5)
+  PlotData(nocursor_reaches[33:320,], 3, 3)
+  PlotData(nocursorI_reaches[33:320,], 4, 4)
   
   grid <- grid
   reaches <- getreachesformodel(dataset1[33:320,])
