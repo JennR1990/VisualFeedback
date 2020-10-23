@@ -245,7 +245,7 @@ PlotoutLine <- function(dataset, exp, color,title, type = c(1)) {
       'Passive Localization Group (N=32)', #purple
       'Pause Group (N=32)', #steel blue
       'No-Cursor(N=32)', #blue
-      'No-Cursor Instructed(N=16)', #Green
+      'No-Cursor Instructed(N=15)', #Green
       'Continous (N=32)',
       'Terminal(N=32)', #Red
       'Exposure', #Yellow
@@ -253,7 +253,7 @@ PlotoutLine <- function(dataset, exp, color,title, type = c(1)) {
       'Active (N=32)',
       'Passive (N=32)',
       'Terminal (N=32)',
-      'No-Cursor (N=48)',
+      'No-Cursor (N=47)',
       'Pause (N=32)',
       'Exposure (N=32)',
       'reaches',
@@ -291,8 +291,8 @@ PlotoutLine <- function(dataset, exp, color,title, type = c(1)) {
         lty = 2,
         col = rgb(0., 0., 0.))
   legend(
-    -20,
     0,
+    -5,
     legend = c(label),
     col = c(unlist(colors)),
     lty = c(type),
