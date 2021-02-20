@@ -11,21 +11,13 @@ Loaddata<- function (group='passive', task='reaches') {
 }
  
 loadalldata<- function () {
-  pause_reaches<<- removeReachOutliers(Loaddata(group='pause'))
-  active_reaches<<- removeReachOutliers(Loaddata(group='active'))
   passive_reaches<<- removeReachOutliers(Loaddata())
-  nocursor_reaches<<- removeReachOutliers(Loaddata(group='nocursor'))
-  nocursorI_reaches<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_reaches'))
   passive_localization<<- removeReachOutliers(Loaddata(task = 'localization'))
-  active_localization<<- removeReachOutliers(Loaddata(group='active', task = 'localization'))
-  nocursor_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'nocursors'))
-  nocursorI_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_nocursors'))
-  exposure_localization<<- removeReachOutliers(Loaddata(group='exposure', task = 'localizations'))
-  terminal_localization<<- removeReachOutliers(Loaddata(group='terminal', task = 'localizations'))
+  exposure_localization<<- removeReachOutliers(Loaddata(group='exposure', task = 'localization'))
+  terminal_localization<<- removeReachOutliers(Loaddata(group='terminal', task = 'localization'))
   terminal_reaches<<- removeReachOutliers(Loaddata(group='terminal'))
   exposure_reaches<<- removeReachOutliers(Loaddata(group='exposure'))
-  newnocursor_reaches<<- cbind(nocursor_reaches, nocursorI_reaches[2:ncol(nocursorI_reaches)])
-  newnocursor_nocursors<<- cbind(nocursor_nocursors, nocursorI_nocursors[2:ncol(nocursorI_nocursors)])
+  
   variation_reaches<<- removeReachOutliers(Loaddata(group='variation'))
   variation_localization<<- removeReachOutliers(Loaddata(group='variation', task = 'localizations'))
   }
@@ -33,19 +25,12 @@ loadalldata<- function () {
 downloadOSFdata <- function(update=FALSE) {
   
   # this pulls data from the OSF repo:
-  files <- c('active_localization.csv'  = 'https://osf.io/mc523/?action=download',
-             'active_reaches.csv'       = 'https://osf.io/ejxy9/download',
-             'nocursor_nocursors.csv'   = 'https://osf.io/5b8s9/download',
-             'nocursor_reaches.csv'     = 'https://osf.io/vmnx7/download',
-             'nocursor_NI_nocursors.csv'   = 'https://osf.io/y4k2x/download',
-             'nocursor_NI_reaches.csv'     = 'https://osf.io/grnxh/download',
-             'passive_localization.csv' = 'https://osf.io/27v54/download',
+  files <- c('passive_localization.csv' = 'https://osf.io/27v54/download',
              'passive_reaches.csv'      = 'https://osf.io/mq5av/download',
-             'pause_reaches.csv'        = 'https://osf.io/q59b3/download',
              'terminal_reaches.csv'     = 'https://osf.io/qdk9y/download',
-             'terminal_localizations.csv'= 'https://osf.io/6r4bx/download',
+             'terminal_localization.csv'= 'https://osf.io/6r4bx/download',
              'exposure_reaches.csv'     = 'https://osf.io/6cmns/download',
-             'exposure_localizations.csv'= 'https://osf.io/er6u2/download',
+             'exposure_localization.csv'= 'https://osf.io/er6u2/download',
              'variation_reaches.csv'     = 'https://osf.io/pk5fy/download',
              'variation_localizations.csv'= 'https://osf.io/txgwj/download'
 )
@@ -114,4 +99,37 @@ removeReachOutliers <- function(data) {
   
   return(data)
   
+}
+
+loadcolors <- function() {
+  ##Active
+  colorA       <<- rgb(1.0, 0.4, 0.0)         # orange
+  colorA_trans <<- rgb(1.0, 0.4, 0.0, 0.2)     # transparent orange
+  
+  
+  ## Passive
+  colorPA       <<- rgb(0.7, 0.0, 0.7)          # purple
+  colorPA_trans <<- rgb(0.7, 0.0, 0.7, 0.2)     # transparent purple
+  
+  
+  ## Pause
+  colorNL       <<- rgb(0.63, 0.71, 0.81)      # blue-gray
+  colorNL_trans <<- rgb(0.63, 0.71, 0.81, 0.2)  # transparent blue-gray
+  
+  
+  ##No-Cursor
+  colorNC       <<- rgb(0.0, 0.7, 0.0)         # green
+  colorNC_trans <<- rgb(0.0, 0.7, 0.0, 0.2)     # transparent green
+  
+  ##New No-Cursor
+  colorNNC       <<- rgb(0.1, 0.3, 0.5)         # purple
+  colorNNC_trans <<- rgb(0.1, 0.3, 0.5, 0.2)     # transparent purple
+  
+  #Terminal
+  colorT       <<- rgb(1, 0.0, 0.0)         # Red
+  colorT_trans <<- rgb(1, 0.0, 0., 0.2)     # transparent Red
+  
+  ##Exposure
+  colorE       <<- rgb(0.85, 0.65, 0.12)         # Yellow
+  colorE_trans <<- rgb(0.85, 0.65, 0.12, 0.2)     # transparent Yellow
 }

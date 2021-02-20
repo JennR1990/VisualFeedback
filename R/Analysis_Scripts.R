@@ -1,84 +1,49 @@
-# Descriptive statistics about the data -----
-Allmeans<- function() {
+fitPropModel<- function(reachdata, locadata, exp = 1) {
   
-  ActiveReach<- means(active_reaches)
-  ActiveReach$Experiment<- "ActiveR"
-  ActiveProp<- means(active_localization)
-  ActiveProp$Experiment<- "ActiveL"
-  PassiveReach<- means(passive_reaches)
-  PassiveReach$Experiment<- "PassiveR"
-  PassiveProp<- means(passive_localization)
-  PassiveProp$Experiment<- "PassiveL"
-  PauseReach<- means(pause_reaches[33:320,])
-  PauseReach$Experiment<- "PauseR"
-  NocursorReach<- means(nocursor_reaches[33:320,])
-  NocursorReach$Experiment<- "NocursorR"
-  NocursorIReach<- means(nocursorI_reaches[33:320,])
-  NocursorIReach$Experiment<- "NocursorIR"
-  NocursorNCReach<- NCmeans(nocursor_nocursors)
-  NocursorNCReach$Experiment<- "NocursorNC"
-  NocursorNCIReach<- NCmeans(nocursorI_nocursors)
-  NocursorNCIReach$Experiment<- "NocursorINC"
-  Allmeans<- rbind(ActiveReach, ActiveProp, PassiveReach, PassiveProp, PauseReach, NocursorReach, NocursorNCReach, NocursorIReach, NocursorNCIReach)
-  write.csv(Allmeans, 'ana/All Experiments Descriptive Stats_updated.csv', quote = FALSE, row.names = FALSE )
-  
-  return(Allmeans)
-  
-  
-}
-
-NCmeans<- function (data) {
-  
-  
-  
-  AlignedMean<- mean(unlist(data[29:32,2:ncol(data)]), na.rm= TRUE)
-  AlignedMax<- max(unlist(data[29:32,2:ncol(data)]), na.rm= TRUE)
-  AlignedMin<- min(unlist(data[29:32,2:ncol(data)]), na.rm= TRUE)
-  InitialRotationMean<- mean(unlist(data[33:36,2:ncol(data)]), na.rm= TRUE)
-  InitialRotationMax<- max(unlist(data[33:36,2:ncol(data)]), na.rm= TRUE)
-  InitialRotationMin<- min(unlist(data[33:36,2:ncol(data)]), na.rm= TRUE)
-  EndofIRotationMean<- mean(unlist(data[189:192,2:ncol(data)]), na.rm= TRUE)
-  EndofIRotationMax<- max(unlist(data[189:192,2:ncol(data)]), na.rm= TRUE)
-  EndofIRotationMin<- min(unlist(data[189:192,2:ncol(data)]), na.rm= TRUE)
-  SecondRotationMean<- mean(unlist(data[205:208,2:ncol(data)]), na.rm= TRUE)
-  SecondRotationMax<- max(unlist(data[205:208,2:ncol(data)]), na.rm= TRUE)
-  SecondRotationMin<- min(unlist(data[205:208,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampMean<- mean(unlist(data[209:212,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampMax<- max(unlist(data[209:212,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampMin<- min(unlist(data[209:212,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampLateMean<- mean(unlist(data[253:256,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampLateMax<- max(unlist(data[253:256,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampLateMin<- min(unlist(data[253:256,2:ncol(data)]), na.rm= TRUE)
-
-  
-  return(Descriptives<- (data.frame(AlignedMean, AlignedMax, AlignedMin, InitialRotationMean, InitialRotationMax, InitialRotationMin, EndofIRotationMean, EndofIRotationMax, EndofIRotationMin, SecondRotationMean, SecondRotationMax, SecondRotationMin, ErrorClampMean, ErrorClampMax, ErrorClampMin, ErrorClampLateMean, ErrorClampLateMax, ErrorClampLateMin))*-1)
-}
-means<- function (data) {
-  
-
-  
-  AlignedMean<- mean(unlist(data[61:64,2:ncol(data)]), na.rm= TRUE)
-  AlignedMax<- max(unlist(data[61:64,2:ncol(data)]), na.rm= TRUE)
-  AlignedMin<- min(unlist(data[61:64,2:ncol(data)]), na.rm= TRUE)
-  InitialRotationMean<- mean(unlist(data[65:68,2:ncol(data)]), na.rm= TRUE)
-  InitialRotationMax<- max(unlist(data[65:68,2:ncol(data)]), na.rm= TRUE)
-  InitialRotationMin<- min(unlist(data[65:68,2:ncol(data)]), na.rm= TRUE)
-  EndofIRotationMean<- mean(unlist(data[208:224,2:ncol(data)]), na.rm= TRUE)
-  EndofIRotationMax<- max(unlist(data[208:224,2:ncol(data)]), na.rm= TRUE)
-  EndofIRotationMin<- min(unlist(data[208:224,2:ncol(data)]), na.rm= TRUE)
-  SecondRotationMean<- mean(unlist(data[237:240,2:ncol(data)]), na.rm= TRUE)
-  SecondRotationMax<- max(unlist(data[237:240,2:ncol(data)]), na.rm= TRUE)
-  SecondRotationMin<- min(unlist(data[237:240,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampMean<- mean(unlist(data[241:244,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampMax<- max(unlist(data[241:244,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampMin<- min(unlist(data[241:244,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampLateMean<- mean(unlist(data[256:288,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampLateMax<- max(unlist(data[256:288,2:ncol(data)]), na.rm= TRUE)
-  ErrorClampLateMin<- min(unlist(data[256:288,2:ncol(data)]), na.rm= TRUE)
-
-  
-return(Descriptives<- (data.frame(AlignedMean, AlignedMax, AlignedMin, InitialRotationMean, InitialRotationMax, InitialRotationMin, EndofIRotationMean, EndofIRotationMax, EndofIRotationMin, SecondRotationMean, SecondRotationMax, SecondRotationMin, ErrorClampMean, ErrorClampMax, ErrorClampMin, ErrorClampLateMean, ErrorClampLateMax, ErrorClampLateMin))*-1)
+  localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
+  if (exp == 2){
+    meanreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)
+    distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
+    schedule<- c(distortion,meanreaches)
+  } else {
+    meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+    meanreaches<- meanreaches*-1
+    reachdata$distortion[241:288]<- as.numeric(meanreaches)
+    schedule<- reachdata$distortion
   }
+  
+  #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse. 
+  pargrid <- gridsearch(localizations, schedule, nsteps = 7, topn = 4)
+  cat('optimize best fits...\n')
+  for (gridpoint in c(1:nrow(pargrid))) { #for each row 
+    par<-unlist(pargrid[gridpoint,1]) 
+    
+    control <- list('maxit'=10000, 'ndeps'=1e-9 )
+    fit <- optim(par=par, PropModelMSE, gr=NULL, schedule, localizations, control=control, method = "Brent", lower = 0, upper = 1)
+    optpar<- fit$par
+    
+    
+    # stick optpar back in pargrid
+    pargrid[gridpoint,1] <- optpar
+    
+    pargrid[gridpoint,2]<- fit$value
+    
+  } 
+  # get lowest MSE, and pars that go with that
+  bestpar <- order(pargrid[,2])[1]
+  print(unlist(pargrid[bestpar]))
+  
+  output<- PropModel(unlist(pargrid[bestpar]), schedule)
+  
+  
+  # return(those pars)
+  #return(unlist(pargrid[bestpar]))
+  
+  #return the output to use for plots
+  return(output)
+  
+}
+
 
 
 ##How do the different parameters predict the experiments, or can they? -----
@@ -88,14 +53,29 @@ pLogRegression <- function(data, variable = Test_Trial) {
   
   #df <- read.csv('data/Pilot/rebound.csv', stringsAsFactors = F)
   
-  data$variable<- as.factor(data$variable)
+  data$variable<- as.factor(data$Test_Trial)
   
 
     
-    print(summary(glm(formula = variable ~ rs + ls + rf + lf, family = binomial(link = "logit"), 
+    print(summary(glm(formula = variable ~ Rs + Ls + Rf + Lf, family = binomial(link = "logit"), 
                       data = data)))
 
+   model<- glm(formula = variable ~ Rs + Ls + Rf + Lf, family = binomial(link = "logit"), 
+        data = data)
+   
+   #print(predict(model))
+  predictions<- predict(model)
   
+  predictions[predictions<.5]<-0
+  predictions[predictions>.5]<-1
+  predictions
+length(which(data$Test_Trial == predictions))
+  print(correct<- length(which(data$Test_Trial == predictions)) / length(predictions) )
+  
+  return(correct)
+  
+   
+   
 }
 
 tpanalyzedata<- function(AllDataRM){
@@ -119,46 +99,40 @@ ANOVAanalysis<- function(AllDataANOVA){
 }
 
 
-PrepdataforT<- function(adata, pasdata, paudata, ncdata, ncncdata, ncIdata, ncncIdata, termdata, newnoc, newnocnc){
+PrepdataforT<- function(pasdata, termdata){
   #
-  
-  A_RM<-TCombine(adata)
-  A_RM$Experiment <- rep('Active', nrow(A_RM))
-  
+
   Pas_RM<-TCombine(pasdata)
   Pas_RM$Experiment <- rep('Passive', nrow(Pas_RM))
   
-  Pau_RM<-TCombine(paudata)
-  Pau_RM$Experiment <- rep('Pause', nrow(Pau_RM))
-  
-  nc_RM<-TCombine(ncdata)
-  nc_RM$Experiment <- rep('No-Cursor', nrow(nc_RM))
-  
-  ncnc_RM<-NoCursorsTCombine(ncncdata)
-  ncnc_RM$Experiment <- rep('No-Cursor_No-Cursors', nrow(ncnc_RM))
-  
-  ncI_RM<-TCombine(ncIdata)
-  ncI_RM$Experiment <- rep('No-CursorI', nrow(ncI_RM))
+  Term_RM<-TCombine(termdata)
+  Term_RM$Experiment <- rep('Terminal', nrow(Term_RM))
 
-  ncncI_RM<-NoCursorsTCombine(ncncIdata)
-  ncncI_RM$Experiment <- rep('No-CursorI_No-Cursors', nrow(ncncI_RM))
-  
-  Ter_RM<-TCombine(termdata)
-  Ter_RM$Experiment <- rep('Terminal', nrow(Ter_RM))
- 
-  nca_RM<-TCombine(newnoc)
-  nca_RM$Experiment <- rep('No-Cursor_A', nrow(nca_RM))
-  
-  ncnca_RM<-NoCursorsTCombine(newnocnc)
-  ncnca_RM$Experiment <- rep('No-Cursor_No-Cursors_A', nrow(ncnca_RM)) 
-  
-  
-  AllDataRM<- rbind(A_RM, Pas_RM, Pau_RM, nc_RM, ncnc_RM, ncI_RM, ncncI_RM, Ter_RM, nca_RM, ncnca_RM)
+  AllDataRM<- rbind(Pas_RM, Term_RM)
   # 
   return(AllDataRM)
 }
 
-PrepdataforANOVA <- function(adata, pasdata, paudata, ncdata, ncncdata, ncIdata, ncncIdata, termdata) {
+
+PrepdataforANOVA <- function(pasdata, termdata) {
+  
+
+  Pas_RM<-ANOVAcombine(pasdata)
+  Pas_RM$ID <- sprintf('PasLoc.%s',Pas_RM$ID)
+  Pas_RM$Experiment <- rep('Passive', nrow(Pas_RM))
+  
+  Term_RM<-ANOVAcombine(termdata)
+  Term_RM$ID <- sprintf('Pause.%s',Term_RM$ID)
+  Term_RM$Experiment <- rep('Pause', nrow(Term_RM))
+  
+
+  AllDataRM<- rbind(Pas_RM, Term_RM)
+  #
+  return(AllDataRM)
+  
+}
+
+PrepdataforANOVA1 <- function(adata, pasdata, paudata, ncdata, ncncdata, ncIdata, ncncIdata, ncmIdata, ncncmIdata ) {
   
   # 
   
@@ -185,48 +159,56 @@ PrepdataforANOVA <- function(adata, pasdata, paudata, ncdata, ncncdata, ncIdata,
   ncI_RM<-ANOVAcombine(ncIdata)
   ncI_RM$ID <- sprintf('NoCursor.%s',ncI_RM$ID)
   ncI_RM$Experiment <- rep('No-CursorI', nrow(ncI_RM))
-
+  
   ncncI_RM<-NoCursorACombine(ncncIdata)
   ncncI_RM$ID <- sprintf('NoCursorI_No-Cursors.%s',ncncI_RM$ID)
   ncncI_RM$Experiment <- rep('No-CursorI_No-Cursors', nrow(ncncI_RM))
   
+  ncmI_RM<-NoCursorACombine(ncmIdata)
+  ncmI_RM$ID <- sprintf('NoCursor_M.%s',ncmI_RM$ID)
+  ncmI_RM$Experiment <- rep('No-CursorI_MAX', nrow(ncmI_RM))
   
-  TER_RM<-ANOVAcombine(termdata)
-  TER_RM$ID <- sprintf('PasLoc.%s',TER_RM$ID)
-  TER_RM$Experiment <- rep('Terminal', nrow(TER_RM))
+  ncncmI_RM<-NoCursorACombine(ncncmIdata)
+  ncncmI_RM$ID <- sprintf('NoCursorI_No-Cursors_M.%s',ncncmI_RM$ID)
+  ncncmI_RM$Experiment <- rep('No-CursorI_No-Cursors_MAX', nrow(ncncmI_RM))
   
   
-  AllDataRM<- rbind(A_RM, Pas_RM, Pau_RM, nc_RM, ncnc_RM, ncI_RM, ncncI_RM, TER_RM)
+  AllDataRM<- rbind(A_RM, Pas_RM, Pau_RM, nc_RM, ncnc_RM, ncI_RM, ncncI_RM, ncmI_RM, ncncmI_RM)
   #
   return(AllDataRM)
   
 }
 
-PrepdataforPropT<- function(adata, pasdata, termdata, expdata){
-  A_RM<-TCombine(adata)
-  A_RM$Experiment <- rep('Active', nrow(A_RM))
+
+PrepdataforPropT<- function(pasdata, termdata, expdata){
+
   Pas_RM<-TCombine(pasdata)
   Pas_RM$Experiment <- rep('Passive', nrow(Pas_RM))
-  Ter_RM<-TCombine(termdata)
-  Ter_RM$Experiment <- rep('Terminal', nrow(Ter_RM))
-  Exp_RM<-TCombine(expdata)
-  Exp_RM$Experiment <- rep('Exposure', nrow(Exp_RM))
-  
-  
-  AllDataRM<- rbind(A_RM, Pas_RM,Ter_RM, Exp_RM)
+  Term_RM<-TCombine(termdata)
+  Term_RM$Experiment <- rep('Terminal', nrow(Term_RM))
+  exp_RM<-TCombine(expdata)
+  exp_RM$Experiment <- rep('Exposure', nrow(exp_RM))
+  AllDataRM<- rbind( Pas_RM, Term_RM, exp_RM)
   return(AllDataRM)
 }
 
-PrepdataforPropANOVA <- function(adata, pasdata, paudata, ncdata, ncncdata) {
-  
-  A_RM<-ANOVAcombine(adata)
-  A_RM$ID <- sprintf('ActLoc.%s',A_RM$ID)
-  A_RM$Experiment <- rep('Active', nrow(A_RM))
-  
+PrepdataforPropANOVA <- function(pasdata, termdata, expdata) {
+
   Pas_RM<-ANOVAcombine(pasdata)
   Pas_RM$ID <- sprintf('PasLoc.%s',Pas_RM$ID)
   Pas_RM$Experiment <- rep('Passive', nrow(Pas_RM))
-  AllDataRM<- rbind(A_RM, Pas_RM)
+  
+  Term_RM<-ANOVAcombine(termdata)
+  Term_RM$ID <- sprintf('TermLoc.%s',Term_RM$ID)
+  Term_RM$Experiment <- rep('Terminal', nrow(Term_RM))
+  
+  Exp_RM<-ANOVAcombine(expdata)
+  Exp_RM$ID <- sprintf('ExpLoc.%s',Exp_RM$ID)
+  Exp_RM$Experiment <- rep('Exposure', nrow(Exp_RM))
+  
+  
+  
+  AllDataRM<- rbind( Pas_RM, Term_RM, Exp_RM)
   
   return(AllDataRM)
   
@@ -310,62 +292,115 @@ PairedT<- function(data, exp1, task) {
 }
 
 
+
+InitialLearning<- function (data, exp1, task){
+  
+  print('1st four to 2nd four')
+print(t.test(data$R1_Early[data$Experiment == exp1],data$R1_second[data$Experiment == exp1], paired = TRUE)) # p-value = 0.04535 A vs. NC
+print(cohen.d(data$R1_Early[data$Experiment == exp1],data$R1_second[data$Experiment == exp1], paired = TRUE, na.rm = TRUE))
+print(etaSquaredTtest(data$R1_Early[data$Experiment == exp1],data$R1_second[data$Experiment == exp1], na.rm = TRUE))
+print('2nd four to last four of R1')
+print(t.test(data$R1_second[data$Experiment == exp1],data$R1_Late[data$Experiment == exp1], paired = TRUE)) # p-value = 0.04535 A vs. NC
+print(cohen.d(data$R1_second[data$Experiment == exp1],data$R1_Late[data$Experiment == exp1], paired = TRUE, na.rm = TRUE))
+print(etaSquaredTtest(data$R1_second[data$Experiment == exp1],data$R1_Late[data$Experiment == exp1], na.rm = TRUE))
+print('2nd four to 3rd four')
+print(t.test(data$R1_second[data$Experiment == exp1],data$R1_third[data$Experiment == exp1], paired = TRUE)) # p-value = 0.04535 A vs. NC
+print(cohen.d(data$R1_second[data$Experiment == exp1],data$R1_third[data$Experiment == exp1], paired = TRUE, na.rm = TRUE))
+print(etaSquaredTtest(data$R1_second[data$Experiment == exp1],data$R1_third[data$Experiment == exp1], na.rm = TRUE))
+print('Was there learning from 3rd to 4th block of 1st rotation?')
+print(t.test(data$R1_third[data$Experiment == exp1],data$R1_forth[data$Experiment == exp1], paired = TRUE)) # p-value = 0.04535 A vs. NC
+print(cohen.d(data$R1_third[data$Experiment == exp1],data$R1_forth[data$Experiment == exp1], paired = TRUE, na.rm = TRUE))
+print(etaSquaredTtest(data$R1_third[data$Experiment == exp1],data$R1_forth[data$Experiment == exp1], na.rm = TRUE))
+print('Was there learning from 4th to 5th block of 1st rotation?')
+print(t.test(data$R1_forth[data$Experiment == exp1],data$R1_fifth[data$Experiment == exp1], paired = TRUE)) # p-value = 0.04535 A vs. NC
+print(cohen.d(data$R1_forth[data$Experiment == exp1],data$R1_fifth[data$Experiment == exp1], paired = TRUE, na.rm = TRUE))
+print(etaSquaredTtest(data$R1_forth[data$Experiment == exp1],data$R1_fifth[data$Experiment == exp1], na.rm = TRUE))
+print('Was there learning from 5th to 6th block of 1st rotation?')
+print(t.test(data$R1_fifth[data$Experiment == exp1],data$R1_sixth[data$Experiment == exp1], paired = TRUE)) # p-value = 0.04535 A vs. NC
+print(cohen.d(data$R1_fifth[data$Experiment == exp1],data$R1_sixth[data$Experiment == exp1], paired = TRUE, na.rm = TRUE))
+print(etaSquaredTtest(data$R1_fifth[data$Experiment == exp1],data$R1_sixth[data$Experiment == exp1], na.rm = TRUE))
+
+}
+
+
+
+
+propvsREA<- function (){
+  allttest<-rbind(Ttestdata[Ttestdata$Experiment == 'No-Cursor_No-Cursors',], TtestPdata)
+  print('reach aftereffects versus active localizations')
+  print(t.test(allttest$r1[allttest$Experiment == 'No-Cursor_No-Cursors'],allttest$r1[allttest$Experiment == 'Active']*-1)) # p-value = 0.04535 A vs. NC
+  print(cohen.d(allttest$r1[allttest$Experiment == 'No-Cursor_No-Cursors'],allttest$r1[allttest$Experiment == 'Active']*-1, na.rm = TRUE))
+  print(etaSquaredTtest(allttest$r1[allttest$Experiment == 'No-Cursor_No-Cursors'],allttest$r1[allttest$Experiment == 'Active']*-1, na.rm = TRUE))
+  
+  print('reach aftereffects versus active localizations')
+  print(t.test(allttest$r1[allttest$Experiment == 'No-Cursor_No-Cursors'],allttest$r1[allttest$Experiment == 'Passive' ]*-1)) # p-value = 0.04535 A vs. NC
+  print(cohen.d(allttest$r1[allttest$Experiment == 'No-Cursor_No-Cursors'],allttest$r1[allttest$Experiment == 'Passive']*-1, na.rm = TRUE))
+  print(etaSquaredTtest(allttest$r1[allttest$Experiment == 'No-Cursor_No-Cursors'],allttest$r1[allttest$Experiment == 'Passive' ]*-1, na.rm = TRUE))
+
+}
+
+
+
+
+
+
+
 ##Models
 
-ParticipantReachmodels2<- function(adata, pasdata, paudata, ncdata, ncidata) {
+ParticipantReachmodels2<- function(adata, pasdata, paudata, ncdata) {
+  #Active = 1
+  #Passive = 0
   a_par<- getParticipantFits2(adata)
   a_par$Experiment<-'Active'
-  a_par$Test_Trial<-'Active'
+  a_par$Test_Trial<-1
   Pas_par<- getParticipantFits2(pasdata)
   Pas_par$Experiment<-'Passive'
-  Pas_par$Test_Trial<-'Passive'
+  Pas_par$Test_Trial<-0
   Pau_par<- getParticipantFits2(paudata)
   Pau_par$Experiment<-'Pause'
-  Pau_par$Test_Trial<-'Passive'
+  Pau_par$Test_Trial<-0
   nc_par<- getParticipantFits2(ncdata)
   nc_par$Experiment<-'No-Cursor'
-  nc_par$Test_Trial<-'Active'
-  nci_par<- getParticipantFits2(ncidata)
-  nci_par$Experiment<-'No-Cursor_I'
-  nci_par$Test_Trial<-'Active'
-  allpars<- rbind(a_par, Pas_par, Pau_par, nc_par, nci_par)
+  nc_par$Test_Trial<-1
+
+  allpars<- rbind(a_par, Pas_par, Pau_par, nc_par)
   return(allpars)
 }
-ParticipantBothReachmodels<- function(adata, pasdata, paudata, ncdata, ncidata) {
-  a_par<- getParticipantFits2(adata)
-  a_par1<- getParticipantFits1(adata)
-  a_par$Experiment<-'Active'
-  a_par$Test_Trial<-'Active'
-  a_par1$Experiment<-'Active'
-  a_par1$Test_Trial<-'Active'
-  Pas_par<- getParticipantFits2(pasdata)
-  Pas_par1<- getParticipantFits1(pasdata)
-  Pas_par$Experiment<-'Passive'
-  Pas_par$Test_Trial<-'Passive'
-  Pas_par1$Experiment<-'Passive'
-  Pas_par1$Test_Trial<-'Passive'
-  Pau_par<- getParticipantFits2(paudata)
-  Pau_par1<- getParticipantFits1(paudata)
-  Pau_par$Experiment<-'Pause'
-  Pau_par$Test_Trial<-'Passive'
-  Pau_par1$Experiment<-'Pause'
-  Pau_par1$Test_Trial<-'Passive'
-  nc_par<- getParticipantFits2(ncdata)
-  nc_par1<- getParticipantFits1(ncdata)
-  nc_par$Experiment<-'No-Cursor'
-  nc_par$Test_Trial<-'Active'
-  nc_par1$Experiment<-'No-Cursor'
-  nc_par1$Test_Trial<-'Active'
-  nci_par<- getParticipantFits2(ncidata)
-  nci_par1<- getParticipantFits1(ncidata)
-  nci_par$Experiment<-'No-Cursor_I'
-  nci_par$Test_Trial<-'Active'
-  nci_par1$Experiment<-'No-Cursor_I'
-  nci_par1$Test_Trial<-'Active'
-  allpars<- rbind(a_par, Pas_par, Pau_par, nc_par, nci_par,a_par1, Pas_par1, Pau_par1, nc_par1, nci_par1)
-  return(allpars)
-}
-ParticipantReachmodels1<- function(adata, pasdata, paudata, ncdata, ncidata) {
+# ParticipantBothReachmodels<- function(adata, pasdata, paudata, ncdata, ncidata) {
+#   a_par<- getParticipantFits2(adata)
+#   a_par1<- getParticipantFits1(adata)
+#   a_par$Experiment<-'Active'
+#   a_par$Test_Trial<-'Active'
+#   a_par1$Experiment<-'Active'
+#   a_par1$Test_Trial<-'Active'
+#   Pas_par<- getParticipantFits2(pasdata)
+#   Pas_par1<- getParticipantFits1(pasdata)
+#   Pas_par$Experiment<-'Passive'
+#   Pas_par$Test_Trial<-'Passive'
+#   Pas_par1$Experiment<-'Passive'
+#   Pas_par1$Test_Trial<-'Passive'
+#   Pau_par<- getParticipantFits2(paudata)
+#   Pau_par1<- getParticipantFits1(paudata)
+#   Pau_par$Experiment<-'Pause'
+#   Pau_par$Test_Trial<-'Passive'
+#   Pau_par1$Experiment<-'Pause'
+#   Pau_par1$Test_Trial<-'Passive'
+#   nc_par<- getParticipantFits2(ncdata)
+#   nc_par1<- getParticipantFits1(ncdata)
+#   nc_par$Experiment<-'No-Cursor'
+#   nc_par$Test_Trial<-'Active'
+#   nc_par1$Experiment<-'No-Cursor'
+#   nc_par1$Test_Trial<-'Active'
+#   nci_par<- getParticipantFits2(ncidata)
+#   nci_par1<- getParticipantFits1(ncidata)
+#   nci_par$Experiment<-'No-Cursor_I'
+#   nci_par$Test_Trial<-'Active'
+#   nci_par1$Experiment<-'No-Cursor_I'
+#   nci_par1$Test_Trial<-'Active'
+#   allpars<- rbind(a_par, Pas_par, Pau_par, nc_par, nci_par,a_par1, Pas_par1, Pau_par1, nc_par1, nci_par1)
+#   return(allpars)
+# }
+ParticipantReachmodels1<- function(adata, pasdata, paudata, ncdata) {
   a_par<- getParticipantFits1(adata)
   a_par$Experiment<-'Active'
   a_par$Test_Trial<-'Active'
@@ -378,632 +413,9 @@ ParticipantReachmodels1<- function(adata, pasdata, paudata, ncdata, ncidata) {
   nc_par<- getParticipantFits1(ncdata)
   nc_par$Experiment<-'No-Cursor'
   nc_par$Test_Trial<-'Active'
-  nci_par<- getParticipantFits1(ncidata)
-  nci_par$Experiment<-'No-Cursor_I'
-  nci_par$Test_Trial<-'Active'
-  allpars<- rbind(a_par, Pas_par, Pau_par, nc_par, nci_par)
+  allpars<- rbind(a_par, Pas_par, Pau_par, nc_par)
   return(allpars)
 }
-
-GroupModelAICs <- function(data, group, grid = 'restricted') {
-  
-  df<- getreachesformodel(data)
-  #group='active'# add this to the function call when i use the commented line below
-  #df <- read.csv(sprintf('data/%s_reaches.csv', group), stringsAsFactors = FALSE)
-  
-  schedule <- df$distortion
-  
-  #Reaches <- as.matrix(df[,2:dim(df)[2]])
-  Reaches<- df$meanreaches
-  
-  twoRateFit <- fitTwoRateReachModel(reaches=Reaches, schedule=schedule, oneTwoRates=2, grid=grid, checkStability=TRUE)
-  oneRateFit <- fitTwoRateReachModel(reaches=Reaches, schedule=schedule, oneTwoRates=1, grid=grid, checkStability=TRUE)
-  #twoRateFit<- fittworatemodel(Reaches, schedule)
-  #oneRateFit<- fitoneratemodel(Reaches, schedule)
-  
-  
-  print(oneRateFit)
-  print(twoRateFit)
-  
-  twoRateMSE <- twoRateReachModelErrors(par=twoRateFit, reaches=Reaches, schedule=schedule)
-  oneRateMSE <- twoRateReachModelErrors(par=oneRateFit, reaches=Reaches, schedule=schedule)
-  #twoRateMSE <- twoRateReachModelError(par=twoRateFit, reaches=Reaches, distortions =schedule)
-  #oneRateMSE <- oneRateReachModelError(par=oneRateFit, reaches=Reaches, distortions =  schedule)
-  
-  #preparing the AIC stuff
-  N <- dim(df)[2] - 1
-  # the median length of a phase is 40 trials,
-  # and there are 7.2 of those in 288 trials
-  InOb <- 6
-  # this is then used for C:
-  C <- InOb*(log(2*pi)+1)
-  twoRateAIC <- (2*4) + InOb*log(twoRateMSE) + C
-  oneRateAIC <- (2*2) + InOb*log(oneRateMSE) + C
-  
-  cat(sprintf('1-rate AIC: %0.2f  %s  2-rate AIC: %0.2f\n',oneRateAIC,c('>=', ' <')[as.numeric(oneRateAIC<twoRateAIC)+1],twoRateAIC))
-  likelihood<-exp((min(c(twoRateAIC, oneRateAIC))-c(twoRateAIC, oneRateAIC))/2)
-  print(likelihood)
-  #pars<- data.frame(twoRateFit)
-  metrics<- data.frame(twoRateAIC, oneRateAIC, likelihood[1], likelihood[2])
-  names(metrics)<- c('twoRateAIC', 'oneRateAIC', 'twoRatelikelihood', 'oneratelikelihood')
-  #write.csv(AICs, sprintf("ana/AICs/Group AICs for %s Reaches.csv", group), row.names = TRUE, quote = FALSE)
-  
-  return(metrics)
-}
-
-getParticipantFits2 <- function(data, grid='restricted') {
-  
-  participants <- colnames(data)[2:dim(data)[2]]
-  distortions <- data$distortion
-  
-  participantfits <- data.frame(matrix(NA, ncol=6, nrow=length(participants)))
-  colnames(participantfits) <- c('participant', 'rs', 'ls', 'rf', 'lf', 'MSE')
-  
-  for (ppno in c(1:length(participants))) {
-    
-    participant <- participants[ppno]
-    print(participant)
-    reaches <- data[,participant]
-    
-    #pars<- fitTwoRateReachModel(reaches = reaches, schedule = distortions)
-    pars<- fitTwoRateReachModel(reaches=reaches, schedule=distortions, oneTwoRates=2, grid=grid, checkStability=TRUE)
-    #pars <- fittworatemodel(reaches, distortions)
-    
-    participantfits$participant[ppno] <- participant
-    participantfits$rs[ppno] <- pars['Rs']
-    participantfits$ls[ppno] <- pars['Ls']
-    participantfits$rf[ppno] <- pars['Rf']
-    participantfits$lf[ppno] <- pars['Lf']
-    participantfits$MSE[ppno] <- twoRateReachModelErrors(pars, reaches, distortions)
-    
-  }
-  
-  return(participantfits)
-}
-
-getParticipantFits1 <- function(data, grid='restricted') {
-  
-  participants <- colnames(data)[2:dim(data)[2]]
-  distortions <- data$distortion
-  
-  participantfits <- data.frame(matrix(NA, ncol=4, nrow=length(participants)))
-  colnames(participantfits) <- c('participant', 'rs', 'ls', 'MSE')
-  
-  for (ppno in c(1:length(participants))) {
-    
-    participant <- participants[ppno]
-    print(participant)
-    reaches <- data[,participant]
-    
-    #pars <- fitOneRateReachModel(reaches, distortions)
-    pars <- fitTwoRateReachModel(reaches=reaches, schedule=distortions, oneTwoRates=1, grid=grid, checkStability=TRUE)
-    
-    participantfits$participant[ppno] <- participant
-    participantfits$rs[ppno] <- pars['rs']
-    participantfits$ls[ppno] <- pars['ls']
-    participantfits$MSE[ppno] <- twoRateReachModelErrors(pars, reaches, distortions)
-    
-  }
-  
-  return(participantfits)
-}
-
-getgroupfits2<- function(data, grid = grid) {
-  reaches<-rowMeans(data[,2:ncol(data)], na.rm=TRUE)
-  distortion<- data$distortion
-  pars <- fitTwoRateReachModel(reaches=reaches, schedule=distortions, oneTwoRates=2, grid=grid, checkStability=TRUE)
-  pars$MSE <- twoRateReachModelErrors(pars, reaches, distortions)
-  return(pars)
-}
-getgroupfits1<- function(data, grid = grid) {
-  reaches<-rowMeans(data[,2:ncol(data)], na.rm=TRUE)
-  distortion<- data$distortion
-  pars <- fitTwoRateReachModel(reaches=reaches, schedule=distortions, oneTwoRates=1, grid=grid, checkStability=TRUE)
-  pars$MSE <- twoRateReachModelErrors(pars, reaches, distortions)
-  return(pars)
-}
-
-
-Poneratevstworate<- function (data, group = 'Passive',  grid = 'restricted') {
-  ##Getting AICS for one-rate model vs. two-rate model
-  #need to run one rate model
-
-  par1<- getParticipantFits1(data, grid = grid)
-  
-  #write.csv(par1, sprintf("ana/AICs/One Rate Parameters for %s Reaches.csv", group), row.names = TRUE, quote = FALSE)
-  #need to run two rate model
-  
-  
-  par2<- getParticipantFits2(data, grid = grid)
-  #write.csv(par2, sprintf("ana/AICs/Two Rate Parameters for %s Reaches.csv", group), row.names = TRUE, quote = FALSE)
-
-  Data1MSE<- par1$MSE
-  print(par1$MSE)
-  Data2MSE<- par2$MSE
-  print(par2$MSE)
-  N<- 6
-  P1 <- 2
-  P2 <- 4
-  C <- N*(log(2*pi)+1)
-  Data1AIC <- 2*P1 + N*log(Data1MSE) + C
-  Data2AIC <- 2*P2 + N*log(Data2MSE) + C
-  count<-sum(Data1AIC<Data2AIC)
-  print(sprintf('the number of participants with a higher AIC for two rates are %d',count))
-  #AICs<- c('One Rate Model'=Data1AIC,'Two Rate Model'=Data2AIC)
-  likelihood<-exp((min(c(Data2AIC, Data1AIC))-c(Data2AIC, Data1AIC))/2)
-  metrics<- cbind(Data1AIC, Data2AIC, likelihood)
-  #write.csv(AICs, sprintf("ana/AICs/AICs for one and two rate %s reach data.csv", group), row.names = TRUE, quote = FALSE)
-  #relativeLikelihoods <- exp((min(AICs) - AICs)/2)
-  
-}
-
-
-GetRMSEs<- function (){
-  
-  groups<- list('Pause', 'Active', 'Passive', 'NoC', 'NoCI','Average', 'Test Average')
-  RMSEs<-c(PausePars[6],ActivePars[6],PassivePars[6],NoCPars[6],NoCIPars[6])
-  RMSEs<- c(RMSEs, mean(RMSEs), mean(RMSEs[2:5]))
-  names(RMSEs)<- groups
-  
-  
-  
-  
-  
-}
-
-
-
-
-# Model Comparison----
-CompareModel<- function(groups = c('active', 'passive','pause', 'nocursor', 'nocursor_NI'), bootstraps) {
-  
-  allcomps<- list()
-  counter<- 1
-  for (group in groups){
-    
-    outcomes<- list()
-    
-    df <- read.csv(sprintf('data/%s_reaches.csv', group), stringsAsFactors = FALSE)
-    distortion <- df$distortion
-    
-    reaches <- as.matrix(df[,2:dim(df)[2]])
-    
-    N <- dim(df)[2] - 1
-    
-    InOb <-   (288/48)  # I use these values because there are 288 trials which are not technically independent observations
-    # and 48 is the last lag before the autocorrelation between time points drops below .1 
-    
-    for (bootstrap in c(1:bootstraps)) {
-      
-      
-      medReaches <- apply(reaches[,sample(c(1:N),N,replace=TRUE)], 1, median, na.rm=TRUE)
-      distortion<- distortion
-      
-      
-      onerate_par<- fitoneratemodel(reaches = medReaches, distortions = distortion)
-      tworate_par<- fittworatemodel(reaches = medReaches, distortions = distortion)
-      
-      
-      distortion<- distortion
-      onerate_model<- oneratemodel(par = onerate_par, distortions = distortion)
-      tworate_model<- tworatemodel(par = tworate_par, distortions = distortion)
-      
-      
-      twoRateMSE<-twoRateReachModelError(tworate_par, reaches = medReaches, distortions = distortion)
-      oneRateMSE<-oneRateReachModelError(onerate_par, reaches = medReaches, distortions = distortion)
-      
-      twoRateAIC <- InOb + InOb * log(2 * pi) + InOb * log(twoRateMSE) + 2*5
-      oneRateAIC <- InOb + InOb * log(2 * pi) + InOb * log(oneRateMSE) + 2 * 2
-      
-      twoRateBIC <- InOb + InOb * log(2 * pi) + InOb * log(twoRateMSE) + log(InOb) * 5
-      oneRateBIC<-  InOb + InOb * log(2 * pi) + InOb * log(oneRateMSE) + log(InOb) * 2
-      if (length(outcomes) == 0){
-        outcomes[[1]]<- c(twoRateAIC, oneRateAIC)
-        outcomes[[2]]<- c(twoRateBIC, oneRateBIC)
-        outcomes[[3]]<-exp((min(c(twoRateAIC, oneRateAIC))-c(twoRateAIC, oneRateAIC))/2)
-      }else{
-        outcomes[[1]]<- c(outcomes[[1]], twoRateAIC, oneRateAIC)
-        outcomes[[2]]<- c(outcomes[[2]], twoRateBIC, oneRateBIC)
-        outcomes[[3]]<-c(outcomes[[3]],exp((min(c(twoRateAIC, oneRateAIC))-c(twoRateAIC, oneRateAIC))/2))
-      }
-      
-      
-    }
-    names(outcomes)<- c("AIC", "BIC", "Relative Likelihood")
-    names(outcomes[[1]])<- c(rep(c('two-Rate', "one-Rate"), times = bootstraps))
-    names(outcomes[[2]])<- c(rep(c('two-Rate', "one-Rate"), times = bootstraps)) 
-    names(outcomes[[3]])<- c(rep(c('two-Rate', "one-Rate"), times = bootstraps)) 
-    
-    allcomps[[counter]]<- outcomes 
-    counter<- counter + 1
-  }
-  
-  names(allcomps)<- groups
-  return(allcomps)
-}
-
-
-
-
-
-mmed <- function(x,n=5){runmed(x,n)}
-
-
-fitPropModel<- function(reachdata, locadata, exp = 1) {
-  
-  localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
-  if (exp == 2){
-    meanreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)
-    distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
-    schedule<- c(distortion,meanreaches)
-  } else {
-    meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
-    meanreaches<- meanreaches*-1
-    reachdata$distortion[241:288]<- as.numeric(meanreaches)
-    schedule<- reachdata$distortion
-  }
-  
-  #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse. 
-  pargrid <- gridsearch(localizations, schedule, nsteps = 7, topn = 4)
-  cat('optimize best fits...\n')
-  for (gridpoint in c(1:nrow(pargrid))) { #for each row 
-    par<-unlist(pargrid[gridpoint,1]) 
-    
-    control <- list('maxit'=10000, 'ndeps'=1e-9 )
-    fit <- optim(par=par, PropModelMSE, gr=NULL, schedule, localizations, control=control, method = "Brent", lower = 0, upper = 1)
-    optpar<- fit$par
-    
-    
-    # stick optpar back in pargrid
-    pargrid[gridpoint,1] <- optpar
-    
-    pargrid[gridpoint,2]<- fit$value
-    
-  } 
-  # get lowest MSE, and pars that go with that
-  bestpar <- order(pargrid[,2])[1]
-  print(unlist(pargrid[bestpar]))
-
-  output<- PropModel(unlist(pargrid[bestpar]), schedule)
-
-  
-  # return(those pars)
-  #return(unlist(pargrid[bestpar]))
-  
-  #return the output to use for plots
-  return(output)
-  
-}
-
-LocalizationModelCompare<- function (dataset, dataset2, color) {
-  data<- getreachesformodel(dataset)
-  dist<- data$distortion
-  localizations<- mmed(data$meanreaches)
-  Average<- mean(localizations[182:224], na.rm = TRUE)
-  Scale<- Average/30
-  reachdata<- getreachesformodel(dataset2)$meanreaches
-  Reach_par<- fitTwoRateReachModel(reaches = reachdata,schedule= dist)
-  Reach_model<-twoRateReachModel(par=Reach_par, schedule = dist)
-  Reach_model$total<-Reach_model$total*Scale
-  Reach_model$slow<-Reach_model$slow*Scale
-  output<-fitPropModel(dataset2,dataset)
-  #meanreaches<-rowMeans(dataset2[241:288,2:ncol(dataset2)], na.rm=TRUE)
-  #meanreaches<- meanreaches*-1
-  #dataset2$distortion[241:288]<- as.numeric(meanreaches)
-  #output<- PropModel(unlist(prop_par), dataset2$distortion)
-  plot(localizations,main = "Localizations vs Scaled Model",ylim = c(-5, 10), lwd = 2.5, axes= F,col=color, xlab = "Trial", ylab = "Difference in Hand Direction [?]", type = "l")
-  axis(1, at=c(1,64,224,240,288), cex.axis=0.75)
-  axis(2, at=c(-5,0,5,10), cex.axis=0.75)
-  lines(Reach_model$total*-1, col = c(rgb(.5,0.,.5)))
-  lines(Reach_model$slow*-1, col = rgb(0.,.5,1.))
-  lines(output, col = 'yellow')
-  legend(-3,-1,legend=c('Localization Data','Reach Model - Total', "Reach Model - Slow", 'Prop Model'),col=c(color,rgb(.5,0.,.5), rgb(0.,.5,1.), 'darksalmon'),lty=c(1,1),lwd=c(2,2),bty='n')
-  TotalMSE<- mean((localizations - Reach_model$total)^2)
-  SlowMSE<- mean((localizations - Reach_model$slow)^2)
-  PropMSE<- mean((localizations - output)^2)
-  N<- 22.15
-  P <- 4
-  C <- N*(log(2*pi)+1)
-  TotalAIC <- 2*P + N*log(TotalMSE) + C
-  SlowAIC <- 2*P + N*log(SlowMSE) + C
-  PropAIC <- 2*P + N*log(PropMSE) + C
-  AICs<- c('slow'=SlowAIC, 'Total'=TotalAIC, 'Prop' = PropMSE)
-  relativeLikelihoods <- exp((min(AICs) - AICs)/2)
-  names(relativeLikelihoods)<- c('slow', 'Total', 'Prop')
-  metrics<- list(AICs, relativeLikelihoods)
-  totallh<- sprintf('Total %1.2f', relativeLikelihoods[2])
-  text(180, 2, totallh)
-  Slowlh<- sprintf('Slow %1.2f', relativeLikelihoods[1])
-  text(180, 0, Slowlh)
-  Proplh<- sprintf('Prop %1.2f', relativeLikelihoods[3])
-  text(180, -2, Proplh)
-  
-  return(metrics)
-  
-}
-
-
-ExpoLocalizationModelCompare<- function (dataset, dataset2, color) {
-  data<- getreachesformodel(dataset)
-  dist<- data$distortion
-  localizations<- mmed(data$meanreaches)
-  Average<- mean(localizations[182:224], na.rm = TRUE)
-  #Scale<- Average/30
-  reachdata<- getreachesformodel(dataset2)$meanreaches
-  #Reach_par<- fitTwoRateReachModel(reaches = reachdata,schedule= dist)
-  #Reach_model<-twoRateReachModel(par=Reach_par, schedule = dist)
-  #Reach_model$total<-Reach_model$total*Scale
-  #Reach_model$slow<-Reach_model$slow*Scale
-  output<-fitPropModel(dataset2,dataset, exp = 2)
-  plot(localizations,main = "Localizations vs Scaled Model",ylim = c(-5, 10), lwd = 2.5, axes= F,col=color, xlab = "Trial", ylab = "Difference in Hand Direction [?]", type = "l")
-  axis(1, at=c(1,64,224,240,288), cex.axis=0.75)
-  axis(2, at=c(-5,0,5,10), cex.axis=0.75)
-  #lines(Reach_model$total*-1, col = c(rgb(.5,0.,.5)))
-  #lines(Reach_model$slow*-1, col = rgb(0.,.5,1.))
-  lines(output, col = 'yellow')
-  legend(-3,-1,legend=c('Localization Data','Reach Model - Total', "Reach Model - Slow", 'Prop Model'),col=c(color,rgb(.5,0.,.5), rgb(0.,.5,1.), 'darksalmon'),lty=c(1,1),lwd=c(2,2),bty='n')
-  #TotalMSE<- mean((localizations - Reach_model$total)^2)
-  #SlowMSE<- mean((localizations - Reach_model$slow)^2)
-  PropMSE<- mean((localizations - output)^2)
-  N<- 22.15
-  P <- 4
-  C <- N*(log(2*pi)+1)
-  #TotalAIC <- 2*P + N*log(TotalMSE) + C
-  #SlowAIC <- 2*P + N*log(SlowMSE) + C
-  PropAIC <- 2*P + N*log(PropMSE) + C
-  AICs<- c('Prop' = PropMSE)
-  relativeLikelihoods <- exp((min(AICs) - AICs)/2)
-  names(relativeLikelihoods)<- c('Prop')
-  metrics<- list(AICs, relativeLikelihoods)
-  Proplh<- sprintf('Prop %1.2f', relativeLikelihoods[1])
-  text(180, -2, Proplh)
-  
-  return(metrics)
-  
-}
-
-
-
-
-ncImean<- c()
-ncImean[1]<- mean(Ttestdata$Aligned[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE)
-ncImean[2]<- mean(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE)
-ncImean[3]<- mean(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE)
-ncImean[4]<- mean(Ttestdata$R2[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE)
-ncImean[5]<- mean(Ttestdata$EC_Late[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE)
-
-ncISE<- c()
-ncISE[1]<- (sd(Ttestdata$Aligned[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))
-ncISE[2]<- (sd(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))
-ncISE[3]<- (sd(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))
-ncISE[4]<- (sd(Ttestdata$R2[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))
-ncISE[5]<- (sd(Ttestdata$EC_Late[Ttestdata$Experiment == 'No-CursorI_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))
-
-
-ncmean<- c()
-ncmean[1]<- mean(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE)
-ncmean[2]<- mean(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE)
-ncmean[3]<- mean(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE)
-ncmean[4]<- mean(Ttestdata$R2[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE)
-ncmean[5]<- mean(Ttestdata$EC_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE)
-
-ncSE<- c()
-ncSE[1]<- (sd(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))
-ncSE[2]<- (sd(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))
-ncSE[3]<- (sd(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))
-ncSE[4]<- (sd(Ttestdata$R2[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))
-ncSE[5]<- (sd(Ttestdata$EC_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))
-
-plotreapoints<- function(){
-plot(y=ncImean[1:3]*-1, x = c(.95,1.95,2.95), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorNNC, ylim = c(-8,30), cex.lab = 1.5, xlim = c(.5,3.5))
-arrows(x0 = c(.95,1.95,2.95), y0 = (ncImean[1:3]*-1) - ncISE[1:3]*2, x1 = c(.95,1.95,2.95), y1 = (ncImean[1:3]*-1) + ncISE[1:3]*2, code = 3, angle = 90, length = .02, col = colorNNC)
-points(y=Ttestdata$Aligned[Ttestdata$Experiment == 'No-CursorI_No-Cursors']*-1, pch= 16, x = c(rep(.95, times = length(Ttestdata$Aligned[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))),col = colorNNC_trans)
-points(y=Ttestdata$R1_Early[Ttestdata$Experiment == 'No-CursorI_No-Cursors']*-1, pch= 16,x = c(rep(1.95, times = length(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))),col = colorNNC_trans)
-points(y=Ttestdata$R1_Late[Ttestdata$Experiment == 'No-CursorI_No-Cursors']*-1,pch= 16, x = c(rep(2.95, times = length(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-CursorI_No-Cursors']))),col = colorNNC_trans)
-points(y=ncmean[1:3]*-1, x = c(1.05,2.05,3.05),pch = 15,  col = colorNC)
-arrows(x0 = c(1.05,2.05,3.05), y0 = (ncmean[1:3]*-1) - ncISE[1:3]*2, x1 = c(1.05,2.05,3.05), y1 = (ncmean[1:3]*-1) + ncISE[1:3]*2, code = 3, angle = 90, length = .02, col = colorNC)
-points(y=Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors']*-1,pch= 16, x = c(rep(1.05, times = length(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))),col = colorNC_trans)
-points(y=Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors']*-1, pch= 16,x = c(rep(2.05, times = length(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))),col = colorNC_trans)
-points(y=Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors']*-1, pch= 16,x = c(rep(3.05, times = length(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors']))),col = colorNC_trans)
-
-lines(c(1, 2, 2, 3, 3),
-      c(0, 0, 30, 30, 30),
-      col = rgb(0., 0., 0.))
-#lines(c(4.5, 5.5),
- #     c(0, 0),
- #     lty = 2,
-#    col = rgb(0., 0., 0.))
-axis(2, at = c(-5,0,5,10, 15,20,25, 30), cex.axis = 1.5, las = 2)
-axis(1, at = c(1,2,3),labels = c("aligned", "R1_Early", "R1_Final"), cex.axis = 1.5)
-legend(0.3,35, legend = c("Uninstructed", "Instructed"), col = c(colorNNC, colorNC), lty = c(1), lwd = c(2), cex = 1.5, bty = "n")
-}
-
-ncamean<- c()
-ncamean[1]<- mean(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE)
-ncamean[2]<- mean(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE)
-ncamean[3]<- mean(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE)
-ncamean[4]<- mean(Ttestdata$R2[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE)
-ncamean[5]<- mean(Ttestdata$EC_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE)
-
-ncaSE<- c()
-ncaSE[1]<- (sd(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))
-ncaSE[2]<- (sd(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))
-ncaSE[3]<- (sd(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))
-ncaSE[4]<- (sd(Ttestdata$R2[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))
-ncaSE[5]<- (sd(Ttestdata$EC_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A'], na.rm = TRUE))/sqrt(length(Ttestdata$Experiment[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))
-
-
-plotavereapoints<- function(){
-  plot(y=ncamean[1:3]*-1, x = c(1:3), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorNC, ylim = c(-15,35), cex.lab = 1.5, xlim = c(.5,3.5))
-  arrows(x0 = c(1:3), y0 = (ncamean[1:3]*-1) - ncaSE[1:3]*2, x1 = c(1:3), y1 = (ncamean[1:3]*-1) + ncaSE[1:3]*2, code = 3, angle = 90, length = .02, col = colorNC)
-  #points(y=Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, pch= 16, x = c(rep(.95, times = length(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))),col = colorNC_trans)
-  #points(y=Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, pch= 16,x = c(rep(1.95, times = length(Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))),col = colorNC_trans)
-  #points(y=Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1,pch= 16, x = c(rep(2.95, times = length(Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']))),col = colorNC_trans)
-  samp1<-sample(x = c(seq(from = .95, to = 1.05, by = .02)), size = length(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']), replace= TRUE)
-  samp2<-sample(x = c(seq(from = 1.95, to = 2.05, by = .02)), size = length(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']), replace= TRUE)
-  samp3<-sample(x = c(seq(from = 2.95, to = 3.05, by = .02)), size = length(Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']), replace= TRUE)
-  points(y=Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, pch= 16, x= samp1,col = colorNC_trans)
-  points(y=Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, pch= 16,x= samp2,col = colorNC_trans)
-  points(y=Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1,pch= 16, x= samp3,col = colorNC_trans)
-  #segments(x0 = samp1, y0 = Ttestdata$Aligned[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, x1 = samp2, y1 = Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, col = colorNC_trans)
-  segments(x0 = samp2, y0 = Ttestdata$R1_Early[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, x1 = samp3, y1 = Ttestdata$R1_Late[Ttestdata$Experiment == 'No-Cursor_No-Cursors_A']*-1, col = rgb(0.0, 0.7, 0.0, 0.1))
-  
-  lines(c(1, 1.90, 1.90, 3.1, 3.1),
-        c(0, 0, 30, 30, 30),
-        col = rgb(0., 0., 0.))
-  #lines(c(4.5, 5.5),
-  #     c(0, 0),
-  #     lty = 2,
-  #    col = rgb(0., 0., 0.))
-  axis(2, at = c(-10,-5,0,5,10, 15,20,25, 30,35), cex.axis = 1.5, las = 2)
-  axis(1, at = c(1,2,3),labels = c("aligned", "R1_Early", "R1_Final"), cex.axis = 1.5)
-  #legend(0.3,35, legend = c("No-"), col = c(colorNNC, colorNC), lty = c(1), lwd = c(2), cex = 1.5, bty = "n")
-}
-
-Zoomedinprop<- function(){
-
-PAmean<- c()
-PAmean[1]<- mean(TtestPdata$Aligned[TtestPdata$Experiment == 'Active'], na.rm = TRUE)
-PAmean[2]<- mean(TtestPdata$R1_Early[TtestPdata$Experiment == 'Active'], na.rm = TRUE)
-PAmean[3]<- mean(TtestPdata$R1_Late[TtestPdata$Experiment == 'Active'], na.rm = TRUE)
-PAmean[4]<- mean(TtestPdata$R2[TtestPdata$Experiment == 'Active'], na.rm = TRUE)
-PAmean[5]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Active'], na.rm = TRUE)
-
-PASE<- c()
-PASE[1]<- (sd(TtestPdata$Aligned[TtestPdata$Experiment == 'Active'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Active']))
-PASE[2]<- (sd(TtestPdata$R1_Early[TtestPdata$Experiment == 'Active'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Active']))
-PASE[3]<- (sd(TtestPdata$R1_Late[TtestPdata$Experiment == 'Active'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Active']))
-PASE[4]<- (sd(TtestPdata$R2[TtestPdata$Experiment == 'Active'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Active']))
-PASE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Active'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Active']))
-
-
-PPmean<- c()
-PPmean[1]<- mean(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
-PPmean[2]<- mean(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
-PPmean[3]<- mean(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
-PPmean[4]<- mean(TtestPdata$R2[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
-PPmean[5]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
-
-PPSE<- c()
-PPSE[1]<- (sd(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
-PPSE[2]<- (sd(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
-PPSE[3]<- (sd(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
-PPSE[4]<- (sd(TtestPdata$R2[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
-PPSE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
-
-PTmean<- c()
-PTmean[1]<- mean(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
-PTmean[2]<- mean(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
-PTmean[3]<- mean(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
-PTmean[4]<- mean(TtestPdata$R2[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
-PTmean[5]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
-
-PTSE<- c()
-PTSE[1]<- (sd(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
-PTSE[2]<- (sd(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
-PTSE[3]<- (sd(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
-PTSE[4]<- (sd(TtestPdata$R2[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
-PTSE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
-
-PEmean<- c()
-PEmean[1]<- mean(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
-PEmean[2]<- mean(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
-PEmean[3]<- mean(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
-PEmean[4]<- mean(TtestPdata$R2[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
-PEmean[5]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
-
-PESE<- c()
-PESE[1]<- (sd(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
-PESE[2]<- (sd(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
-PESE[3]<- (sd(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
-PESE[4]<- (sd(TtestPdata$R2[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
-PESE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
-
-plotproppoints()
-
-}
-plotproppoints<- function(){
-  plot(y=PAmean[1:3]*1, x = c(.95,1.95,2.95), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorA, ylim = c(-8,30), cex.lab = 1.5, xlim = c(.5,3.5))
-  arrows(x0 = c(.95,1.95,2.95), y0 = (PAmean[1:3]) - PASE[1:3]*2, x1 = c(.95,1.95,2.95), y1 = (PAmean[1:3]) + PASE[1:3]*2, code = 3, angle = 90, length = .02, col = 'Orange')
-  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Active'], pch= 16,x = c(rep(.95, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Active']))),col = colorA_trans)
-  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Active'],pch= 16, x = c(rep(1.95, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Active']))),col = colorA_trans)
-  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Active'], pch= 16,x = c(rep(2.95, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Active']))),col = colorA_trans)
-  
-  points(y=PPmean[1:3]*1,x = c(.85,1.85,2.85), pch = 15,  col = colorPA)
-  arrows(x0 = c(.85,1.85,2.85), y0 = (PPmean[1:3]) - PPSE[1:3]*2, x1 = c(.85,1.85,2.85), y1 = (PPmean[1:3]) + PPSE[1:3]*2, code = 3, angle = 90, length = .02, col = colorPA)
-  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(.85, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
-  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(1.85, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
-  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(2.85, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
-  
-  points(y=PTmean[1:3]*1,x = c(1.05,2.05,3.05), pch = 15,  col = colorT)
-  arrows(x0 = c(1.05,2.05,3.05), y0 = (PTmean[1:3]) - PTSE[1:3]*2, x1 = c(1.05,2.05,3.05), y1 = (PTmean[1:3]) + PTSE[1:3]*2, code = 3, angle = 90, length = .02, col = colorT)
-  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(1.05, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(2.05, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(3.05, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  
-  points(PEmean[1:3]*1, x = c(1.15,2.15,3.15),pch = 15,  col = colorE)
-  arrows(x0 = c(1.15,2.15,3.15), y0 = (PEmean[1:3]) - PESE[1:3]*2, x1 = c(1.15,2.15,3.15), y1 = (PEmean[1:3]) + PESE[1:3]*2, code = 3, angle = 90, length = .02, col = colorE)
-  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(1.15, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
-  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'],pch= 16, x = c(rep(2.15, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
-  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(3.15, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
-  
-  
-  lines(c(1, 1.80, 1.80, 3.2, 3.2),
-        c(0, 0, 30, 30, 30),
-        col = rgb(0., 0., 0.))
-  #lines(c(4.5, 5.5),
-  #     c(0, 0),
-  #     lty = 2,
-  #    col = rgb(0., 0., 0.))
-  axis(2, at = c(-5,0,5,10, 15,20,25, 30), cex.axis = 1.5, las = 2)
-  axis(1, at = c(1,2,3),labels = c("aligned", "R1_Early", "R1_Final"), cex.axis = 1.5)
-  legend(.3,35, legend = c("Active", "Passive", "Terminal", "Exposure"), col = c(colorA, colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.5, bty = "n")
-}
-
-plotpassiveproppoints<- function(){
-  plot(y=PPmean[1:3]*1, x = c(.9,1.9,2.9), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorPA, ylim = c(-8,30), cex.lab = 1.5, xlim = c(.5,3.5))
-  #points(y=PPmean[1:3]*1,x = c(.85,1.85,2.85), pch = 15,  col = colorPA)
-  arrows(x0 = c(.9,1.9,2.9), y0 = (PPmean[1:3]) - PPSE[1:3]*2, x1 = c(.90,1.9,2.9), y1 = (PPmean[1:3]) + PPSE[1:3]*2, code = 3, angle = 90, length = .02, col = colorPA)
-  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(.9, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
-  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(1.9, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
-  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(2.9, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
-  #segments(x0 = .9, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], x1 = 1.9, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], col = colorPA_trans)
-  segments(x0 = 1.9, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], x1 = 2.9, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], col = rgb(0.7, 0.0, 0.7, 0.1))
-  
-  points(y=PTmean[1:3]*1,x = c(1.0,2.0,3.0), pch = 15,  col = colorT)
-  arrows(x0 = c(1.0,2.0,3.0), y0 = (PTmean[1:3]) - PTSE[1:3]*2, x1 = c(1.0,2.0,3.0), y1 = (PTmean[1:3]) + PTSE[1:3]*2, code = 3, angle = 90, length = .02, col = colorT)
-  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(1.0, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(2.0, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  #segments(x0 = 1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], x1 = 2, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], col = colorT_trans)
-  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(3.0, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
-  segments(x0 = 2, y0 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], x1 = 3, y1 = TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], col = rgb(1, 0.0, 0., 0.1))
-  
-  
-  points(PEmean[1:3]*1, x = c(1.1,2.1,3.1),pch = 15,  col = colorE)
-  arrows(x0 = c(1.1,2.1,3.1), y0 = (PEmean[1:3]) - PESE[1:3]*2, x1 = c(1.1,2.1,3.1), y1 = (PEmean[1:3]) + PESE[1:3]*2, code = 3, angle = 90, length = .02, col = colorE)
-  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(1.1, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
-  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'],pch= 16, x = c(rep(2.1, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
-  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(3.1, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
-  #segments(x0 = 1.1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], x1 = 2.1, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], col = colorE_trans)
-  segments(x0 = 2.1, y0 = TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], x1 = 3.1, y1 = TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], col = rgb(0.85, 0.65, 0.12, 0.1))
-  
-  
-  lines(c(1, 1.80, 1.80, 3.2, 3.2),
-        c(0, 0, 30, 30, 30),
-        col = rgb(0., 0., 0.))
-  #lines(c(4.5, 5.5),
-  #     c(0, 0),
-  #     lty = 2,
-  #    col = rgb(0., 0., 0.))
-  axis(2, at = c(-5,0,5,10, 15,20,25, 30), cex.axis = 1.5, las = 2)
-  axis(1, at = c(1,2,3),labels = c("aligned", "R1_Early", "R1_Final"), cex.axis = 1.5)
-  legend(.3,33, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.5, bty = "n")
-}
-
-
-
-
-
 
 GroupModelAICs <- function(data, group, grid = 'restricted') {
   
@@ -1054,3 +466,335 @@ GroupModelAICs <- function(data, group, grid = 'restricted') {
   
   return(metrics)
 }
+
+getParticipantFits2 <- function(data, grid='restricted') {
+
+  participants <- colnames(data)[2:dim(data)[2]]
+  distortions <- data$distortion
+
+  participantfits <- data.frame(matrix(NA, ncol=6, nrow=length(participants)))
+  colnames(participantfits) <- c('participant', 'Rs', 'Ls', 'Rf', 'Lf', 'MSE')
+
+  for (ppno in c(1:length(participants))) {
+
+    participant <- participants[ppno]
+    participant
+    reaches <- data[,participant]
+
+    #pars<- fitTwoRateReachModel(reaches = reaches, schedule = distortions)
+    pars<- fitTwoRateReachModel(reaches=reaches, schedule=distortions, oneTwoRates=2, grid=grid, checkStability=TRUE)
+    #pars <- fittworatemodel(reaches, distortions)
+
+    participantfits$participant[ppno] <- participant
+    participantfits$Rs[ppno] <- pars['Rs']
+    participantfits$Ls[ppno] <- pars['Ls']
+    participantfits$Rf[ppno] <- pars['Rf']
+    participantfits$Lf[ppno] <- pars['Lf']
+    participantfits$MSE[ppno] <- twoRateReachModelErrors(pars, reaches, distortions)
+
+  }
+
+  return(participantfits)
+}
+
+getParticipantFits1 <- function(data, grid='restricted') {
+
+  participants <- colnames(data)[2:dim(data)[2]]
+  distortions <- data$distortion
+
+  participantfits <- data.frame(matrix(NA, ncol=4, nrow=length(participants)))
+  colnames(participantfits) <- c('participant', 'rs', 'ls', 'MSE')
+
+  for (ppno in c(1:length(participants))) {
+
+    participant <- participants[ppno]
+    participant
+    reaches <- data[,participant]
+
+    #pars <- fitOneRateReachModel(reaches, distortions)
+    pars <- fitTwoRateReachModel(reaches=reaches, schedule=distortions, oneTwoRates=1, grid=grid, checkStability=TRUE)
+
+    participantfits$participant[ppno] <- participant
+    participantfits$rs[ppno] <- pars['rs']
+    participantfits$ls[ppno] <- pars['ls']
+    participantfits$MSE[ppno] <- twoRateReachModelErrors(pars, reaches, distortions)
+
+  }
+
+  return(participantfits)
+}
+
+
+mmed <- function(x,n=5){runmed(x,n)}
+
+LocalizationModelCompare<- function (dataset, dataset2, color) {
+  data<- getreachesformodel(dataset)
+  dist<- data$distortion
+  localizations<- mmed(data$meanreaches)
+  Average<- mean(localizations[182:224], na.rm = TRUE)
+  Scale<- Average/30
+  reachdata<- getreachesformodel(dataset2)$meanreaches
+  Reach_par<- fitTwoRateReachModel(reaches = reachdata,schedule= dist)
+  Reach_model<-twoRateReachModel(par=Reach_par, schedule = dist)
+  Reach_model$total<-Reach_model$total*Scale
+  Reach_model$slow<-Reach_model$slow*Scale
+  prop_par<-fitPropModel(dataset2,dataset)
+  meanreaches<-rowMeans(dataset2[241:288,2:ncol(dataset2)], na.rm=TRUE)
+  meanreaches<- meanreaches*-1
+  dataset2$distortion[241:288]<- as.numeric(meanreaches)
+  output<- PropModel(unlist(prop_par), dataset2$distortion)
+  plot(localizations,main = "Localizations vs Scaled Model",ylim = c(-5, 10), lwd = 2.5, axes= F,col=color, xlab = "Trial", ylab = "Difference in Hand Direction [?]", type = "l")
+  axis(1, at=c(1,64,224,240,288), cex.axis=0.75)
+  axis(2, at=c(-5,0,5,10), cex.axis=0.75)
+  lines(Reach_model$total*-1, col = c(rgb(.5,0.,.5)))
+  lines(Reach_model$slow*-1, col = rgb(0.,.5,1.))
+  lines(output, col = 'yellow')
+  legend(-3,-1,legend=c('Localization Data','Reach Model - Total', "Reach Model - Slow", 'Prop Model'),col=c(color,rgb(.5,0.,.5), rgb(0.,.5,1.), 'yellow'),lty=c(1,1),lwd=c(2,2),bty='n')
+  TotalMSE<- mean((localizations - Reach_model$total)^2)
+  SlowMSE<- mean((localizations - Reach_model$slow)^2)
+  PropMSE<- mean((localizations - output)^2)
+  
+  
+  InOb <- seriesEffectiveSampleSize(reachdata, method='ac_lag95%CI')
+  TotalAIC<-(InOb * log(TotalMSE)) + (2 * 4)
+  SlowAIC<-(InOb * log(SlowMSE)) + (2 * 2)
+  PropAIC<-(InOb * log(PropMSE)) + (2 * 2)
+  
+  
+  # N<- 22.15
+  # P <- 4
+  # C <- N*(log(2*pi)+1)
+  # 
+  
+  
+  # 
+  # TotalAIC <- 2*P + N*log(TotalMSE) + C
+  # SlowAIC <- 2*P + N*log(SlowMSE) + C
+  # PropAIC <- 2*P + N*log(PropMSE) + C
+  AICs<- c('slow'=SlowAIC, 'Total'=TotalAIC, 'Prop' = PropMSE)
+  relativeLikelihoods <- exp((min(AICs) - AICs)/2)
+  names(relativeLikelihoods)<- c('slow', 'Total', 'Prop')
+  metrics<- list(AICs, relativeLikelihoods)
+  totallh<- sprintf('Total %1.2f', relativeLikelihoods[2])
+  text(180, 2, totallh)
+  Slowlh<- sprintf('Slow %1.2f', relativeLikelihoods[1])
+  text(180, 0, Slowlh)
+  Proplh<- sprintf('Prop %1.2f', relativeLikelihoods[3])
+  text(180, -2, Proplh)
+  
+  return(metrics)
+  
+}
+
+
+fitPropModel<- function(reachdata, locadata) {
+
+  localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
+  meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+  meanreaches<- meanreaches*-1
+  reachdata$distortion[241:288]<- as.numeric(meanreaches)
+  schedule<- reachdata$distortion
+
+
+  #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse.
+  pargrid <- gridsearch(localizations, schedule, nsteps = 7, topn = 4)
+  cat('optimize best fits...\n')
+  for (gridpoint in c(1:nrow(pargrid))) { #for each row
+    par<-unlist(pargrid[gridpoint,1])
+
+    control <- list('maxit'=10000, 'ndeps'=1e-9 )
+    fit <- optim(par=par, PropModelMSE, gr=NULL, schedule, localizations, control=control, method = "Brent", lower = 0, upper = 1)
+    optpar<- fit$par
+
+
+    # stick optpar back in pargrid
+    pargrid[gridpoint,1] <- optpar
+
+    pargrid[gridpoint,2]<- fit$value
+
+  }
+  # get lowest MSE, and pars that go with that
+  bestpar <- order(pargrid[,2])[1]
+
+  output<- PropModel(unlist(pargrid[bestpar]), schedule)
+  proportion<- sprintf('Proportion = %.2f', unlist(pargrid[bestpar]))
+
+  reaches <- getreachesformodel(reachdata)
+  reach_par <-
+    fitTwoRateReachModel(
+      reaches = reaches$meanreaches,
+      schedule = schedule,
+      oneTwoRates = 2,
+      checkStability = TRUE
+    )
+  reach_model <-
+    twoRateReachModel(par = reach_par, schedule = schedule)
+  Average<- mean(localizations[182:224], na.rm = TRUE)
+  Scale<- Average/30
+  reach_model$slow<- reach_model$slow*Scale
+  reach_model$fast<- reach_model$fast*Scale
+
+  return(unlist(pargrid[bestpar]))
+
+}
+PropModel <- function(par, schedule) {
+  locest<-c()
+  #loop through the perturbations in the schedule:
+  for (t in c(1:length(schedule))) {
+    # first we calculate what the model does, since the model is proportional, we just multiply the one parameters by the schedule to get what the person should do
+
+    locest[t] <- par * schedule[t]
+  }
+
+  # after we loop through all trials, we return the model output:
+  return(locest)
+
+}
+
+PropModelMSE <- function(par, schedule, localizations) {
+
+  locesti<- PropModel(par, schedule)
+  errors <- locesti - localizations
+  MSE <- mean(errors^2, na.rm=TRUE)
+
+
+
+  return( MSE )
+
+}
+
+
+gridsearch<- function(localizations, schedule, nsteps=7, topn=4) {
+
+
+  cat('doing grid search...\n')
+
+  steps <- nsteps #say how many points inbetween 0-1 we want
+  pargrid <- seq(0.5*(1/steps),1-(0.5*(1/steps)),by=1/steps) #not sure what exactly this does
+  MSE<- rep(NA, length(pargrid))
+  pargrid<- cbind(pargrid, MSE)
+
+  for (gridpoint in c(1:nrow(pargrid))) { #for each row
+    par<-unlist(pargrid[gridpoint,1])    #take that row and take it out of df and make it par
+    pargrid[gridpoint,2] <- PropModelMSE(par, schedule,localizations)
+  }
+
+  bestN <- order(pargrid[,2])[1:topn]
+
+  return(pargrid[bestN,])
+}
+
+
+
+##Equivalence tests
+
+equivalence<- function(){
+meanNC<-mean(allttest$r1[allttest$Task== 'Reach' & allttest$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE)*-1
+SDNC<-sd(allttest$r1[allttest$Task== 'Reach' & allttest$Experiment == 'No-Cursor_No-Cursors'], na.rm = TRUE)
+meanA<-mean(allttest$r1[allttest$Task== 'Prop' & allttest$Experiment == 'Active'], na.rm = TRUE)
+SDA<-sd(allttest$r1[allttest$Task== 'Prop' & allttest$Experiment == 'Active'], na.rm = TRUE)
+SDP<-sd(allttest$r1[allttest$Task== 'Prop' & allttest$Experiment == 'Passive'], na.rm = TRUE)
+meanP<-mean(allttest$r1[allttest$Task== 'Prop' & allttest$Experiment == 'Passive'], na.rm = TRUE)
+
+x <- mean(allttest$r1[allttest$Task == "Reach" & allttest$Experiment == "No-Cursor"], na.rm = TRUE)*-1
+sd <- sd(allttest$r1[allttest$Task == "Reach" & allttest$Experiment == "No-Cursor"], na.rm = TRUE)
+n <- 48
+t<- 2.01
+se<- sd/(sqrt(n))
+CI<- c((x+t*se),(x-t*se))
+pwr.t2n.test(n1 = 48, n2 = 32, sig.level = .05, power = .33)
+
+TOSTtwo(meanNC, meanA, SDNC,SDA,48,32,-.35,.35,0.05)
+TOSTtwo(meanNC, meanP, SDNC,SDP,48,32,-.35,.35,0.05)
+}
+
+
+
+
+# Descriptive statistics about the data -----
+Allmeans<- function() {
+  
+  ActiveReach<- means(active_reaches)
+  ActiveReach$Experiment<- "ActiveR"
+  ActiveProp<- means(active_localization)
+  ActiveProp$Experiment<- "ActiveL"
+  PassiveReach<- means(passive_reaches)
+  PassiveReach$Experiment<- "PassiveR"
+  PassiveProp<- means(passive_localization)
+  PassiveProp$Experiment<- "PassiveL"
+  PauseReach<- means(pause_reaches[33:320,])
+  PauseReach$Experiment<- "PauseR"
+  NocursorReach<- means(nocursor_reaches[33:320,])
+  NocursorReach$Experiment<- "NocursorR"
+  NocursorIReach<- means(nocursorI_reaches[33:320,])
+  NocursorIReach$Experiment<- "NocursorIR"
+  NocursorNCReach<- NCmeans(nocursor_nocursors)
+  NocursorNCReach$Experiment<- "NocursorNC"
+  NocursorNCIReach<- NCmeans(nocursorI_nocursors)
+  NocursorNCIReach$Experiment<- "NocursorINC"
+  Allmeans<- rbind(ActiveReach, ActiveProp, PassiveReach, PassiveProp, PauseReach, NocursorReach, NocursorNCReach, NocursorIReach, NocursorNCIReach)
+  write.csv(Allmeans, 'ana/All Experiments Descriptive Stats_updated.csv', quote = FALSE, row.names = FALSE )
+  
+  return(Allmeans)
+  
+  
+}
+
+NCmeans<- function (data) {
+  
+  
+  
+  AlignedMean<- mean(unlist(data[29:32,2:ncol(data)]), na.rm= TRUE)
+  AlignedMax<- max(unlist(data[29:32,2:ncol(data)]), na.rm= TRUE)
+  AlignedMin<- min(unlist(data[29:32,2:ncol(data)]), na.rm= TRUE)
+  InitialRotationMean<- mean(unlist(data[33:36,2:ncol(data)]), na.rm= TRUE)
+  InitialRotationMax<- max(unlist(data[33:36,2:ncol(data)]), na.rm= TRUE)
+  InitialRotationMin<- min(unlist(data[33:36,2:ncol(data)]), na.rm= TRUE)
+  EndofIRotationMean<- mean(unlist(data[189:192,2:ncol(data)]), na.rm= TRUE)
+  EndofIRotationMax<- max(unlist(data[189:192,2:ncol(data)]), na.rm= TRUE)
+  EndofIRotationMin<- min(unlist(data[189:192,2:ncol(data)]), na.rm= TRUE)
+  SecondRotationMean<- mean(unlist(data[205:208,2:ncol(data)]), na.rm= TRUE)
+  SecondRotationMax<- max(unlist(data[205:208,2:ncol(data)]), na.rm= TRUE)
+  SecondRotationMin<- min(unlist(data[205:208,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampMean<- mean(unlist(data[209:212,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampMax<- max(unlist(data[209:212,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampMin<- min(unlist(data[209:212,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampLateMean<- mean(unlist(data[253:256,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampLateMax<- max(unlist(data[253:256,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampLateMin<- min(unlist(data[253:256,2:ncol(data)]), na.rm= TRUE)
+  
+  
+  return(Descriptives<- (data.frame(AlignedMean, AlignedMax, AlignedMin, InitialRotationMean, InitialRotationMax, InitialRotationMin, EndofIRotationMean, EndofIRotationMax, EndofIRotationMin, SecondRotationMean, SecondRotationMax, SecondRotationMin, ErrorClampMean, ErrorClampMax, ErrorClampMin, ErrorClampLateMean, ErrorClampLateMax, ErrorClampLateMin))*-1)
+}
+means<- function (data) {
+  
+  
+  
+  AlignedMean<- mean(unlist(data[61:64,2:ncol(data)]), na.rm= TRUE)
+  AlignedMax<- max(unlist(data[61:64,2:ncol(data)]), na.rm= TRUE)
+  AlignedMin<- min(unlist(data[61:64,2:ncol(data)]), na.rm= TRUE)
+  InitialRotationMean<- mean(unlist(data[65:68,2:ncol(data)]), na.rm= TRUE)
+  InitialRotationMax<- max(unlist(data[65:68,2:ncol(data)]), na.rm= TRUE)
+  InitialRotationMin<- min(unlist(data[65:68,2:ncol(data)]), na.rm= TRUE)
+  EndofIRotationMean<- mean(unlist(data[208:224,2:ncol(data)]), na.rm= TRUE)
+  EndofIRotationMax<- max(unlist(data[208:224,2:ncol(data)]), na.rm= TRUE)
+  EndofIRotationMin<- min(unlist(data[208:224,2:ncol(data)]), na.rm= TRUE)
+  SecondRotationMean<- mean(unlist(data[237:240,2:ncol(data)]), na.rm= TRUE)
+  SecondRotationMax<- max(unlist(data[237:240,2:ncol(data)]), na.rm= TRUE)
+  SecondRotationMin<- min(unlist(data[237:240,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampMean<- mean(unlist(data[241:244,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampMax<- max(unlist(data[241:244,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampMin<- min(unlist(data[241:244,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampLateMean<- mean(unlist(data[256:288,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampLateMax<- max(unlist(data[256:288,2:ncol(data)]), na.rm= TRUE)
+  ErrorClampLateMin<- min(unlist(data[256:288,2:ncol(data)]), na.rm= TRUE)
+  
+  
+  return(Descriptives<- (data.frame(AlignedMean, AlignedMax, AlignedMin, InitialRotationMean, InitialRotationMax, InitialRotationMin, EndofIRotationMean, EndofIRotationMax, EndofIRotationMin, SecondRotationMean, SecondRotationMax, SecondRotationMin, ErrorClampMean, ErrorClampMax, ErrorClampMin, ErrorClampLateMean, ErrorClampLateMax, ErrorClampLateMin))*-1)
+}
+
+
+
+### Calculating and Comparing Rate of Learning in localizations, RAE and Slow Process
+#We already have the data for localizations and RAE. Need to calculate the slow process output for each participant
+

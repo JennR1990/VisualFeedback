@@ -1,46 +1,13 @@
 # Codes to create final plots for manuscript -----
 
-loadcolors <- function() {
-  ##Active
-  colorA       <<- rgb(1.0, 0.4, 0.0)         # orange
-  colorA_trans <<- rgb(1.0, 0.4, 0.0, 0.2)     # transparent orange
-  
-  
-  ## Passive
-  colorPA       <<- rgb(0.7, 0.0, 0.7)          # purple
-  colorPA_trans <<- rgb(0.7, 0.0, 0.7, 0.2)     # transparent purple
-  
-  
-  ## Pause
-  colorNL       <<- rgb(0.63, 0.71, 0.81)      # blue-gray
-  colorNL_trans <<- rgb(0.63, 0.71, 0.81, 0.2)  # transparent blue-gray
-  
-  
-  ##No-Cursor
-  colorNC       <<- rgb(0.0, 0.7, 0.0)         # green
-  colorNC_trans <<- rgb(0.0, 0.7, 0.0, 0.2)     # transparent green
-  
-  ##New No-Cursor
-  colorNNC       <<- rgb(0.1, 0.3, 0.5)         # purple
-  colorNNC_trans <<- rgb(0.1, 0.3, 0.5, 0.2)     # transparent purple
-  
-  #Terminal
-  colorT       <<- rgb(1, 0.0, 0.0)         # Red
-  colorT_trans <<- rgb(1, 0.0, 0., 0.2)     # transparent Red
-  
-  ##Exposure
-  colorE       <<- rgb(0.85, 0.65, 0.12)         # Yellow
-  colorE_trans <<- rgb(0.85, 0.65, 0.12, 0.2)     # transparent Yellow
-}
+
 
 
 VisualFeedbackReaches <- function () {
-  PlotoutLine(active_reaches, 10:14, c(1,5,6,3,2), "Reach Trials")
+  PlotoutLine(passive_reaches, 10:14, c(1,5,6,3,2), "Reach Trials")
   PlotData(passive_reaches, 5, 5 )
   PlotData(terminal_reaches, 6, 6)
-  PlotData(active_reaches, 1, 1 )
-  PlotData(pause_reaches[33:320,], 2, 2)
-  PlotData(newnocursor_reaches[33:320,], 3, 3)
+
 }
 
 neuromatchReaches <- function () {
@@ -173,7 +140,7 @@ plotpropmodels<- function (){
   output1<-fitPropModel(passive_reaches, passive_localization)
   output2<-fitPropModel(terminal_reaches, terminal_localization)
   output3<-fitPropModel(exposure_reaches, exposure_localization, exp = 2)
-  output4<-fitPropModel(active_reaches, active_localization)
+  #output4<-fitPropModel(active_reaches, active_localization)
   
   plot(output1,
     ylim = c(-15, 15),
@@ -194,11 +161,11 @@ plotpropmodels<- function (){
     las = 2
   )
   axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
-  legend(0, 3, legend = c('Continous Group (21%)', 'Terminal Group (19%)', 'Exposure Group (16%)', 'Active Group (31%)'), col = c(colorPA, colorT, colorE, colorA), 
+  legend(0, 3, legend = c('Continous Group (21%)', 'Terminal Group (19%)', 'Exposure Group (16%)'), col = c(colorPA, colorT, colorE), 
          lty = c(1,1,1), lwd = 2, bty = 'n', cex = 1.5)
   lines(output2, col = colorT, lwd = 1)
   lines(output3, col = colorE, lwd = 1)
-  lines(output4, col = colorA, lwd = 1)
+  #lines(output4, col = colorA, lwd = 1)
 }
 
 

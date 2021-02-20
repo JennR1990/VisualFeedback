@@ -1,0 +1,8 @@
+group,signal,avg,lwr,upr
+passive,localization,2,2,8
+passive,slowprocess,66,56,76
+passive,reaches,13,11,17
+terminal,localization,5,2,24
+terminal,slowprocess,73,67,81
+terminal,reaches,20,14,28
+exposure,localization,3,2,4
