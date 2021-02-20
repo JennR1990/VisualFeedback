@@ -7,8 +7,10 @@ This notebook will allow you to download the necessary data from OSF and compute
 
 ```{r echo=FALSE}
 source('R/shared.R')
-source('R/Plots.R')
-source('R/Analysis_Scripts.R')
+source('R/Figures.R')
+source('R/Analysis.R')
+source('R/asymptoticDecayModel_terminal.R')
+source('R/Repeated_Measures_Combine.R')
 downloadOSFdata()
 loadalldata()
 loadcolors()
@@ -20,104 +22,67 @@ Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by press
 When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
-```{r}
 
-svglite('figs/Visual Feedback_Poster_figs.svg', width = 8, height = 25, system_fonts=list(sans = "Arial"))
-layout(matrix(c(1,2,3,4,5), nrow = 5), heights = c(2,2,2,2,2))
-VisualFeedbackReaches(active_reaches, passive_reaches, terminal_reaches)
-
-ReachmodelCTs()
-Localizations(passive_localization,terminal_localization, exposure_localization, active_localization)
-plotpropmodels()
-RAEPlots(active_reaches, nocursor_reaches[33:320,], nocursorI_reaches[33:320,], nocursor_nocursors, nocursorI_nocursors)
+```{r plots}
+Reachmodel(passive_reaches, 'Passive', condition = 'loc', loc_data = passive_localization, color = colorPA)
+Reachmodel(terminal_reaches, 'Terminal', condition = 'loc', loc_data = terminal_localization, color = colorT)
+svglite('figs/Manuscript Figures.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2,3,4), nrow = 2, byrow = TRUE), heights = c(2,2))
+neuromatchReaches()
+neuromatchReaches()
+Localizations(passive_localization, terminal_localization, exposure_localization)
+plotpassiveproppoints()
 dev.off()
+
+
+
+```
+
+
+```{r Analysis}
+ANOVAdata<- PrepdataforANOVA(passive_reaches,terminal_reaches)
+ReachANOVA<-ANOVAanalysis(ANOVAdata)
+ReachANOVA
+Ttestdata<- PrepdataforT(passive_reaches,terminal_reaches)
+
+Rebounds<- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
+Implicit<-Reboundanalysis(Rebounds)
+Implicit
+
+
+ANOVAPdata<- PrepdataforPropANOVA(passive_localization, terminal_localization, exposure_localization)
+TtestPdata<- PrepdataforPropT(passive_localization, terminal_localization, exposure_localization)
+
+LocANOVA<-ANOVAanalysis(ANOVAPdata)
+LocANOVA
+
+##Reach Model Comparison
+Passive_metrics<- GroupModelAICs(passive_reaches, 'Passive')
+Terminal_metrics<- GroupModelAICs(terminal_reaches, 'Terminal')
+Runlogregression()
+
+
+##Rate of Change
+bootstrapSemiAsymptoticDecayModels()
+getAsymptoticDecayParameterCIs()
+getSaturationTrials()
+
+
+
+```
+
+
+```{r}
+RegressionPLot()
+plotpropmodels()
+
 
 plotfitPropModel(terminal_reaches, terminal_localization, colorT, 'Terminal Prop Model')
 plotfitPropModel(passive_reaches, passive_localization, colorPA, 'Continuous Prop Model')
 plotfitPropModel(exposure_reaches, exposure_localization, colorE, 'Exposure Prop Model', exp = 'exp')
 dev.off()
-
-svglite('figs/Reach Aftereffects.svg', width = 8, height = 10, system_fonts=list(sans = "Arial"))
-layout(matrix(c(1,2), nrow = 2), heights = c(2,2))
-RAEPlots(active_reaches, nocursor_reaches[33:320,], nocursorI_reaches[33:320,], nocursor_nocursors, nocursorI_nocursors)
-ReachAfterEffectReaches(active_reaches, nocursor_reaches[33:320,], nocursorI_reaches[33:320,])
-ReachAfterEffects(active_reaches, nocursor_nocursors, nocursorI_nocursors)
-dev.off()
-
-
-
-
-svglite('figs/all reaches.svg', width = 12, height = 4, system_fonts=list(sans = "Arial"))
-layout(matrix(c(1,2), nrow = 1), heights = c(2,2))
-VisualFeedbackReaches()
-#ReachAfterEffects(active_reaches, nocursor_nocursors, nocursorI_nocursors)
-Localizations(passive_localization,terminal_localization, exposure_localization, active_localization)
-dev.off()
-
-svglite('figs/Implicit learning Zoomed in.svg', width = 12, height = 4, system_fonts=list(sans = "Arial"))
-layout(matrix(c(1,2), nrow = 1), heights = c(2,2))
-#plotreapoints()
-plotavereapoints()
-plotproppoints()
-dev.off()
-
-svglite('figs/Model Fits3.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
-layout(matrix(c(1,2,3,4), nrow = 2), heights = c(2,2))
-#VisualFeedbackReaches()
-#ActivePars<-Reachmodel(active_reaches, 'Active', color = colorA)
-RAENewPlots(active_reaches, newnocursor_nocursors)
-ExposureDatas(exposure_localization, exposure_reaches)
-#PassivePars<-Reachmodel(passive_reaches, 'Passive', color = colorPA)
-TerminalPars<-Reachmodel(terminal_reaches, 'Terminal', color = colorT)
-NoCIPars<-Reachmodel(newnocursor_reaches[33:320,], 'No-Cursor', grid = 'skewed', color = colorNC)
-dev.off()
-
-
-svglite('figs/neuromatchfigs_updated.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
-layout(matrix(c(1,2,3,4), nrow = 2), heights = c(2,2))
-neuromatchReaches()
-Localizations1(passive_localization, terminal_localization, exposure_localization)
-plotpassiveproppoints()
-dev.off()
-
-```
-
-```{r}
-PausePars<-Reachmodel(pause_reaches[33:320,], 'Pause', color = colorNL)
-NoCPars<-Reachmodel(nocursor_reaches[33:320,], 'No-Cursor', color = colorNC)
-NoCIPars<-Reachmodel(newnocursor_reaches[33:320,], 'No-Cursor', grid = 'skewed', color = colorNC)
-ActivePars<-Reachmodel(active_reaches, 'Active', color = colorA)
-PassivePars<-Reachmodel(passive_reaches, 'Passive', color = colorPA)
-TerminalPars<-Reachmodel(terminal_reaches, 'Terminal', color = colorT)
-```
-
-```{r}
-Active_metrics<- GroupModelAICs(active_reaches, 'Active')
-Passive_metrics<- GroupModelAICs(passive_reaches, 'Passive')
-Pause_metrics<- GroupModelAICs(pause_reaches, 'Pause')
-Terminal_metrics<- GroupModelAICs(terminal_reaches, 'Terminal')
-NC_metrics<- GroupModelAICs(nocursor_reaches, 'No-Cursor', 'skewed')
-NCI_metrics<- GroupModelAICs(nocursorI_reaches,'No-Cursor_I', 'skewed')
-metrics<- rbind(Active_metrics, passive_reaches, Pause_metrics, NC_metrics, NCI_metrics,Terminal_metrics)
-groups = c('active', 'passive','pause', 'nocursor', 'nocursor_NI', 'Terminal')
-metrics$group<- groups
-```
-
-```{r}
 Passive_PropMetrics<-LocalizationModelCompare(passive_localization, passive_reaches, colorPA)
 Active_PropMetrics<-LocalizationModelCompare(active_localization, active_reaches, colorA)
 Exposure_PropMetrics<-ExpoLocalizationModelCompare(exposure_localization, exposure_reaches, colorE)
 Terminal_PropMetrics<-LocalizationModelCompare(terminal_localization, terminal_reaches, colorT)
 ```
-
-
-```{r}
-ANOVAdata<- PrepdataforANOVA(active_reaches, passive_reaches, pause_reaches[33:320,], nocursor_reaches[33:320,], nocursorI_reaches[33:320,], nocursor_nocursors, nocursorI_nocursors, terminal_reaches)
-ANOVAPdata<- PrepdataforPropANOVA(active_localization,passive_localization)
-TtestPdata<- PrepdataforPropT(active_localization, passive_localization, terminal_localization, exposure_localization)
-Ttestdata<- PrepdataforT(active_reaches, passive_reaches, pause_reaches[33:320,], nocursor_reaches[33:320,], nocursor_nocursors, nocursorI_reaches[33:320,], nocursorI_nocursors, terminal_reaches, newnocursor_reaches, newnocursor_nocursors)
-
-
-```
-
-
