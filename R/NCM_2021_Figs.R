@@ -1,0 +1,7 @@
+svglite('figs/NCM_2021_figs.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2,3,4), nrow = 2, byrow = TRUE), heights = c(2,2))
+Reachmodel(newnocursor_reaches, 'No-Cursor', grid = 'skewed', condition = 'nc', ncdata = newnocursor_nocursors, color = colorNC, yaxis = 'Hand Direction [°]')
+neuromatchReaches()
+Localizations(passive_localization, terminal_localization, exposure_localization)
+plotvariation()
+dev.off()

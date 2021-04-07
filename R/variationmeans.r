@@ -1,10 +1,13 @@
+
+
+
 Getshiftsperrotation<- function() {
   g<- seq(from = 50, to = 480, by = 12)
   h<- seq(from = 61, to = 481, by = 12)
   h[36]<- h[36]-1
   rotation<- c()
   localizations<- c()
-  
+  VP_Data<- getreachesformodel(variation_localization)
   
   for (i in 1:length(g)) {
     
@@ -23,7 +26,7 @@ Getreachesperrotation<- function() {
   h[36]<- h[36]-1
   rotation<- c()
   stuff<- c()
-  
+  VR_Data<- getreachesformodel(variation_reaches)
   
   for (i in 1:length(g)) {
     
@@ -38,8 +41,58 @@ Getreachesperrotation<- function() {
 
 ##Creates the necessary lists of numbers from the perturbation lists to make the plot
 
-makingschedule<- function (){
-  
+
+#   
+#   vprop<- Getshiftsperrotation()
+#   vreac<- Getreachesperrotation()
+#   localizations<-vprop$localizations
+#   Variation_means<- cbind(vreac,localizations)
+#   
+#   
+#   g<- seq(from = 50, to = 480, by = 12)
+#   h<- seq(from = 61, to = 481, by = 12)
+#   h[36]<- h[36]-2
+#   
+#   z<-c(0,50)
+#   for (i in 1:36) {
+# 
+#   z<<- c(z, g[i], h[i]+1)
+# }
+# 
+# 
+# sizes<- c(0,0)
+# 
+# for (i in 1:36){
+#   
+#   sizes<<- c(sizes,Variation_means$rotation[i],Variation_means$rotation[i]) 
+#   sizes[sizes == 360] <- NA
+# }
+
+
+
+##Finds out which places have the NAs so we can use that info for making the perturbation schedule
+# 
+# variation_reaches[variation_reaches$rotation == 360]<- NA
+# v<- NA
+# counter<- 1
+# g<- c()
+# for (i in 1:length(sizes)){
+#   
+#   
+#   if (is.na(sizes[i])){
+#     print(i)
+#     g[counter]<-i
+#     v<- c(v,z[i])
+#     counter<-counter+1
+#   }
+#   
+# }
+# v<- v[-1]
+
+
+
+##This turns the NA's into zeros for plottign the perturbation.
+plotvariation<- function (){
   vprop<- Getshiftsperrotation()
   vreac<- Getreachesperrotation()
   localizations<-vprop$localizations
@@ -52,44 +105,18 @@ makingschedule<- function (){
   
   z<-c(0,50)
   for (i in 1:36) {
-
-  z<<- c(z, g[i], h[i]+1)
-}
-
-
-sizes<- c(0,0)
-
-for (i in 1:36){
-  
-  sizes<<- c(sizes,Variation_means$rotation[i],Variation_means$rotation[i]) 
-  
-}
-
-
-}
-
-variation_reaches[variation_reaches$rotation == 360]<- NA
-##Finds out which places have the NAs so we can use that info for making the perturbation schedule
-v<- NA
-counter<- 1
-g<- c()
-for (i in 1:length(sizes)){
-  
-  
-  if (is.na(sizes[i])){
-    print(i)
-    g[counter]<-i
-    v<- c(v,z[i])
-    counter<-counter+1
+    
+    z<- c(z, g[i], h[i]+1)
   }
   
-}
-v<- v[-1]
-
-
-
-##This turns the NA's into zeros for plottign the perturbation.
-plotvariation<- function (){
+  
+  sizes<- c(0,0)
+  
+  for (i in 1:36){
+    
+    sizes<- c(sizes,Variation_means$rotation[i],Variation_means$rotation[i]) 
+    sizes[sizes == 360] <- NA
+  }
   g<- seq(from = 50, to = 480, by = 12)
   g<- c(1,g,480)
   for (i in 1:length(sizes)){
@@ -126,7 +153,7 @@ plotvariation<- function (){
     lty = c(1),
     lwd = c(2),
     bty = 'n', 
-    cex = 1.25
+    cex = 1.2
   )
   axis(2, at = c(-30, -15, 0, 15, 30), cex.axis = 1.5,
        las = 2)

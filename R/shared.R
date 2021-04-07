@@ -20,6 +20,15 @@ loadalldata<- function () {
   
   variation_reaches<<- removeReachOutliers(Loaddata(group='variation'))
   variation_localization<<- removeReachOutliers(Loaddata(group='variation', task = 'localizations'))
+  
+  nocursor_reaches<<- removeReachOutliers(Loaddata(group='nocursor'))
+  nocursorI_reaches<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_reaches'))
+  nocursor_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'nocursors'))
+  nocursorI_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_nocursors'))
+  nocursorI_reaches<<-nocursorI_reaches[,-9]
+  nocursorI_nocursors<<-nocursorI_nocursors[,-9]
+  newnocursor_reaches<<- cbind(nocursor_reaches, nocursorI_reaches[2:ncol(nocursorI_reaches)])
+  newnocursor_nocursors<<- cbind(nocursor_nocursors, nocursorI_nocursors[2:ncol(nocursorI_nocursors)])
   }
 
 downloadOSFdata <- function(update=FALSE) {
@@ -32,7 +41,11 @@ downloadOSFdata <- function(update=FALSE) {
              'exposure_reaches.csv'     = 'https://osf.io/6cmns/download',
              'exposure_localization.csv'= 'https://osf.io/er6u2/download',
              'variation_reaches.csv'     = 'https://osf.io/pk5fy/download',
-             'variation_localizations.csv'= 'https://osf.io/txgwj/download'
+             'variation_localizations.csv'= 'https://osf.io/txgwj/download',
+             'nocursor_nocursors.csv'   = 'https://osf.io/5b8s9/download',
+             'nocursor_reaches.csv'     = 'https://osf.io/vmnx7/download',
+             'nocursor_NI_nocursors.csv'   = 'https://osf.io/y4k2x/download',
+             'nocursor_NI_reaches.csv'     = 'https://osf.io/grnxh/download'
 )
 
   # check if data directory exists and create if necessary:
