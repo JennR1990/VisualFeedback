@@ -53,6 +53,28 @@ PrepANOVARebounds<- function (pas, term, expo){
   return(rebounds)
 }
 
+PreptoplotRebounds<- function (pas, term, expo){
+  
+  
+  rebounds<- data.frame()
+  Experiment<- c(rep("Passive", times = 32), rep("Terminal", times = 32), rep("Exposure", times = 32))
+  ID<- c(rep(1:32,times = 3))
+  EC_Late<- colMeans(pas[273:288,2:33], na.rm = TRUE)
+  EC_Late<- c(EC_Late,colMeans(term[273:288,2:33], na.rm = TRUE))
+  EC_Late<- c(EC_Late,(colMeans(expo[33:48,2:33], na.rm = TRUE)*-1))
+  EC_Early<- colMeans(pas[241:255,2:33], na.rm = TRUE)
+  EC_Early<- c(EC_Early,colMeans(term[241:255,2:33], na.rm = TRUE))
+  EC_Early<- c(EC_Early,(colMeans(expo[1:15,2:33], na.rm = TRUE)*-1))
+  begins<- c(rep(1:32,times = 3))
+  ends<-c(rep("p", times = 32), rep("t", times = 32), rep("e", times = 32))
+  ID<-paste(begins, ends, sep = ".")
+  
+  rebounds<-data.frame(cbind(EC_Late,EC_Early, Experiment, ID))
+  rebounds$EC_Late<- as.numeric(rebounds$EC_Late)
+  
+  return(rebounds)
+}
+
 
 PrepRebounds<- function (pas, term, expo){
   

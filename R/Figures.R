@@ -539,6 +539,69 @@ plotpassiveproppoints<- function(){
   legend(.3,33, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.2, bty = "n")
 }
 
+plotrebound<- function(){
+  TtestPdata<-PreptoplotRebounds(passive_reaches, terminal_reaches, exposure_reaches)
+  TtestPdata[,1]<-TtestPdata[,1]*-1
+  TtestPdata[,2]<-as.numeric(TtestPdata[,2])*-1
+
+  
+  PPmean<- c()
+  PPmean[1]<- mean(as.numeric(TtestPdata$EC_Early[TtestPdata$Experiment == 'Passive']), na.rm = TRUE)
+  PPmean[2]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
+
+  
+  PPSE<- c()
+  PPSE[1]<- (sd(TtestPdata$EC_Early[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
+  PPSE[2]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
+  
+  PTmean<- c()
+  PTmean[1]<- mean(as.numeric(TtestPdata$EC_Early[TtestPdata$Experiment == 'Terminal']), na.rm = TRUE)
+  PTmean[2]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
+  
+  PTSE<- c()
+  PTSE[1]<- (sd(TtestPdata$EC_Early[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
+  PTSE[2]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
+  
+  PEmean<- c()
+  PEmean[1]<- mean(as.numeric(TtestPdata$EC_Early[TtestPdata$Experiment == 'Exposure']), na.rm = TRUE)
+  PEmean[2]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
+  
+  PESE<- c()
+  PESE[1]<- (sd(TtestPdata$EC_Early[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
+  PESE[2]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
+ 
+  # PPmean<- PPmean*-1
+  # PEmean<- PEmean*-1
+  # PTmean<- PTmean*-1
+  
+  plot(y = PPmean, x =c( .9,1.9), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorPA, cex.lab = 1.5, ylim = c(-30,30), xlim = c(0.8,2.2) , main = "Rebounds")
+  #points(y=PPmean[1:3]*1,x = c(.85,1.85,2.85), pch = 15,  col = colorPA)
+  arrows(x0 = c(.9,1.9), y0 = (PPmean) - PPSE*2, x1 = c(.9,1.9), y1 = (PPmean) + PPSE*2, code = 3, angle = 90, length = .02, col = colorPA)
+  points(y=TtestPdata$EC_Early[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(.9, times = length(TtestPdata$EC_Early[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
+  points(y=TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(1.9, times = length(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
+  segments(x0 = .9, y0 = mean(as.numeric(TtestPdata$EC_Early[TtestPdata$Experiment == 'Passive']), na.rm= TRUE), x1 = 1.9, y1 = mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'],na.rm= TRUE), col = colorPA)
+  
+  points(y=PTmean,x = c(1.0,2.0), pch = 15,  col = colorT)
+  arrows(x0 = c(1.0,2.0), y0 = (PTmean) - PTSE*2, x1 = c(1.0,2.0), y1 = (PTmean) + PTSE*2, code = 3, angle = 90, length = .02, col = colorT)
+  points(y=TtestPdata$EC_Early[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(1.0, times = length(TtestPdata$EC_Early[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
+  points(y=TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(2.0, times = length(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
+  segments(x0 = 1, y0 = mean(as.numeric(TtestPdata$EC_Early[TtestPdata$Experiment == 'Terminal']), na.rm= TRUE), x1 = 2, y1 = mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], na.rm= TRUE), col = colorT)
+  
+  
+  points(PEmean, x = c(1.1,2.1),pch = 15,  col = colorE)
+  arrows(x0 = c(1.1,2.1), y0 = (PEmean) - PESE*2, x1 = c(1.1,2.1), y1 = (PEmean) + PESE*2, code = 3, angle = 90, length = .02, col = colorE)
+  points(y=TtestPdata$EC_Early[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(1.1, times = length(TtestPdata$EC_Early[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
+  points(y=TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'],pch= 16, x = c(rep(2.1, times = length(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
+  segments(x0 = 1.1, y0 = mean(as.numeric(TtestPdata$EC_Early[TtestPdata$Experiment == 'Exposure']), na.rm = TRUE), x1 = 2.1, y1 = mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm=TRUE), col = colorE)
+  
+  
+
+  abline(h = 0, lty = 2)
+  axis(2, at = c(-30,-20,-10,0,10,20,30), cex.axis = 1.5, las = 2)
+  axis(1, at = c(1,2),labels = c("1st 16 \n trials", "last 16 \n trials"), cex.axis = 1.5)
+  legend(1.3,-10, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.2, bty = "n")
+}
+
 Localizations <- function (pl, tl , expl) {
   PlotoutLine(pl, c(1:3), 1:3, "Hand Localizations")
   PlotData(pl, 1, 1,1)
