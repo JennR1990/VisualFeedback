@@ -500,7 +500,7 @@ plotpassiveproppoints<- function(){
   PESE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
   
   
-  plot(y=PPmean[1:3]*1, x = c(.9,1.9,2.9), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorPA, ylim = c(-8,30), cex.lab = 1.5, xlim = c(.5,3.5))
+  plot(y=PPmean[1:3]*1, x = c(.9,1.9,2.9), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorPA, ylim = c(-10,35), cex.lab = 1.5, xlim = c(.5,3.5))
   #points(y=PPmean[1:3]*1,x = c(.85,1.85,2.85), pch = 15,  col = colorPA)
   arrows(x0 = c(.9,1.9,2.9), y0 = (PPmean[1:3]) - PPSE[1:3]*2, x1 = c(.90,1.9,2.9), y1 = (PPmean[1:3]) + PPSE[1:3]*2, code = 3, angle = 90, length = .02, col = colorPA)
   points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(.9, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
@@ -534,7 +534,7 @@ plotpassiveproppoints<- function(){
   #     c(0, 0),
   #     lty = 2,
   #    col = rgb(0., 0., 0.))
-  axis(2, at = c(-5,0,5,10, 15,20,25, 30), cex.axis = 1.5, las = 2)
+  axis(2, at = c(-5,0,5,10, 20, 30), cex.axis = 1.5, las = 2)
   axis(1, at = c(1,2,3),labels = c("aligned", "R1_Early", "R1_Final"), cex.axis = 1.5)
   legend(.3,33, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.2, bty = "n")
 }
@@ -574,7 +574,7 @@ plotrebound<- function(){
   # PEmean<- PEmean*-1
   # PTmean<- PTmean*-1
   
-  plot(y = PPmean, x =c( .9,1.9), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorPA, cex.lab = 1.5, ylim = c(-30,30), xlim = c(0.8,2.2) , main = "Rebounds")
+  plot(y = PPmean, x =c( .9,1.9), pch = 15, axes = FALSE, xlab = "Block", ylab = "Hand Direction [°]", col = colorPA, cex.lab = 1.5, ylim = c(-35,35), xlim = c(0.8,2.2) , main = "Rebounds", cex.main = 1.5)
   #points(y=PPmean[1:3]*1,x = c(.85,1.85,2.85), pch = 15,  col = colorPA)
   arrows(x0 = c(.9,1.9), y0 = (PPmean) - PPSE*2, x1 = c(.9,1.9), y1 = (PPmean) + PPSE*2, code = 3, angle = 90, length = .02, col = colorPA)
   points(y=TtestPdata$EC_Early[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(.9, times = length(TtestPdata$EC_Early[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
@@ -597,7 +597,7 @@ plotrebound<- function(){
   
 
   abline(h = 0, lty = 2)
-  axis(2, at = c(-30,-20,-10,0,10,20,30), cex.axis = 1.5, las = 2)
+  axis(2, at = c(-30,-15,0,15,30), cex.axis = 1.5, las = 2)
   axis(1, at = c(1,2),labels = c("1st 16 \n trials", "last 16 \n trials"), cex.axis = 1.5)
   legend(1.3,-10, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.2, bty = "n")
 }
