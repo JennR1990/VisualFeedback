@@ -151,6 +151,8 @@ plotvariation<- function (){
       'Localizations'),
     col = c('blue', 'red'),
     lty = c(1),
+    
+    
     lwd = c(2),
     bty = 'n', 
     cex = 1.2
@@ -175,4 +177,7 @@ plotvariation<- function (){
   polygon(x, y, col = rgb(0,0,1,.2), border = NA)
   
 }
+
+
+
 

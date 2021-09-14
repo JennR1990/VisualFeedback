@@ -729,20 +729,20 @@ Plotschedule <- function(dataset) {
     dataset$p1,
     ylim = c(-35, 35),
     xlab = "Trial",
-    ylab = "Hand Direction [°]",
+    ylab = "Cursor Rotation [°]",
     axes = F,
-    main = "Schedule",
+    main = "Rotation Schedule",
     type = 'l',
-    col = 'white'
+    col = 'white', cex.lab = 1.25
   )
   rect(65,0,68,30, col = 'grey',border = NA)
-  text(67,33,'R1', adj = .5)
+  text(67,33,'early', adj = .5)
   rect(221,0,224,30, col = 'grey',border = NA)
-  text(223,33,'R1_late', adj = .5)
+  text(223,33,'late', adj = .5)
   rect(237,-30,240,0, col = 'grey',border = NA)
-  text(239,-33,'R2', adj = .5)
+  text(239,-33,'reversed', adj = .5)
   rect(273,-15,288,15, col = 'grey',border = NA)
-  text(280,18,'EC', adj = .5)
+  text(280,18,'clamped', adj = .5)
   lines(c(1, 64, 64, 224, 224, 240, 240),
         c(0, 0, 30, 30, -30, -30, 0),
         col = rgb(0., 0., 0.))

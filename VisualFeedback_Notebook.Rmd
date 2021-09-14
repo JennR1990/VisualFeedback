@@ -38,6 +38,9 @@ plotpassiveproppoints()
 mtext('b', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
 dev.off()
 
+svglite('figs/Schedule.svg', width = 6, height = 2, system_fonts=list(sans = "Arial"))
+Plotschedule(passive_reaches)
+dev.off()
 
 
 ```
@@ -70,6 +73,17 @@ Runlogregression()
 bootstrapSemiAsymptoticDecayModels()
 getAsymptoticDecayParameterCIs()
 getSaturationTrials()
+
+
+#Fast process comparison between terminal and continuous
+parsforttest<-ParticipantReachmodels2(passive_reaches, terminal_reaches)
+t.test(parsforttest$Rf[parsforttest$Experiment == "Continuous"],parsforttest$Rf[parsforttest$Experiment == "Terminal"]) 
+cohen.d(parsforttest$Rf[parsforttest$Experiment == "Continuous"],parsforttest$Rf[parsforttest$Experiment == "Terminal"], na.rm = TRUE)
+etaSquaredTtest(parsforttest$Rf[parsforttest$Experiment == "Continuous"],parsforttest$Rf[parsforttest$Experiment == "Terminal"], na.rm = TRUE)
+t.test(parsforttest$Lf[parsforttest$Experiment == "Continuous"],parsforttest$Lf[parsforttest$Experiment == "Terminal"]) 
+cohen.d(parsforttest$Lf[parsforttest$Experiment == "Continuous"],parsforttest$Lf[parsforttest$Experiment == "Terminal"], na.rm = TRUE)
+etaSquaredTtest(parsforttest$Lf[parsforttest$Experiment == "Continuous"],parsforttest$Lf[parsforttest$Experiment == "Terminal"], na.rm = TRUE)
+
 
 
 

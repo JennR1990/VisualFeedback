@@ -417,3 +417,4 @@ Runlogregression<- function (){
   return(pLogRegression(data))
   
 }
+
