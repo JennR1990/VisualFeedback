@@ -1,6 +1,10 @@
 {
-    "path": "E:/Jenn/Documents/VisualFeedback",
+    "path": "E:/Jenn/Documents/VisualFeedback/R",
     "sortOrder": [
+        {
+            "columnIndex": 4,
+            "ascending": false
+        },
         {
             "columnIndex": 2,
             "ascending": true
