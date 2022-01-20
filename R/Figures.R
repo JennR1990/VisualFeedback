@@ -45,7 +45,7 @@ neuromatchReaches <- function () {
   
   
 }
-PlotoutLine <- function(dataset, exp, color,title, type = c(1)) {
+PlotoutLine <- function(dataset, exp, color,title, type = c(1), ylabel = "Reach Direction [°]") {
   labels <-
     list (
 
@@ -71,7 +71,7 @@ PlotoutLine <- function(dataset, exp, color,title, type = c(1)) {
     NULL,
     ylim = c(-35, 35),
     xlab = "Trial",
-    ylab = "Hand Direction [°]",
+    ylab = ylabel,
     axes = F,
     main = title,
     type = 'l',
@@ -541,6 +541,91 @@ plotpassiveproppoints<- function(){
   #legend(-.3,33, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.2, bty = "n")
 }
 
+plotpassiveprop4points<- function(){
+  TtestPdata<- PrepdataforPropT(passive_localization, terminal_localization, exposure_localization)
+  PPmean<- c()
+  PPmean[1]<- mean(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
+  PPmean[2]<- mean(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
+  PPmean[3]<- mean(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
+  PPmean[4]<- mean(TtestPdata$R2[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
+  PPmean[5]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE)
+  
+  PPSE<- c()
+  PPSE[1]<- (sd(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
+  PPSE[2]<- (sd(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
+  PPSE[3]<- (sd(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
+  PPSE[4]<- (sd(TtestPdata$R2[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
+  PPSE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Passive']))
+  
+  PTmean<- c()
+  PTmean[1]<- mean(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
+  PTmean[2]<- mean(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
+  PTmean[3]<- mean(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
+  PTmean[4]<- mean(TtestPdata$R2[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
+  PTmean[5]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE)
+  
+  PTSE<- c()
+  PTSE[1]<- (sd(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
+  PTSE[2]<- (sd(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
+  PTSE[3]<- (sd(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
+  PTSE[4]<- (sd(TtestPdata$R2[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
+  PTSE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Terminal']))
+  
+  PEmean<- c()
+  PEmean[1]<- mean(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
+  PEmean[2]<- mean(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
+  PEmean[3]<- mean(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
+  PEmean[4]<- mean(TtestPdata$R2[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
+  PEmean[5]<- mean(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE)
+  
+  PESE<- c()
+  PESE[1]<- (sd(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
+  PESE[2]<- (sd(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
+  PESE[3]<- (sd(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
+  PESE[4]<- (sd(TtestPdata$R2[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
+  PESE[5]<- (sd(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], na.rm = TRUE))/sqrt(length(TtestPdata$Experiment[TtestPdata$Experiment == 'Exposure']))
+  
+  
+  plot(y=PPmean[1:5]*1, x = c(.3,.95,1.6,2.25,2.9), pch = 15, axes = FALSE,xlab = "", ylab = "Hand Localization Change [°]", col = colorPA, ylim = c(-30,30), cex.lab = 1.5, xlim = c(0,5))
+  arrows(x0 = c(.3,.95,1.6,2.25,2.9), y0 = (PPmean[1:5]) - PPSE[1:5]*3, x1 = c(.3,.95,1.6,2.25,2.9), y1 = (PPmean[1:5]) + PPSE[1:5]*3, code = 3, angle = 90, length = .02, col = colorPA)
+  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(.35, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
+  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(1, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
+  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(1.65, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
+  points(y=TtestPdata$R2[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(2.3, times = length(TtestPdata$R2[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
+  points(y=TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive'], pch= 16,x = c(rep(2.95, times = length(TtestPdata$EC_Late[TtestPdata$Experiment == 'Passive']))),col = colorPA_trans)
+  
+  
+  points(y=PTmean[1:5]*1,x = c(.4,1.05,1.7,2.35,3), pch = 15,  col = colorT)
+  arrows(x0 = c(.4,1.05,1.7,2.35,3), y0 = (PTmean[1:5]) - PTSE[1:5]*3, x1 = c(.4,1.05,1.7,2.35,3), y1 = (PTmean[1:5]) + PTSE[1:5]*3, code = 3, angle = 90, length = .02, col = colorT)
+  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(.45, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
+  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(1.1, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
+  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(1.75, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
+  points(y=TtestPdata$R2[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(2.4, times = length(TtestPdata$R2[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
+  points(y=TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal'], pch= 16,x = c(rep(3.05, times = length(TtestPdata$EC_Late[TtestPdata$Experiment == 'Terminal']))),col = colorT_trans)
+  
+  
+  
+  points(PEmean[1:5]*1, x = c(.5,1.15,1.8,2.45,3.1),pch = 15,  col = colorE)
+  arrows(x0 = c(.5,1.15,1.8,2.45,3.1), y0 = (PEmean[1:5]) - PESE[1:5]*3, x1 = c(.5,1.15,1.8,2.45,3.1), y1 = (PEmean[1:5]) + PESE[1:5]*3, code = 3, angle = 90, length = .02, col = colorE)
+  points(y=TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(.55, times = length(TtestPdata$Aligned[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
+  points(y=TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure'],pch= 16, x = c(rep(1.2, times = length(TtestPdata$R1_Early[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
+  points(y=TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(1.85, times = length(TtestPdata$R1_Late[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
+  points(y=TtestPdata$R2[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(2.5, times = length(TtestPdata$R2[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
+  points(y=TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure'], pch= 16,x = c(rep(3.15, times = length(TtestPdata$EC_Late[TtestPdata$Experiment == 'Exposure']))),col = colorE_trans)
+  
+  
+  lines(c(0, .75,.75, 1.85,2.05, 2.05, 2.95,2.95),
+        c(0, 0, 30, 30,30, -30,-30,0),
+        col = rgb(0., 0., 0.))
+  lines(c(2.95, 3.35),
+       c(0, 0),
+       lty = 2,
+      col = rgb(0., 0., 0.))
+  axis(2, at = c(-30,-20,-10,0,10, 20, 30), cex.axis = 1.5, las = 2)
+  axis(1, at = c(.4,1.1,1.7,2.4,3),labels = c("Aligned \n 61-64", "Early \n 65-68", "Late \n 221-224", "Reversed \n 237-240", "Clamped \n 273-288"), cex.axis = 1.25, las = 2)
+  #legend(-.3,33, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.2, bty = "n")
+}
+
 plotrebound<- function(){
   TtestPdata<-PreptoplotRebounds(passive_reaches, terminal_reaches, exposure_reaches)
   TtestPdata[,1]<-TtestPdata[,1]*-1
@@ -616,50 +701,50 @@ plotREAANOVA<- function(){
   TtestPdata<- rbind(ANOVAdata, data)
   TtestPdata$Deviations<- TtestPdata$Deviations*-1
 
-  PPmean<- c()
-  PPmean[1]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)
-  PPmean[2]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)
-  PPmean[3]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE) 
-  PPmean[4]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)
+  PPmean1<- c()
+  PPmean1[1]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)
+  PPmean1[2]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)
+  PPmean1[3]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE) 
+  PPmean1[4]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)
   
-  PPSE<- c()
-  PPSE[1]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)/sqrt(32)
-  PPSE[2]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)/sqrt(32)
-  PPSE[3]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE) /sqrt(32)
-  PPSE[4]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)/sqrt(32)
+  PPSE1<- c()
+  PPSE1[1]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)/sqrt(32)
+  PPSE1[2]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)/sqrt(32)
+  PPSE1[3]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE) /sqrt(32)
+  PPSE1[4]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Passive"]), na.rm = TRUE)/sqrt(32)
   
   
-  PTmean<- c()
-  PTmean[1]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)
-  PTmean[2]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)
-  PTmean[3]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE) 
-  PTmean[4]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)
+  PTmean1<- c()
+  PTmean1[1]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)
+  PTmean1[2]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)
+  PTmean1[3]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE) 
+  PTmean1[4]<- mean(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)
   
-  PTSE<- c()
-  PTSE[1]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)/sqrt(32)
-  PTSE[2]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)/sqrt(32)
-  PTSE[3]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE) /sqrt(32)
-  PTSE[4]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)/sqrt(32)
+  PTSE1<- c()
+  PTSE1[1]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)/sqrt(32)
+  PTSE1[2]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)/sqrt(32)
+  PTSE1[3]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE) /sqrt(32)
+  PTSE1[4]<- sd(as.numeric(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Terminal"]), na.rm = TRUE)/sqrt(32)
   
-  PEmean<- c()
-  PEmean[1]<- mean(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Exposure"], na.rm = TRUE)
+  PEmean1<- c()
+  PEmean1[1]<- mean(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Exposure"], na.rm = TRUE)
 
   
-  PESE<- c()
-  PESE[1]<- (sd(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Exposure"], na.rm = TRUE))/sqrt(32)
+  PESE1<- c()
+  PESE1[1]<- (sd(TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Exposure"], na.rm = TRUE))/sqrt(32)
 
   
-  plot(y = PPmean, x =c( .3,.85,1.4,1.95), pch = 15, axes = FALSE, xlab = "", ylab = "Hand Direction [°]", col = colorPA, cex.lab = 1.5, ylim = c(-35,35),xlim = c(0,4.2), main = "", cex.main = 1.5)
+  plot(y = PPmean1, x =c( .3,.85,1.4,1.95), pch = 15, axes = FALSE, xlab = "", ylab = "Reach Direction [°]", col = colorPA, cex.lab = 1.5, ylim = c(-35,35),xlim = c(0,4.2), main = "", cex.main = 1.5)
   #points(y=PPmean[1:3]*1,x = c(.85,1.85,2.85), pch = 15,  col = colorPA)
-  arrows(x0 = c(.3,.85,1.4,1.95), y0 = (PPmean) - PPSE*3, x1 = c(.3,.85,1.4,1.95), y1 = (PPmean) + PPSE*3, code = 3, angle = 90, length = .02, col = colorPA)
+  arrows(x0 = c(.3,.85,1.4,1.95), y0 = (PPmean1) - PPSE1*3, x1 = c(.3,.85,1.4,1.95), y1 = (PPmean1) + PPSE1*3, code = 3, angle = 90, length = .02, col = colorPA)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Passive"], pch= 16,x = c(rep(.35, times = 32)),col = colorPA_trans)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Passive"], pch= 16,x = c(rep(.9, times = 32)),col = colorPA_trans)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Passive"], pch= 16,x = c(rep(1.45, times = 32)),col = colorPA_trans)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Passive"], pch= 16,x = c(rep(2, times = 32)),col = colorPA_trans)
  
   
-  points(y=PTmean,x = c(.4,0.95,1.5,2.05), pch = 15,  col = colorT)
-  arrows(x0 = c(.4,.95,1.5,2.05), y0 = (PTmean) - PTSE*3, x1 = c(.4,.95,1.5,2.05), y1 = (PTmean) + PTSE*3, code = 3, angle = 90, length = .02, col = colorT)
+  points(y=PTmean1,x = c(.4,0.95,1.5,2.05), pch = 15,  col = colorT)
+  arrows(x0 = c(.4,.95,1.5,2.05), y0 = (PTmean1) - PTSE1*3, x1 = c(.4,.95,1.5,2.05), y1 = (PTmean1) + PTSE1*3, code = 3, angle = 90, length = .02, col = colorT)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "R1_early" & TtestPdata$Experiment == "Terminal"], pch= 16,x = c(rep(.45, times = 32)),col = colorT_trans)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "R1_late" & TtestPdata$Experiment == "Terminal"], pch= 16,x = c(rep(1, times = 32)),col = colorT_trans)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "R2D2" & TtestPdata$Experiment == "Terminal"], pch= 16,x = c(rep(1.55, times = 32)),col = colorT_trans)
@@ -667,8 +752,8 @@ plotREAANOVA<- function(){
  
   
   
-  points(PEmean, x = c(2.15),pch = 15,  col = colorE)
-  arrows(x0 = c(2.15), y0 = (PEmean) - PESE*3, x1 = c(2.15), y1 = (PEmean) + PESE*3, code = 3, angle = 90, length = .02, col = colorE)
+  points(PEmean1, x = c(2.15),pch = 15,  col = colorE)
+  arrows(x0 = c(2.15), y0 = (PEmean1) - PESE1*3, x1 = c(2.15), y1 = (PEmean1) + PESE1*3, code = 3, angle = 90, length = .02, col = colorE)
   points(y=TtestPdata$Deviations[TtestPdata$Time == "EC" & TtestPdata$Experiment == "Exposure"], pch= 16,x = c(rep(2.2, times = 32)),col = colorE_trans)
   
   
@@ -683,12 +768,12 @@ plotREAANOVA<- function(){
         lty = 2,
         col = rgb(0., 0., 0.))
   axis(2, at = c(-30,-15,0,15,30), cex.axis = 1.5, las = 2)
-  axis(1, at = c(.35,.9,1.45,2.1),labels = c("Early \n 65-68", "Late \n 221-224", "Reversed \n 237-240", "EC \n 273-288"), cex.axis = 1.25, las = 2)
+  axis(1, at = c(.35,.9,1.45,2.1),labels = c("Early \n 65-68", "Late \n 221-224", "Reversed \n 237-240", "Clamped \n 273-288"), cex.axis = 1.25, las = 2)
   #legend(.5,-3, legend = c("Continous", "Terminal", "Exposure"), col = c(colorPA, colorT, colorE), lty = c(1), lwd = c(2), cex = 1.2, bty = "n")
 }
 
 Localizations <- function (pl, tl , expl) {
-  PlotoutLine(pl, c(1:3), 1:3, "Hand Localizations")
+  PlotoutLine(pl, c(1:3), 1:3,title =  "Hand Localizations", ylabel = "Hand Direction Change [°]")
   PlotData(pl, 1, 1,1)
   PlotData(tl, 2, 2,1)
   PlotData(expl, 3, 3,1)

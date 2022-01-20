@@ -174,8 +174,8 @@ ANOVAanalysis<- function(AllDataANOVA){
 
 tanalyzedata<- function(AllDataRM){
   IndependentT(AllDataRM, 'Terminal', 'Passive', 'Reaches')
-  PairedT(AllDataRM, 'Passive', 'Reaches')
-  PairedT(AllDataRM, 'Terminal', 'Reaches')
+  #PairedT(AllDataRM, 'Passive', 'Reaches')
+  #PairedT(AllDataRM, 'Terminal', 'Reaches')
 }
 
 

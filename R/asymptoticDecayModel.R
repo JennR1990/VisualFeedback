@@ -228,14 +228,7 @@ asymptoticDecaySettings <- function() {
   
   # this list determines which signals get done for each group
   groupsignals <- list(
-    'active'        = c('localization', 'slowprocess', 'reaches'),
-    'passive'       = c('localization', 'slowprocess', 'reaches'),
-#    'nocursor'      = c('nocursors',    'slowprocess', 'reaches'),
-    'nocursor-47'   = c('nocursors',    'slowprocess', 'reaches', 'nocursors-mv'),
-    'nocursor-ni32' = c('nocursors',    'slowprocess', 'reaches', 'nocursors-mv'),
-#    'nocursor-in16' = c('nocursors',    'slowprocess', 'reaches'),
-    'nocursor-in15' = c('nocursors',    'slowprocess', 'reaches', 'nocursors-mv'),
-    'pause'         = c('reaches',      'slowprocess' ),
+     'passive'       = c('localization', 'slowprocess', 'reaches'),
     'terminal'        = c('localization', 'slowprocess', 'reaches'),
     'exposure'        = c('localization')
   )
@@ -248,27 +241,13 @@ asymptoticDecaySettings <- function() {
   trialsets <- list('main'=c(1:160), 'reversal'=c(161:176))
 
   baselines <- list(
-#    'nocursor'      = list( 'nocursors'   =32, 'slowprocess'=96, 'reaches'=96 ), 
-    'nocursor-47'   = list( 'nocursors'   =32, 'slowprocess'=96, 'reaches'=96, 'nocursors-mv'=32 ), 
-    'nocursor-ni32' = list( 'nocursors'   =32, 'slowprocess'=96, 'reaches'=96, 'nocursors-mv'=32 ), 
-#    'nocursor-in16' = list( 'nocursors'   =32, 'slowprocess'=96, 'reaches'=96 ), 
-    'nocursor-in15' = list( 'nocursors'   =32, 'slowprocess'=96, 'reaches'=96, 'nocursors-mv'=32 ), 
-    'active'        = list( 'localization'=64, 'slowprocess'=64, 'reaches'=64 ),
     'passive'       = list( 'localization'=64, 'slowprocess'=64, 'reaches'=64 ),
-    'pause'         = list(                    'slowprocess'=64, 'reaches'=96 ),
     'terminal'        = c('localization'=64,      'slowprocess'=64,    'reaches'=96),
     'exposure'        = c('localization'=64)
   )
   
   schedules <- list( 
-#    'nocursor'      = list( 'nocursors'   = -1, 'slowprocess'=  1, 'reaches'= -1 ), 
-    'nocursor-47'   = list( 'nocursors'   = -1, 'slowprocess'=  1, 'reaches'= -1, 'nocursors-mv'= -1 ), 
-    'nocursor-ni32' = list( 'nocursors'   = -1, 'slowprocess'=  1, 'reaches'= -1, 'nocursors-mv'= -1 ), 
-#    'nocursor-in16' = list( 'nocursors'   = -1, 'slowprocess'=  1, 'reaches'= -1 ), 
-    'nocursor-in15' = list( 'nocursors'   = -1, 'slowprocess'=  1, 'reaches'= -1, 'nocursors-mv'= -1 ), 
-    'active'        = list( 'localization'=  1, 'slowprocess'=  1, 'reaches'= -1 ),
     'passive'       = list( 'localization'=  1, 'slowprocess'=  1, 'reaches'= -1 ),
-    'pause'         = list(                     'slowprocess'=  1, 'reaches'= -1 ),
     'terminal'        = c('localization'=1,      'slowprocess'=1,    'reaches'=-1),
     'exposure'        = c('localization'=1)
   )
@@ -728,7 +707,7 @@ getStyles <- function() {
   
   styles[['passive']] <- list(
     'solid'=rgb(0.7, 0.0, 0.7),          # purple
-    'trans'=rgb(0.7, 0.0, 0.7, 0.1),     # transparent purple
+    'trans'=rgb(0.7, 0.0, 0.7, 0.2),     # transparent purple
     'label'='passive localization'
   )
 
@@ -752,11 +731,27 @@ getStyles <- function() {
   
   styles[['reaches']] <- list(
     'solid'=rgb(0,0,0),                 # black
-    'trans'=rgb(0,0,0,0.1),             # gray
+    'trans'=rgb(0,0,0,0.2),             # gray
     'label'='reaches'
   )
   
+  ## Terminal
   
+  styles[['terminal']] <- list(
+    'solid'=rgb(1, 0.0, 0.0),         # Red
+    'trans'=rgb(1, 0.0, 0., 0.1),     # transparent Red
+    'label'='no-cursor'
+  )
+  
+  ## Exposure
+  
+  styles[['exposure']] <- list(
+    'solid'=rgb(0.85, 0.65, 0.12),         # Red
+    'trans'=rgb(0.85, 0.65, 0.12, 0.2),     # transparent Red
+    'label'='no-cursor'
+  )
+  
+
   ## Slow Process
   
   styles[['slowprocess']] <- list(
@@ -778,20 +773,20 @@ plotSaturation <- function(xscale='normal', target='tiff') {
   fonts <- list(sans = "Arial", mono = "Arial")
   if (target == 'svg') {
     library('svglite')
-    svglite::svglite(file='docs/Fig4.svg', width=8, height=6, bg='white', system_fonts=fonts)
+    svglite::svglite(file='figs/AbstractFig.svg', width=8, height=6, bg='white', system_fonts=fonts)
     
   }
   if (target == 'pdf') {
-    pdf(file='docs/Fig4.pdf', width=8, height=6, bg='white')
+    pdf(file='figs/AbstractFig.pdf', width=8, height=6, bg='white')
     
   }
   if (target == 'eps') {
-    postscript(file='docs/Fig4.eps', bg='white', width=8, height=6, paper='special', horizontal=FALSE)
+    postscript(file='figs/AbstractFig.eps', bg='white', width=8, height=6, paper='special', horizontal=FALSE)
     
   }
   
   if (target == 'tiff') {
-    tiff(filename='Figure 4.tiff', res=600, width=6, height=4.5, units='in', compression='lzw')
+    tiff(filename='figs/AbstractFig.tiff', res=600, width=6, height=4.5, units='in', compression='lzw')
     
   } 
   
@@ -802,10 +797,9 @@ plotSaturation <- function(xscale='normal', target='tiff') {
   settings <- asymptoticDecaySettings()
   
   groupsignals <- list(
-    'active'        = c('localization'),
-    'passive'       = c('localization', 'slowprocess'),
-    'nocursor-47'   = c('nocursors'    ),
-    'pause'         = c('reaches'     )
+    'passive'       = c('reaches','localization', 'slowprocess'),
+    'terminal'   = c('localization'),
+    'exposure'         = c('localization')
   )
   
   trialsets    <- settings[['trialsets']]
@@ -842,10 +836,10 @@ plotSaturation <- function(xscale='normal', target='tiff') {
     
   }
   
-  groupcolors <- c(styles$active$solid,
-                   styles$passive$solid,
-                   styles[['nocursor-47']]$solid,
-                   'black',
+  groupcolors <- c(styles$passive$solid,
+                   styles$terminal$solid,
+                   styles$exposure$solid,
+                   "black",
                    styles$slowprocess$solid)
   
   # loop through groups:
@@ -952,7 +946,7 @@ plotSaturation <- function(xscale='normal', target='tiff') {
     lines(c(1,80),c(1,1),col='black',lty=1,lw=2)
     text(60,1.05,'asymptote lower bound')
     
-    legend(22,.4,legend=c('active localization', 'passive localization', 'reach aftereffects', 'reach training', 'slow process'),col=groupcolors,lty=c(1,1,1,1,1),bty='n')
+    legend(22,.4,legend=c('passive localization', 'reach training', 'slow process'),col=groupcolors,lty=c(1,1,1,1,1),bty='n')
     
     axis(side=1, at=c(1,2,3,4,5,6,11,21,41,81), labels=sprintf('%d',c(0,1,2,3,4,5,10,20,40,80)))
     axis(side=2, at=seq(0,1,0.2), labels=sprintf('%d',round(seq(0,1,0.2)*100)))
@@ -966,7 +960,7 @@ plotSaturation <- function(xscale='normal', target='tiff') {
     lines(c(0,20),c(1,1),col='black',lty=1,lw=2)
     text(20,1.05,'asymptote lower bound',adj=c(1,0.5))
     
-    legend(11,1.03,legend=c('active localization', 'passive localization', 'reach aftereffects', 'reach training', 'slow process'),col=groupcolors,lty=c(1,1,1,1,1),bty='n', cex = .85)
+    legend(11,1.03,legend=c('Continuous-Localization',  'Terminal-Localization', 'Exposure-Localization', 'Reaches','Slowprocess'),col=groupcolors,lty=c(1,1,1,1,1),bty='n', cex = .85)
     
     axis(side=1, at=c(0,5,10,15,20), labels=c('baseline',sprintf('%d',c(5,10,15,20))))
     axis(side=2, at=seq(0,1,0.2), labels=sprintf('%d',round(seq(0,1,0.2)*100)),las = 2)
