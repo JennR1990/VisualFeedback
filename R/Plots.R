@@ -458,35 +458,43 @@ RegressionPLotec <- function() {
       xlab = 'Reaches',
       ylab = 'Localization',
       main = 'Localization ~ Reaches During Error Clamp',
-      xlim = c(-12, 30),
-      ylim = c(-12, 30),
+      xlim = c(-30, 30),
+      ylim = c(-30, 30),
       axes = FALSE,
-      pch = 19, cex.lab = 1.5, cex.main = 1.5
+      pch = 19, cex.lab = 1.5, cex.main = 1.5, asp = 1
     )
     axis(2,
-         at = c( -10, 0, 10, 20, 30),
+         at = c( -30,-20,-10, 0, 10, 20, 30),
          cex.axis = 1.5, las =2)
     axis(1,
-         at = c(- 10, 0, 10, 20, 30),
+         at = c(-30,-20,- 10, 0, 10, 20, 30),
          cex.axis = 1.5)
     plotRegressionWithCI(PRRm, PPec, colors = c(colorPA_trans, colorPA))
     
     
-    Arm <- TCombine(active_reaches)
+    Arm <- TCombine(terminal_reaches)
     ARm <- Arm$EC_Late * -1
-    APec <- TCombine(active_localization)
+    APec <- TCombine(terminal_localization)
     APec <- APec$EC_Late
-    points(APec ~ ARm, col = colorA_trans, pch = 19)
-    plotRegressionWithCI(ARm, APec, colors = c(colorA_trans, colorA))
+    points(APec ~ ARm, col = colorT_trans, pch = 19)
+    plotRegressionWithCI(ARm, APec, colors = c(colorT_trans, colorT))
+    
+    
+    ARm <- as.numeric(colMeans(exposure_reaches[33:48,2:33], na.rm = TRUE))*-1
+    APec <- TCombine(exposure_localization)
+    APec <- APec$EC_Late
+    points(APec ~ ARm, col = colorE_trans, pch = 19)
+    plotRegressionWithCI(ARm, APec, colors = c(colorE_trans, colorE))
 
     legend(
-      -14,
-      30,
+      -30,
+      35,
       legend = c(
-        'Passive Localization',
-        'Active Localization'
+        'Continuous Training',
+        'Terminal Training',
+        "Exposure Training"
       ),
-      col = c(colorPA, colorA),
+      col = c(colorPA, colorT, colorE),
       lty = c(1, 1),
       lwd = c(2, 2),
       bty = 'n', cex = 1.5
