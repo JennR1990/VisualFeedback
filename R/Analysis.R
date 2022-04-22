@@ -243,7 +243,7 @@ PairedT<- function(data, exp1, task) {
 
 
 ##Equivalence tests
-
+library('car')
 equivalence<- function(){
   meanP<-mean(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], na.rm = TRUE)*-1
   SDP<-sd(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], na.rm = TRUE)
@@ -259,6 +259,11 @@ print("Equivalance test for terminal vs. exposure rebound")
  print("Equivalance test for exposure vs. Passive rebound")
  print(tsum_TOST(m1=meanE, m2 = meanP, sd1=SDE,sd2=SDP,n1 = 48,n2 = 48,low_eqbound = -1,high_eqbound = 1))
 }
+
+library('bayestestR')
+
+rope()
+
 
 
 ## Model Comparison ----

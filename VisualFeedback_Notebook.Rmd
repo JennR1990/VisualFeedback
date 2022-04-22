@@ -59,7 +59,14 @@ tanalyzedata(Ttestdata)
 Rebounds<- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
 leveneTest(EC_Late~Experiment, Rebounds)
 oneway.test(EC_Late~Experiment, Rebounds,na.action = na.omit, var.equal = FALSE)
+#inconclusive
 equivalence()
+anovaBF(EC_Late~Experiment, Rebounds)
+
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], paired = FALSE)
+
 Implicit<-Reboundanalysis(Rebounds)
 Implicit
 
