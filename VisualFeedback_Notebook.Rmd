@@ -59,6 +59,7 @@ tanalyzedata(Ttestdata)
 Rebounds<- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
 leveneTest(EC_Late~Experiment, Rebounds)
 oneway.test(EC_Late~Experiment, Rebounds,na.action = na.omit, var.equal = FALSE)
+equivalence()
 Implicit<-Reboundanalysis(Rebounds)
 Implicit
 
