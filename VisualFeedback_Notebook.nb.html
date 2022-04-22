@@ -1787,77 +1787,19 @@ dev.off()
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXF1aXZhbGVuY2UoKVxuXG5gYGAifQ== -->
-<pre class="r"><code>equivalence()
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHRlc3RCRihSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ1Bhc3NpdmUnXSwgUmVib3VuZHMkRUNfTGF0ZVtSZWJvdW5kcyRFeHBlcmltZW50ID09ICdFeHBvc3VyZSddLCBwYWlyZWQgPSBGQUxTRSlcblxuYGBgIn0= -->
+<pre class="r"><code>ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Passive&#39;], Rebounds$EC_Late[Rebounds$Experiment == &#39;Exposure&#39;], paired = FALSE)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5XZWxjaCBNb2RpZmllZCBUd28tU2FtcGxlIHQtVGVzdFxuSHlwb3RoZXNpcyBUZXN0ZWQ6IEVxdWl2YWxlbmNlXG5FcXVpdmFsZW5jZSBCb3VuZHMgKHJhdyk6LTAuMzUwICYgMC4zNTBcbkFscGhhIExldmVsOjAuMDVcblRoZSBlcXVpdmFsZW5jZSB0ZXN0IHdhcyBub24tc2lnbmlmaWNhbnQsIHQoNjQuMjIpID0gLTEuMDU5LCBwID0gOC41M2UtMDFcblRoZSBudWxsIGh5cG90aGVzaXMgdGVzdCB3YXMgbm9uLXNpZ25pZmljYW50LCB0KDY0LjIyKSA9IC0xLjI1OSwgcCA9IDIuMTNlLTAxXG5OSFNUOiBkb24ndCByZWplY3QgbnVsbCBzaWduaWZpY2FuY2UgaHlwb3RoZXNpcyB0aGF0IHRoZSBlZmZlY3QgaXMgZXF1YWwgdG8gemVybyBcblRPU1Q6IGRvbid0IHJlamVjdCBudWxsIGVxdWl2YWxlbmNlIGh5cG90aGVzaXNcblxuVE9TVCBSZXN1bHRzIFxuIn0= -->
-<pre><code>
-Welch Modified Two-Sample t-Test
-Hypothesis Tested: Equivalence
-Equivalence Bounds (raw):-0.350 &amp; 0.350
-Alpha Level:0.05
-The equivalence test was non-significant, t(64.22) = -1.059, p = 8.53e-01
-The null hypothesis test was non-significant, t(64.22) = -1.259, p = 2.13e-01
-NHST: don&#39;t reject null significance hypothesis that the effect is equal to zero 
-TOST: don&#39;t reject null equivalence hypothesis
+<!-- rnb-output-begin eyJkYXRhIjoiQmF5ZXMgZmFjdG9yIGFuYWx5c2lzXG4tLS0tLS0tLS0tLS0tLVxuWzFdIEFsdC4sIHI9MC43MDcgOiAwLjI2MDI4NjQgwrEwLjAxJVxuXG5BZ2FpbnN0IGRlbm9taW5hdG9yOlxuICBOdWxsLCBtdTEtbXUyID0gMCBcbi0tLVxuQmF5ZXMgZmFjdG9yIHR5cGU6IEJGaW5kZXBTYW1wbGUsIEpaU1xuIn0= -->
+<pre><code>Bayes factor analysis
+--------------
+[1] Alt., r=0.707 : 0.2602864 ±0.01%
 
-TOST Results </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoWUdKZ1pnVXlHZGljQXd5TlRJMFlHRmlZZ0R4R29Bd25pSzRBcWhJR01saUFtQStrWmY4WGxVbVBXdUtMOTM5NC8zQ3o1Yk5QKzc5SHVnaWV1LzRGSm0vLys5UDNyWTlZOTZQVE1IbUhBRDVQeFNzaTh1ZzBYUDlwczZmeTVrWTM3Vi83N0h2czZtbHF2MWxPTjNQYWNtWTBoN0htSmVhbUZnTVpBbURIUVYxYkFtVXdCYnZDV0NscFVCWjdnVjVaWWs1cEtwcEJuRVg1NVhySWhqRkRKZGhLZEV0U2kyRW1jb1g0QjRjbytPU1hweGFoaUlRV0ZBQkYwTnlXbkpOWURETU9Kc2lWa2xpU3FKZFdCTFFKeVB1SHBvVTl2NkFrTXo4UHFJa0pGTnFzYUpvWmk5QUVPQnp6RW5NcWl6TkJ0bkNCeFNHWUYwb3pJN0ZaSUhZeC9ZZWF3UXJ6WUdwZWVtWmVLc3pST1lsSnFUbFFEaDh3VU1CaG9sZFFsSmtIRHdPZ2FMRmVTWDVKSWt3ZFYzSitEa3dFN0NtR2Z3RE1wdmovWGdJQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["t"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"-1.258929","2":"1.746818","3":"64.22321","4":"0.21261276","_rn_":"t-test"},{"1":"-1.058565","2":"1.746818","3":"64.22321","4":"0.85311837","_rn_":"TOST Lower"},{"1":"-1.459293","2":"1.746818","3":"64.22321","4":"0.07467922","_rn_":"TOST Upper"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5FZmZlY3QgU2l6ZXMgXG4ifQ== -->
-<pre><code>
-Effect Sizes </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoWUdKZ1pnVXlHZGljQXd5TlRJMFlHRmlZZ0R4R29Bd25pSzRBcWhJR01rQnErSUNZNlFEajlETkZ1eGNkM1gvQjRkM2lZMXBIWWVMMnZ6OTkzL3FJZGIvOXFhMFI3MC85V0FWWEwxS3FaMVJiV0xEL3NTL3Z0UDdGZ25EMXoxN3ovdU1yamJEZktpeTZab3JQR2JqNG16TWdjQlpHb3ptSU5TOHhON1VZeUJBQU93b2l5SkZhWEpLWm0xaVNDdVV6QmJ2Q1pITHl5MU9MOUpJellmelNnZ0prUGxkeWZsNmFYazVxV1dvT21rV2NSZm5sZXNpV01VRWxtSU1TeTZGTVhvL1VsUFRVWW5XRmRJM0VNazEwbHlibkpCYkROTU1FdVZJU1N4TDEwb3FBNWdKNS85QzBzT2NYbEdUbTV3RTFNY0hDSEZrell4R2FBSWRqWG1KT1pYRW15Qll1c0RnRTgwSnBKaVEySzhRdXB2OW9ZY2VXbXBlZW1RY0xPZGFjeENSZ1VFQTRmTUFnQUllQVhrRlJabDRKekF0QTBXSzlrdnlTeEJ4RUlPYkFSTUNlWXZnSEFCR21SS0prQWdBQSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["estimate"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["lower.ci"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["upper.ci"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["conf.level"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-2.1991204","2":"1.7468183","3":"-5.1144340","4":"0.71619320","5":"0.9","_rn_":"Raw"},{"1":"-0.2539631","2":"0.2086593","3":"-0.6031559","4":"0.08232246","5":"0.9","_rn_":"Hedges' g(av)"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5Ob3RlOiBTTUQgY29uZmlkZW5jZSBpbnRlcnZhbHMgYXJlIGFuIGFwcHJveGltYXRpb24uIFNlZSB2aWduZXR0ZShcIlNNRF9jYWxjc1wiKS5cblxuV2VsY2ggTW9kaWZpZWQgVHdvLVNhbXBsZSB0LVRlc3Rcbkh5cG90aGVzaXMgVGVzdGVkOiBFcXVpdmFsZW5jZVxuRXF1aXZhbGVuY2UgQm91bmRzIChyYXcpOi0wLjM1MCAmIDAuMzUwXG5BbHBoYSBMZXZlbDowLjA1XG5UaGUgZXF1aXZhbGVuY2UgdGVzdCB3YXMgbm9uLXNpZ25pZmljYW50LCB0KDY1LjI4KSA9IC0wLjc0OCwgcCA9IDcuNzFlLTAxXG5UaGUgbnVsbCBoeXBvdGhlc2lzIHRlc3Qgd2FzIG5vbi1zaWduaWZpY2FudCwgdCg2NS4yOCkgPSAtMC45NTQsIHAgPSAzLjQ0ZS0wMVxuTkhTVDogZG9uJ3QgcmVqZWN0IG51bGwgc2lnbmlmaWNhbmNlIGh5cG90aGVzaXMgdGhhdCB0aGUgZWZmZWN0IGlzIGVxdWFsIHRvIHplcm8gXG5UT1NUOiBkb24ndCByZWplY3QgbnVsbCBlcXVpdmFsZW5jZSBoeXBvdGhlc2lzXG5cblRPU1QgUmVzdWx0cyBcbiJ9 -->
-<pre><code>
-Note: SMD confidence intervals are an approximation. See vignette(&quot;SMD_calcs&quot;).
-
-Welch Modified Two-Sample t-Test
-Hypothesis Tested: Equivalence
-Equivalence Bounds (raw):-0.350 &amp; 0.350
-Alpha Level:0.05
-The equivalence test was non-significant, t(65.28) = -0.748, p = 7.71e-01
-The null hypothesis test was non-significant, t(65.28) = -0.954, p = 3.44e-01
-NHST: don&#39;t reject null significance hypothesis that the effect is equal to zero 
-TOST: don&#39;t reject null equivalence hypothesis
-
-TOST Results </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoWUdKZ1pnVXlHZGljQXd5TlRJMFlHRmlZZ0R4R29Bd25pSzRBcWhJR01saUFtQStrWmYrN3R0c3I1NTNmdC8vNWgwTnJWRFpJN3YvVVZ4WGNVNzRSSm0vLzI5VHlpWjNJVm5RYUp1OFFFUGowSytjOURYUWFydi9xMytlNi93VHI3Ritzdi9kNm5kaysrd09zTDA4NUpqaWdPWXcxTHpFM3RSaklFQUE3RHVyYUVpaURLZGdWeGtwSmc3TFlDL1RLRW5OS1U5RU00aXpLTDlkRE5vd1pLc0ZXb2x1U1dnd3prU3ZFUHpoRXdTZS9QTFVJUlNTMG9BQW9ndWEyNUp6RVlwaHhNRUd1bE1TU1JMMjBJcUJOUU40L05DM3MrUVVsbWZsNVFFMU1vTkJtUmRQTVdJUW13T0dZbDVoVFdad0pzb1VMTEE3QnZGQ2FHWW5OQXJHTDZUL1VERmFZQjFQejBqUHpVbUdPemtsTVNzMkJjdmlBZ1FJT0U3MkNvc3c4ZUJnQVJZdjFTdkpMRW1IcXVKTHpjMkFpWUU4eC9BTUF6S3V4Y1Y0Q0FBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["t"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.9539622","2":"1.700495","3":"65.27966","4":"0.3436220","_rn_":"t-test"},{"1":"-0.7481397","2":"1.700495","3":"65.27966","4":"0.7714686","_rn_":"TOST Lower"},{"1":"-1.1597846","2":"1.700495","3":"65.27966","4":"0.1251805","_rn_":"TOST Upper"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5FZmZlY3QgU2l6ZXMgXG4ifQ== -->
-<pre><code>
-Effect Sizes </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoWUdKZ1pnVXlHZGljQXd5TlRJMFlHRmlZZ0R4R29Bd25pSzRBcWhJR01rQnErSUNZYWYvUEwvMXZIbmxOMjM5aXNkWTh2OTlmWWVMMnYwMHRuOWlKYkxVL3RURGl4ZVB0YzJEaUJ3U3ZUYlErdnBSdi8wUDdGeTY3dDMySHEvOWNxQ29hK1ovTC9sRHQ0NDE2M3hMaDRtL09nTUJaR0kzbUlOYTh4TnpVWWlCREFPd29pQ0JIYW5GSlptNWlTU3FVenhUc0NwUEp5UzlQTGRKTHpvVHhTd3NLa1BsY3lmbDVhWG81cVdXcE9XZ1djUmJsbCtzaFc4WUVsV0FPU2l5SE1uazlVbFBTVTR2VkZkSTFFc3MwMFYyYW5KTllETk1NRStSS1NTeEoxRXNyQXBvTDVQMUQwOEtlWDFDU21aOEgxTVFFQzNOa3pZeEZhQUljam5tSk9aWEZtU0JidU1EaUVNd0xwWm1RMkt3UXU1aitvNFVkVzJwZWVtWWVMT1JZY3hLVGdFRUI0ZkFCZ3dBY0Fub0ZSWmw1SlRBdkFFV0w5VXJ5U3hKekVJR1lBeE1CZTRyaEh3Q1Y0c0wrWkFJQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["estimate"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["lower.ci"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["upper.ci"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["conf.level"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-1.6222076","2":"1.7004947","3":"-4.4595384","4":"1.2151233","5":"0.9","_rn_":"Raw"},{"1":"-0.1924794","2":"0.2080489","3":"-0.5390512","4":"0.1444668","5":"0.9","_rn_":"Hedges' g(av)"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5Ob3RlOiBTTUQgY29uZmlkZW5jZSBpbnRlcnZhbHMgYXJlIGFuIGFwcHJveGltYXRpb24uIFNlZSB2aWduZXR0ZShcIlNNRF9jYWxjc1wiKS5cbiJ9 -->
-<pre><code>
-Note: SMD confidence intervals are an approximation. See vignette(&quot;SMD_calcs&quot;).</code></pre>
+Against denominator:
+  Null, mu1-mu2 = 0 
+---
+Bayes factor type: BFindepSample, JZS</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
