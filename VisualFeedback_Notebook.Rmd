@@ -55,6 +55,7 @@ Ttestdata<- PrepdataforT(passive_reaches,terminal_reaches)
 tanalyzedata(Ttestdata)
 
 Rebounds<- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
+oneway.test(EC_Late~Experiment, Rebounds,na.action = na.omit, var.equal = FALSE)
 Implicit<-Reboundanalysis(Rebounds)
 Implicit
 
