@@ -252,12 +252,12 @@ equivalence<- function(){
   SDE<-sd(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], na.rm = TRUE)
   meanE<-mean(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], na.rm = TRUE)*-1
   
-Print("Equivalance test for terminal vs. exposure rebound")
- print(tsum_TOST(m1=meanT, m2 = meanE, sd1= SDT,sd2 = SDE,n1 = 48,n2 = 48,low_eqbound = -.35,high_eqbound = .35))
- Print("Equivalance test for terminal vs. Passive rebound")
- print(tsum_TOST(m1=meanT, m2 = meanP, sd1=SDT,sd2=SDP,n1 = 48,n2 = 48,low_eqbound = -.35,high_eqbound = .35))
- Print("Equivalance test for exposure vs. Passive rebound")
- print(tsum_TOST(m1=meanE, m2 = meanP, sd1=SDE,sd2=SDP,n1 = 48,n2 = 48,low_eqbound = -.35,high_eqbound = .35))
+print("Equivalance test for terminal vs. exposure rebound")
+ print(tsum_TOST(m1=meanT, m2 = meanE, sd1= SDT,sd2 = SDE,n1 = 48,n2 = 48,low_eqbound = -1,high_eqbound = 1))
+ print("Equivalance test for terminal vs. Passive rebound")
+ print(tsum_TOST(m1=meanT, m2 = meanP, sd1=SDT,sd2=SDP,n1 = 48,n2 = 48,low_eqbound = -1,high_eqbound = 1))
+ print("Equivalance test for exposure vs. Passive rebound")
+ print(tsum_TOST(m1=meanE, m2 = meanP, sd1=SDE,sd2=SDP,n1 = 48,n2 = 48,low_eqbound = -1,high_eqbound = 1))
 }
 
 

@@ -18,17 +18,17 @@ loadalldata<- function () {
   terminal_reaches<<- removeReachOutliers(Loaddata(group='terminal'))
   exposure_reaches<<- removeReachOutliers(Loaddata(group='exposure'))
   
-  variation_reaches<<- removeReachOutliers(Loaddata(group='variation'))
-  variation_localization<<- removeReachOutliers(Loaddata(group='variation', task = 'localizations'))
+  #variation_reaches<<- removeReachOutliers(Loaddata(group='variation'))
+  #variation_localization<<- removeReachOutliers(Loaddata(group='variation', task = 'localizations'))
   
-  nocursor_reaches<<- removeReachOutliers(Loaddata(group='nocursor'))
-  nocursorI_reaches<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_reaches'))
-  nocursor_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'nocursors'))
-  nocursorI_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_nocursors'))
-  nocursorI_reaches<<-nocursorI_reaches[,-9]
-  nocursorI_nocursors<<-nocursorI_nocursors[,-9]
-  newnocursor_reaches<<- cbind(nocursor_reaches, nocursorI_reaches[2:ncol(nocursorI_reaches)])
-  newnocursor_nocursors<<- cbind(nocursor_nocursors, nocursorI_nocursors[2:ncol(nocursorI_nocursors)])
+  # nocursor_reaches<<- removeReachOutliers(Loaddata(group='nocursor'))
+  # nocursorI_reaches<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_reaches'))
+  # nocursor_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'nocursors'))
+  # nocursorI_nocursors<<- removeReachOutliers(Loaddata(group='nocursor', task = 'NI_nocursors'))
+  # nocursorI_reaches<<-nocursorI_reaches[,-9]
+  # nocursorI_nocursors<<-nocursorI_nocursors[,-9]
+  # newnocursor_reaches<<- cbind(nocursor_reaches, nocursorI_reaches[2:ncol(nocursorI_reaches)])
+  # newnocursor_nocursors<<- cbind(nocursor_nocursors, nocursorI_nocursors[2:ncol(nocursorI_nocursors)])
   }
 
 downloadOSFdata <- function(update=FALSE) {
