@@ -50,11 +50,14 @@ dev.off()
 library(ez)
 ANOVAdata<- PrepdataforANOVA(passive_reaches,terminal_reaches)
 ReachANOVA<-ANOVAanalysis(ANOVAdata)
+leveneTest(Deviations~Time, ANOVAdata)
+leveneTest(Deviations~Experiment, ANOVAdata)
 ReachANOVA
 Ttestdata<- PrepdataforT(passive_reaches,terminal_reaches)
 tanalyzedata(Ttestdata)
 
 Rebounds<- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
+leveneTest(EC_Late~Experiment, Rebounds)
 oneway.test(EC_Late~Experiment, Rebounds,na.action = na.omit, var.equal = FALSE)
 Implicit<-Reboundanalysis(Rebounds)
 Implicit
