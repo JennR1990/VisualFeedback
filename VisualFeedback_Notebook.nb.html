@@ -1787,34 +1787,61 @@ dev.off()
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmFCRihEZXZpYXRpb25zfkV4cGVyaW1lbnQgKyBUaW1lLCBBTk9WQVBkYXRhKVxuXG5gYGAifQ== -->
-<pre class="r"><code>anovaBF(Deviations~Experiment + Time, ANOVAPdata)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShleilcbkFOT1ZBZGF0YTwtIFByZXBkYXRhZm9yQU5PVkEocGFzc2l2ZV9yZWFjaGVzLHRlcm1pbmFsX3JlYWNoZXMpXG5SZWFjaEFOT1ZBPC1BTk9WQWFuYWx5c2lzKEFOT1ZBZGF0YSlcbmxldmVuZVRlc3QoRGV2aWF0aW9uc35UaW1lLCBBTk9WQWRhdGEpXG5sZXZlbmVUZXN0KERldmlhdGlvbnN+RXhwZXJpbWVudCwgQU5PVkFkYXRhKVxuUmVhY2hBTk9WQVxuVHRlc3RkYXRhPC0gUHJlcGRhdGFmb3JUKHBhc3NpdmVfcmVhY2hlcyx0ZXJtaW5hbF9yZWFjaGVzKVxudGFuYWx5emVkYXRhKFR0ZXN0ZGF0YSlcblxuUmVib3VuZHM8LSBQcmVwQU5PVkFSZWJvdW5kcyhwYXNzaXZlX3JlYWNoZXMsdGVybWluYWxfcmVhY2hlcyxleHBvc3VyZV9yZWFjaGVzKVxubGV2ZW5lVGVzdChFQ19MYXRlfkV4cGVyaW1lbnQsIFJlYm91bmRzKVxub25ld2F5LnRlc3QoRUNfTGF0ZX5FeHBlcmltZW50LCBSZWJvdW5kcyxuYS5hY3Rpb24gPSBuYS5vbWl0LCB2YXIuZXF1YWwgPSBGQUxTRSlcbiNpbmNvbmNsdXNpdmVcbmVxdWl2YWxlbmNlKClcbmFub3ZhQkYoRUNfTGF0ZX5FeHBlcmltZW50LCBSZWJvdW5kcylcblxudHRlc3RCRihSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ1Bhc3NpdmUnXSwgUmVib3VuZHMkRUNfTGF0ZVtSZWJvdW5kcyRFeHBlcmltZW50ID09ICdUZXJtaW5hbCddLCBwYWlyZWQgPSBGQUxTRSlcbnR0ZXN0QkYoUmVib3VuZHMkRUNfTGF0ZVtSZWJvdW5kcyRFeHBlcmltZW50ID09ICdFeHBvc3VyZSddLCBSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ1Rlcm1pbmFsJ10sIHBhaXJlZCA9IEZBTFNFKVxudHRlc3RCRihSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ1Bhc3NpdmUnXSwgUmVib3VuZHMkRUNfTGF0ZVtSZWJvdW5kcyRFeHBlcmltZW50ID09ICdFeHBvc3VyZSddLCBwYWlyZWQgPSBGQUxTRSlcblxuSW1wbGljaXQ8LVJlYm91bmRhbmFseXNpcyhSZWJvdW5kcylcbkltcGxpY2l0XG5cblxuQU5PVkFQZGF0YTwtIFByZXBkYXRhZm9yUHJvcEFOT1ZBKHBhc3NpdmVfbG9jYWxpemF0aW9uLCB0ZXJtaW5hbF9sb2NhbGl6YXRpb24sIGV4cG9zdXJlX2xvY2FsaXphdGlvbilcblR0ZXN0UGRhdGE8LSBQcmVwZGF0YWZvclByb3BUKHBhc3NpdmVfbG9jYWxpemF0aW9uLCB0ZXJtaW5hbF9sb2NhbGl6YXRpb24sIGV4cG9zdXJlX2xvY2FsaXphdGlvbilcblxuTG9jQU5PVkE8LUFOT1ZBYW5hbHlzaXMoQU5PVkFQZGF0YSlcbmFub3ZhQkYoRGV2aWF0aW9uc35FeHBlcmltZW50ICsgVGltZSwgQU5PVkFQZGF0YSlcblxuTG9jQU5PVkFcblxuIyNSZWFjaCBNb2RlbCBDb21wYXJpc29uXG5QYXNzaXZlX21ldHJpY3M8LSBHcm91cE1vZGVsQUlDcyhwYXNzaXZlX3JlYWNoZXMsICdQYXNzaXZlJylcblRlcm1pbmFsX21ldHJpY3M8LSBHcm91cE1vZGVsQUlDcyh0ZXJtaW5hbF9yZWFjaGVzLCAnVGVybWluYWwnKVxuUnVubG9ncmVncmVzc2lvbigpXG5cblxuIyNSYXRlIG9mIENoYW5nZVxuYm9vdHN0cmFwU2VtaUFzeW1wdG90aWNEZWNheU1vZGVscygpXG5nZXRBc3ltcHRvdGljRGVjYXlQYXJhbWV0ZXJDSXMoKVxuZ2V0U2F0dXJhdGlvblRyaWFscygpXG5cblxuI0Zhc3QgcHJvY2VzcyBjb21wYXJpc29uIGJldHdlZW4gdGVybWluYWwgYW5kIGNvbnRpbnVvdXNcbnBhcnNmb3J0dGVzdDwtUGFydGljaXBhbnRSZWFjaG1vZGVsczIocGFzc2l2ZV9yZWFjaGVzLCB0ZXJtaW5hbF9yZWFjaGVzKVxudC50ZXN0KHBhcnNmb3J0dGVzdCRSZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIkNvbnRpbnVvdXNcIl0scGFyc2ZvcnR0ZXN0JFJmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiVGVybWluYWxcIl0pIFxuY29oZW4uZChwYXJzZm9ydHRlc3QkUmZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJDb250aW51b3VzXCJdLHBhcnNmb3J0dGVzdCRSZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIlRlcm1pbmFsXCJdLCBuYS5ybSA9IFRSVUUpXG5ldGFTcXVhcmVkVHRlc3QocGFyc2ZvcnR0ZXN0JFJmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiQ29udGludW91c1wiXSxwYXJzZm9ydHRlc3QkUmZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJUZXJtaW5hbFwiXSwgbmEucm0gPSBUUlVFKVxudC50ZXN0KHBhcnNmb3J0dGVzdCRMZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIkNvbnRpbnVvdXNcIl0scGFyc2ZvcnR0ZXN0JExmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiVGVybWluYWxcIl0pIFxuY29oZW4uZChwYXJzZm9ydHRlc3QkTGZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJDb250aW51b3VzXCJdLHBhcnNmb3J0dGVzdCRMZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIlRlcm1pbmFsXCJdLCBuYS5ybSA9IFRSVUUpXG5ldGFTcXVhcmVkVHRlc3QocGFyc2ZvcnR0ZXN0JExmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiQ29udGludW91c1wiXSxwYXJzZm9ydHRlc3QkTGZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJUZXJtaW5hbFwiXSwgbmEucm0gPSBUUlVFKVxuXG5cblxuXG5gYGAifQ== -->
+<pre class="r"><code>library(ez)
+ANOVAdata&lt;- PrepdataforANOVA(passive_reaches,terminal_reaches)
+ReachANOVA&lt;-ANOVAanalysis(ANOVAdata)
+leveneTest(Deviations~Time, ANOVAdata)
+leveneTest(Deviations~Experiment, ANOVAdata)
+ReachANOVA
+Ttestdata&lt;- PrepdataforT(passive_reaches,terminal_reaches)
+tanalyzedata(Ttestdata)
+
+Rebounds&lt;- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
+leveneTest(EC_Late~Experiment, Rebounds)
+oneway.test(EC_Late~Experiment, Rebounds,na.action = na.omit, var.equal = FALSE)
+#inconclusive
+equivalence()
+anovaBF(EC_Late~Experiment, Rebounds)
+
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Passive&#39;], Rebounds$EC_Late[Rebounds$Experiment == &#39;Terminal&#39;], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Exposure&#39;], Rebounds$EC_Late[Rebounds$Experiment == &#39;Terminal&#39;], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Passive&#39;], Rebounds$EC_Late[Rebounds$Experiment == &#39;Exposure&#39;], paired = FALSE)
+
+Implicit&lt;-Reboundanalysis(Rebounds)
+Implicit
+
+
+ANOVAPdata&lt;- PrepdataforPropANOVA(passive_localization, terminal_localization, exposure_localization)
+TtestPdata&lt;- PrepdataforPropT(passive_localization, terminal_localization, exposure_localization)
+
+LocANOVA&lt;-ANOVAanalysis(ANOVAPdata)
+anovaBF(Deviations~Experiment + Time, ANOVAPdata)
+
+LocANOVA
+
+##Reach Model Comparison
+Passive_metrics&lt;- GroupModelAICs(passive_reaches, &#39;Passive&#39;)
+Terminal_metrics&lt;- GroupModelAICs(terminal_reaches, &#39;Terminal&#39;)
+Runlogregression()
+
+
+##Rate of Change
+bootstrapSemiAsymptoticDecayModels()
+getAsymptoticDecayParameterCIs()
+getSaturationTrials()
+
+
+#Fast process comparison between terminal and continuous
+parsforttest&lt;-ParticipantReachmodels2(passive_reaches, terminal_reaches)
+t.test(parsforttest$Rf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Rf[parsforttest$Experiment == &quot;Terminal&quot;]) 
+cohen.d(parsforttest$Rf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Rf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
+etaSquaredTtest(parsforttest$Rf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Rf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
+t.test(parsforttest$Lf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Lf[parsforttest$Experiment == &quot;Terminal&quot;]) 
+cohen.d(parsforttest$Lf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Lf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
+etaSquaredTtest(parsforttest$Lf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Lf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDAlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHw9PT09PT09PT09PT09PT09PT09PT09PT0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjUlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHw9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNTAlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHw9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09ICAgICAgICAgICAgICAgICAgICAgICAgfCAgNzUlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHw9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09fCAxMDAlXG5CYXllcyBmYWN0b3IgYW5hbHlzaXNcbi0tLS0tLS0tLS0tLS0tXG5bMV0gVGltZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiAxLjA5MTQ3OGUrMjcgwrEwJVxuWzJdIEV4cGVyaW1lbnQgICAgICAgICAgICAgICAgICAgICAgICAgIDogMC4wMzA0MDcwMiAgIMKxMCVcblszXSBUaW1lICsgRXhwZXJpbWVudCAgICAgICAgICAgICAgICAgICA6IDMuNDAxNTE4ZSsyNSDCsTEuNDUlXG5bNF0gVGltZSArIEV4cGVyaW1lbnQgKyBUaW1lOkV4cGVyaW1lbnQgOiAyLjAzNDgyOGUrMjQgwrExLjQxJVxuXG5BZ2FpbnN0IGRlbm9taW5hdG9yOlxuICBJbnRlcmNlcHQgb25seSBcbi0tLVxuQmF5ZXMgZmFjdG9yIHR5cGU6IEJGbGluZWFyTW9kZWwsIEpaU1xuIn0= -->
-<pre><code>
-  |                                                                                                    
-  |                                                                                              |   0%
-  |                                                                                                    
-  |========================                                                                      |  25%
-  |                                                                                                    
-  |===============================================                                               |  50%
-  |                                                                                                    
-  |======================================================================                        |  75%
-  |                                                                                                    
-  |==============================================================================================| 100%
-Bayes factor analysis
---------------
-[1] Time                                : 1.091478e+27 ±0%
-[2] Experiment                          : 0.03040702   ±0%
-[3] Time + Experiment                   : 3.401518e+25 ±1.45%
-[4] Time + Experiment + Time:Experiment : 2.034828e+24 ±1.41%
-
-Against denominator:
-  Intercept only 
----
-Bayes factor type: BFlinearModel, JZS</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->

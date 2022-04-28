@@ -414,16 +414,18 @@ RegressionPLot <- function() {
       xlab = 'Reaches',
       ylab = 'Localization',
       main = 'Localization ~ Reaches During Error Clamp',
-      xlim = c(-20, 30),
+      xlim = c(-30, 30),
       ylim = c(-20, 20),
       axes = FALSE, asp = 1, cex.lab = 1.25
     )
     axis(2,
-         at = c( -10, 0, 10, 20),
+         at = c( -20,-10, 0, 10, 20),
          cex.axis = 1.2)
     axis(1,
-         at = c(-20,- 10, 0, 10, 20, 30),
+         at = c(-30,-20,- 10, 0, 10, 20, 30),
          cex.axis = 1.2)
+    lines(x = c(-30:30), y = rep(0, times = length(-30:30)), lty = 3)
+    abline(v = c(0), lty = 3)
     plotRegressionWithCI(PRRm, PPec, colors = c(colorPA_trans, colorPA))
     
     
@@ -436,7 +438,7 @@ RegressionPLot <- function() {
     
     PARRm <- as.numeric(unlist(colMeans(exposure_reaches[33:48,2:33], na.rm = TRUE)))
     PAPec <- TCombine(exposure_localization)
-    PAPec<- PAPec$EC_Late
+    PAPec<- PAPec$EC_Late*-1
     points(PAPec ~ PARRm, col = colorE)
     plotRegressionWithCI(PARRm, PAPec, colors = c(colorE_trans, colorE))
     legend(
