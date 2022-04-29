@@ -426,28 +426,37 @@ RegressionPLot <- function() {
          cex.axis = 1.2)
     lines(x = c(-30:30), y = rep(0, times = length(-30:30)), lty = 3)
     abline(v = c(0), lty = 3)
-    plotRegressionWithCI(PRRm, PPec, colors = c(colorPA_trans, colorPA))
-    
+    lm<-plotRegressionWithCI(PRRm, PPec, colors = c(colorPA_trans, colorPA))
+    pr<-summary(lm)$r.squared
+    print(summary(lm)$coefficients[2,4])
     
     Arm <- TCombine(terminal_reaches)
     ARm <- Arm$EC_Late * -1
     APec <- TCombine(terminal_localization)
     APec <- APec$EC_Late
     points(APec ~ ARm, col = colorT)
-    plotRegressionWithCI(ARm, APec, colors = c(colorT_trans, colorT))
+    tm<-plotRegressionWithCI(ARm, APec, colors = c(colorT_trans, colorT))
+    tr<-summary(tm)$r.squared
+    print(summary(tm)$coefficients[2,4])
     
     PARRm <- as.numeric(unlist(colMeans(exposure_reaches[33:48,2:33], na.rm = TRUE)))
     PAPec <- TCombine(exposure_localization)
     PAPec<- PAPec$EC_Late*-1
     points(PAPec ~ PARRm, col = colorE)
-    plotRegressionWithCI(PARRm, PAPec, colors = c(colorE_trans, colorE))
+    em<-plotRegressionWithCI(PARRm, PAPec, colors = c(colorE_trans, colorE))
+    er<-summary(em)$r.squared
+    print(summary(em)$coefficients[2,4])
+    
+    label1<- sprintf("Continuous, r2=%.2f", pr)
+    label2<- sprintf("Terminal, r2=%.2f", tr)
+    label3<- sprintf("Exposure, r2=%.2f", er)
     legend(
       -35,
       20,
       legend = c(
-        'Continuous',
-        'Terminal',
-        'Exposure'
+        label1,
+        label2,
+        label3
       ),
       col = c(colorPA, colorT, colorE),
       lty = c(1, 1, 1),

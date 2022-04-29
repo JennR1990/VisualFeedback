@@ -82,6 +82,10 @@ Implicit
 ANOVAPdata<- PrepdataforPropANOVA(passive_localization, terminal_localization, exposure_localization)
 TtestPdata<- PrepdataforPropT(passive_localization, terminal_localization, exposure_localization)
 
+
+t.test(TtestPdata$R1_Early[TtestPdata$Experiment == "Passive"])
+t.test(TtestPdata$R1_Early[TtestPdata$Experiment == "Terminal"])
+t.test(TtestPdata$R1_Early[TtestPdata$Experiment == "Exposure"])
 LocANOVA<-ANOVAanalysis(ANOVAPdata)
 anovaBF(Deviations~Experiment* Time, ANOVAPdata)
 
