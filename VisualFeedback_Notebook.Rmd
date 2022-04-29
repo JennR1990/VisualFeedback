@@ -83,7 +83,8 @@ ANOVAPdata<- PrepdataforPropANOVA(passive_localization, terminal_localization, e
 TtestPdata<- PrepdataforPropT(passive_localization, terminal_localization, exposure_localization)
 
 LocANOVA<-ANOVAanalysis(ANOVAPdata)
-anovaBF(Deviations~Experiment + Time, ANOVAPdata)
+anovaBF(Deviations~Experiment* Time, ANOVAPdata)
+
 
 LocANOVA
 
