@@ -1791,23 +1791,74 @@ dev.off()
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudC50ZXN0KFR0ZXN0UGRhdGEkUjFfRWFybHlbVHRlc3RQZGF0YSRFeHBlcmltZW50ID09IFwiRXhwb3N1cmVcIl0pXG5cbmBgYCJ9 -->
-<pre class="r"><code>t.test(TtestPdata$R1_Early[TtestPdata$Experiment == &quot;Exposure&quot;])
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShleilcbkFOT1ZBZGF0YTwtIFByZXBkYXRhZm9yQU5PVkEocGFzc2l2ZV9yZWFjaGVzLHRlcm1pbmFsX3JlYWNoZXMpXG5SZWFjaEFOT1ZBPC1BTk9WQWFuYWx5c2lzKEFOT1ZBZGF0YSlcbmxldmVuZVRlc3QoRGV2aWF0aW9uc35UaW1lLCBBTk9WQWRhdGEpXG5sZXZlbmVUZXN0KERldmlhdGlvbnN+RXhwZXJpbWVudCwgQU5PVkFkYXRhKVxuUmVhY2hBTk9WQVxuVHRlc3RkYXRhPC0gUHJlcGRhdGFmb3JUKHBhc3NpdmVfcmVhY2hlcyx0ZXJtaW5hbF9yZWFjaGVzKVxudGFuYWx5emVkYXRhKFR0ZXN0ZGF0YSlcblxuUmVib3VuZHM8LSBQcmVwQU5PVkFSZWJvdW5kcyhwYXNzaXZlX3JlYWNoZXMsdGVybWluYWxfcmVhY2hlcyxleHBvc3VyZV9yZWFjaGVzKVxubGV2ZW5lVGVzdChFQ19MYXRlfkV4cGVyaW1lbnQsIFJlYm91bmRzKVxub25ld2F5LnRlc3QoRUNfTGF0ZX5FeHBlcmltZW50LCBSZWJvdW5kcyxuYS5hY3Rpb24gPSBuYS5vbWl0LCB2YXIuZXF1YWwgPSBGQUxTRSlcbiNpbmNvbmNsdXNpdmVcbmVxdWl2YWxlbmNlKClcbmFub3ZhQkYoRUNfTGF0ZX5FeHBlcmltZW50LCBSZWJvdW5kcylcblxudHRlc3RCRihSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ1Bhc3NpdmUnXSwgcGFpcmVkID0gRkFMU0UpXG50dGVzdEJGKFJlYm91bmRzJEVDX0xhdGVbUmVib3VuZHMkRXhwZXJpbWVudCA9PSAnRXhwb3N1cmUnXSwgcGFpcmVkID0gRkFMU0UpXG50dGVzdEJGKFJlYm91bmRzJEVDX0xhdGVbUmVib3VuZHMkRXhwZXJpbWVudCA9PSAnVGVybWluYWwnXSwgcGFpcmVkID0gRkFMU0UpXG50LnRlc3QoUmVib3VuZHMkRUNfTGF0ZVtSZWJvdW5kcyRFeHBlcmltZW50ID09ICdQYXNzaXZlJ10sIHBhaXJlZCA9IEZBTFNFKVxudC50ZXN0KFJlYm91bmRzJEVDX0xhdGVbUmVib3VuZHMkRXhwZXJpbWVudCA9PSAnRXhwb3N1cmUnXSwgcGFpcmVkID0gRkFMU0UpXG50LnRlc3QoUmVib3VuZHMkRUNfTGF0ZVtSZWJvdW5kcyRFeHBlcmltZW50ID09ICdUZXJtaW5hbCddLCBwYWlyZWQgPSBGQUxTRSlcblxuXG50dGVzdEJGKFJlYm91bmRzJEVDX0xhdGVbUmVib3VuZHMkRXhwZXJpbWVudCA9PSAnUGFzc2l2ZSddLCBSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ1Rlcm1pbmFsJ10sIHBhaXJlZCA9IEZBTFNFKVxudHRlc3RCRihSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ0V4cG9zdXJlJ10sIFJlYm91bmRzJEVDX0xhdGVbUmVib3VuZHMkRXhwZXJpbWVudCA9PSAnVGVybWluYWwnXSwgcGFpcmVkID0gRkFMU0UpXG50dGVzdEJGKFJlYm91bmRzJEVDX0xhdGVbUmVib3VuZHMkRXhwZXJpbWVudCA9PSAnUGFzc2l2ZSddLCBSZWJvdW5kcyRFQ19MYXRlW1JlYm91bmRzJEV4cGVyaW1lbnQgPT0gJ0V4cG9zdXJlJ10sIHBhaXJlZCA9IEZBTFNFKVxuXG5JbXBsaWNpdDwtUmVib3VuZGFuYWx5c2lzKFJlYm91bmRzKVxuSW1wbGljaXRcblxuXG5BTk9WQVBkYXRhPC0gUHJlcGRhdGFmb3JQcm9wQU5PVkEocGFzc2l2ZV9sb2NhbGl6YXRpb24sIHRlcm1pbmFsX2xvY2FsaXphdGlvbiwgZXhwb3N1cmVfbG9jYWxpemF0aW9uKVxuVHRlc3RQZGF0YTwtIFByZXBkYXRhZm9yUHJvcFQocGFzc2l2ZV9sb2NhbGl6YXRpb24sIHRlcm1pbmFsX2xvY2FsaXphdGlvbiwgZXhwb3N1cmVfbG9jYWxpemF0aW9uKVxuXG5cbnQudGVzdChUdGVzdFBkYXRhJFIxX0Vhcmx5W1R0ZXN0UGRhdGEkRXhwZXJpbWVudCA9PSBcIlBhc3NpdmVcIl0pXG50LnRlc3QoVHRlc3RQZGF0YSRSMV9FYXJseVtUdGVzdFBkYXRhJEV4cGVyaW1lbnQgPT0gXCJUZXJtaW5hbFwiXSlcbnQudGVzdChUdGVzdFBkYXRhJFIxX0Vhcmx5W1R0ZXN0UGRhdGEkRXhwZXJpbWVudCA9PSBcIkV4cG9zdXJlXCJdKVxuTG9jQU5PVkE8LUFOT1ZBYW5hbHlzaXMoQU5PVkFQZGF0YSlcbmFub3ZhQkYoRGV2aWF0aW9uc35FeHBlcmltZW50KiBUaW1lLCBBTk9WQVBkYXRhKVxuXG5cbkxvY0FOT1ZBXG5cbiMjUmVhY2ggTW9kZWwgQ29tcGFyaXNvblxuUGFzc2l2ZV9tZXRyaWNzPC0gR3JvdXBNb2RlbEFJQ3MocGFzc2l2ZV9yZWFjaGVzLCAnUGFzc2l2ZScpXG5UZXJtaW5hbF9tZXRyaWNzPC0gR3JvdXBNb2RlbEFJQ3ModGVybWluYWxfcmVhY2hlcywgJ1Rlcm1pbmFsJylcblJ1bmxvZ3JlZ3Jlc3Npb24oKVxuXG5cbiMjUmF0ZSBvZiBDaGFuZ2VcbmJvb3RzdHJhcFNlbWlBc3ltcHRvdGljRGVjYXlNb2RlbHMoKVxuZ2V0QXN5bXB0b3RpY0RlY2F5UGFyYW1ldGVyQ0lzKClcbmdldFNhdHVyYXRpb25UcmlhbHMoKVxuXG5cbiNGYXN0IHByb2Nlc3MgY29tcGFyaXNvbiBiZXR3ZWVuIHRlcm1pbmFsIGFuZCBjb250aW51b3VzXG5wYXJzZm9ydHRlc3Q8LVBhcnRpY2lwYW50UmVhY2htb2RlbHMyKHBhc3NpdmVfcmVhY2hlcywgdGVybWluYWxfcmVhY2hlcylcbnQudGVzdChwYXJzZm9ydHRlc3QkUmZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJDb250aW51b3VzXCJdLHBhcnNmb3J0dGVzdCRSZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIlRlcm1pbmFsXCJdKSBcbmNvaGVuLmQocGFyc2ZvcnR0ZXN0JFJmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiQ29udGludW91c1wiXSxwYXJzZm9ydHRlc3QkUmZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJUZXJtaW5hbFwiXSwgbmEucm0gPSBUUlVFKVxuZXRhU3F1YXJlZFR0ZXN0KHBhcnNmb3J0dGVzdCRSZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIkNvbnRpbnVvdXNcIl0scGFyc2ZvcnR0ZXN0JFJmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiVGVybWluYWxcIl0sIG5hLnJtID0gVFJVRSlcbnQudGVzdChwYXJzZm9ydHRlc3QkTGZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJDb250aW51b3VzXCJdLHBhcnNmb3J0dGVzdCRMZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIlRlcm1pbmFsXCJdKSBcbmNvaGVuLmQocGFyc2ZvcnR0ZXN0JExmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiQ29udGludW91c1wiXSxwYXJzZm9ydHRlc3QkTGZbcGFyc2ZvcnR0ZXN0JEV4cGVyaW1lbnQgPT0gXCJUZXJtaW5hbFwiXSwgbmEucm0gPSBUUlVFKVxuZXRhU3F1YXJlZFR0ZXN0KHBhcnNmb3J0dGVzdCRMZltwYXJzZm9ydHRlc3QkRXhwZXJpbWVudCA9PSBcIkNvbnRpbnVvdXNcIl0scGFyc2ZvcnR0ZXN0JExmW3BhcnNmb3J0dGVzdCRFeHBlcmltZW50ID09IFwiVGVybWluYWxcIl0sIG5hLnJtID0gVFJVRSlcblxuXG5cblxuYGBgIn0= -->
+<pre class="r"><code>library(ez)
+ANOVAdata&lt;- PrepdataforANOVA(passive_reaches,terminal_reaches)
+ReachANOVA&lt;-ANOVAanalysis(ANOVAdata)
+leveneTest(Deviations~Time, ANOVAdata)
+leveneTest(Deviations~Experiment, ANOVAdata)
+ReachANOVA
+Ttestdata&lt;- PrepdataforT(passive_reaches,terminal_reaches)
+tanalyzedata(Ttestdata)
+
+Rebounds&lt;- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
+leveneTest(EC_Late~Experiment, Rebounds)
+oneway.test(EC_Late~Experiment, Rebounds,na.action = na.omit, var.equal = FALSE)
+#inconclusive
+equivalence()
+anovaBF(EC_Late~Experiment, Rebounds)
+
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Passive&#39;], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Exposure&#39;], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Terminal&#39;], paired = FALSE)
+t.test(Rebounds$EC_Late[Rebounds$Experiment == &#39;Passive&#39;], paired = FALSE)
+t.test(Rebounds$EC_Late[Rebounds$Experiment == &#39;Exposure&#39;], paired = FALSE)
+t.test(Rebounds$EC_Late[Rebounds$Experiment == &#39;Terminal&#39;], paired = FALSE)
+
+
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Passive&#39;], Rebounds$EC_Late[Rebounds$Experiment == &#39;Terminal&#39;], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Exposure&#39;], Rebounds$EC_Late[Rebounds$Experiment == &#39;Terminal&#39;], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == &#39;Passive&#39;], Rebounds$EC_Late[Rebounds$Experiment == &#39;Exposure&#39;], paired = FALSE)
+
+Implicit&lt;-Reboundanalysis(Rebounds)
+Implicit
+
+
+ANOVAPdata&lt;- PrepdataforPropANOVA(passive_localization, terminal_localization, exposure_localization)
+TtestPdata&lt;- PrepdataforPropT(passive_localization, terminal_localization, exposure_localization)
+
+
+t.test(TtestPdata$R1_Early[TtestPdata$Experiment == &quot;Passive&quot;])
+t.test(TtestPdata$R1_Early[TtestPdata$Experiment == &quot;Terminal&quot;])
+t.test(TtestPdata$R1_Early[TtestPdata$Experiment == &quot;Exposure&quot;])
+LocANOVA&lt;-ANOVAanalysis(ANOVAPdata)
+anovaBF(Deviations~Experiment* Time, ANOVAPdata)
+
+
+LocANOVA
+
+##Reach Model Comparison
+Passive_metrics&lt;- GroupModelAICs(passive_reaches, &#39;Passive&#39;)
+Terminal_metrics&lt;- GroupModelAICs(terminal_reaches, &#39;Terminal&#39;)
+Runlogregression()
+
+
+##Rate of Change
+bootstrapSemiAsymptoticDecayModels()
+getAsymptoticDecayParameterCIs()
+getSaturationTrials()
+
+
+#Fast process comparison between terminal and continuous
+parsforttest&lt;-ParticipantReachmodels2(passive_reaches, terminal_reaches)
+t.test(parsforttest$Rf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Rf[parsforttest$Experiment == &quot;Terminal&quot;]) 
+cohen.d(parsforttest$Rf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Rf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
+etaSquaredTtest(parsforttest$Rf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Rf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
+t.test(parsforttest$Lf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Lf[parsforttest$Experiment == &quot;Terminal&quot;]) 
+cohen.d(parsforttest$Lf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Lf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
+etaSquaredTtest(parsforttest$Lf[parsforttest$Experiment == &quot;Continuous&quot;],parsforttest$Lf[parsforttest$Experiment == &quot;Terminal&quot;], na.rm = TRUE)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBUdGVzdFBkYXRhJFIxX0Vhcmx5W1R0ZXN0UGRhdGEkRXhwZXJpbWVudCA9PSBcIkV4cG9zdXJlXCJdXG50ID0gNi42NTM4LCBkZiA9IDMxLCBwLXZhbHVlID0gMS45MzhlLTA3XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzLjQ0MTYzNiA2LjQ4NDAzNFxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA0Ljk2MjgzNSBcbiJ9 -->
-<pre><code>
-    One Sample t-test
-
-data:  TtestPdata$R1_Early[TtestPdata$Experiment == &quot;Exposure&quot;]
-t = 6.6538, df = 31, p-value = 1.938e-07
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 3.441636 6.484034
-sample estimates:
-mean of x 
- 4.962835 </code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->

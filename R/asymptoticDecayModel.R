@@ -271,7 +271,7 @@ asymptoticDecaySettings <- function() {
   
 }
 
-bootstrapSemiAsymptoticDecayModels <- function(bootstraps=5) {
+bootstrapSemiAsymptoticDecayModels <- function(bootstraps=1000) {
   
   settings <- asymptoticDecaySettings()
   
@@ -767,7 +767,7 @@ getStyles <- function() {
 }
 
 
-plotSaturation <- function(xscale='normal', target='tiff') {
+plotSaturation <- function(xscale='normal', target='svg') {
   
   
   fonts <- list(sans = "Arial", mono = "Arial")
