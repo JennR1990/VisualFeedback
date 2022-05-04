@@ -67,8 +67,11 @@ ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], paired = FALSE)
 ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], paired = FALSE)
 ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
 t.test(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], paired = FALSE)
+cohen.d(d=Rebounds$EC_Late[Rebounds$Experiment == 'Passive'],f=NA, na.rm=TRUE)
 t.test(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], paired = FALSE)
+cohen.d(d=Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'],f=NA, na.rm=TRUE)
 t.test(Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
+cohen.d(d=Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'],f=NA, na.rm=TRUE)
 
 
 ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
