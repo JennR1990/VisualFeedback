@@ -728,7 +728,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
   
   groupsignals <- list(
     'passive'       = c('reaches','localization'),
-    'terminal'   = c('localization', 'reaches'),
+    'terminal'   = c('reaches','localization'),
     'exposure'         = c('localization')
   )
   
@@ -767,10 +767,11 @@ plotSaturation <- function(xscale='normal', target='svg') {
   }
   
   groupcolors <- c(styles$passive$solid,
+                   styles$passive$solid,
                    styles$terminal$solid,
-                   styles$exposure$solid,
-                   "black",
-                   "grey")
+                   styles$terminal$solid,
+                   styles$exposure$solid
+                    )
   
   # loop through groups:
   for (groupname in names(groupsignals)) {
@@ -808,13 +809,13 @@ plotSaturation <- function(xscale='normal', target='svg') {
         
         processes <- list()
         
-        #print(c(groupname,signalname))
+        print(c(groupname,signalname))
         
         for (roc in c('lambda','lambda_975','lambda_025')) {
           
           par <- c('lambda'=df[which(df$group == groupname & df$signal == signalname),roc], 'N0'=df[which(df$group == groupname & df$signal == signalname),'N0'])
           par['scale'] <- df$N0_025[which(df$group == groupname & df$signal == signalname)]
-          #print(par)
+          print(par)
           
           dfit <- asymptoticDecayModel(par,schedule)$output
           smspl <- smooth.spline(x=c(0:(length(schedule)-1)), y=dfit, spar=NULL)
@@ -829,7 +830,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
         up_idx <- which(upr >= 1)[1]
         lo_idx <- which(lwr >= 1)[1]
         
-        #print(c(up_idx,lo_idx))
+        print(c(up_idx,lo_idx))
         
         X <- c(xcoords[1:up_idx],rev(xcoords[1:lo_idx]))
         Y <- c(upr[1:up_idx],rev(lwr[1:lo_idx]))
@@ -890,7 +891,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
     lines(c(0,20),c(1,1),col='black',lty=1,lw=2)
     text(20,1.05,'asymptote lower bound',adj=c(1,0.5))
     
-    legend(11,1.03,legend=c('Continuous-Localization',  'Terminal-Localization', 'Exposure-Localization', 'Reaches','Slowprocess'),col=groupcolors,lty=c(1,1,1,1,1),bty='n', cex = .85)
+    legend(11,.3,legend=c('Continuous-Localization',"Continuous-Reaches",  'Terminal-Localization',"Terminal-Reaches", 'Exposure-Localization'),col=groupcolors,lty=c(1,1,1,1,1),bty='n', cex = .85)
     
     axis(side=1, at=c(0,5,10,15,20), labels=c('baseline',sprintf('%d',c(5,10,15,20))))
     axis(side=2, at=seq(0,1,0.2), labels=sprintf('%d',round(seq(0,1,0.2)*100)),las = 2)
