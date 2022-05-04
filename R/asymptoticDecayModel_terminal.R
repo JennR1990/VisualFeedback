@@ -727,8 +727,8 @@ plotSaturation <- function(xscale='normal', target='svg') {
   settings <- asymptoticDecaySettings()
   
   groupsignals <- list(
-    'passive'       = c('reaches','localization', 'slowprocess'),
-    'terminal'   = c('localization'),
+    'passive'       = c('reaches','localization'),
+    'terminal'   = c('localization', 'reaches'),
     'exposure'         = c('localization')
   )
   
@@ -770,7 +770,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
                    styles$terminal$solid,
                    styles$exposure$solid,
                    "black",
-                   styles$slowprocess$solid)
+                   "grey")
   
   # loop through groups:
   for (groupname in names(groupsignals)) {

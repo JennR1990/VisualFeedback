@@ -1,8 +1,6 @@
-group,signal,avg,lwr,upr
-passive,localization,2,2,5
-passive,slowprocess,68,58,80
-passive,reaches,13,10,16
-terminal,localization,4,2,28
-terminal,slowprocess,78,72,84
-terminal,reaches,20,14,28
-exposure,localization,2,2,4
+﻿lower,mean,upper,Experiment,Task
+1,1,5,Conitnuous,Localization
+10,13,16,Conitnuous,Reaches
+1,3,25,Terminal,Localization
+14,20,29,Terminal,Reaches
+1,2,4,Exposure,Localization
