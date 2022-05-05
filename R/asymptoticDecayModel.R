@@ -773,7 +773,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
   fonts <- list(sans = "Arial", mono = "Arial")
   if (target == 'svg') {
     library('svglite')
-    svglite::svglite(file='figs/AbstractFig.svg', width=8, height=6, bg='white', system_fonts=fonts)
+    svglite::svglite(file='figs/Presentation Figure.svg', width=8, height=6, bg='white', system_fonts=fonts)
     
   }
   if (target == 'pdf') {
