@@ -26,16 +26,22 @@ The preview shows you a rendered HTML copy of the contents of the editor. Conseq
 ```{r plots}
 Reachmodel(passive_reaches, 'Passive', condition = 'loc', loc_data = passive_localization, color = colorPA)
 Reachmodel(terminal_reaches, 'Terminal', condition = 'loc', loc_data = terminal_localization, color = colorT)
-svglite('figs/Manuscript Figures_Jan19.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
+svglite('figs/Manuscript Figures_May16.svg', width = 12, height = 8, system_fonts=list(sans = "Arial"))
 layout(matrix(c(1,2,3,4), nrow = 2, byrow = TRUE))
-neuromatchReaches()
-mtext('a', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
-plotREAANOVA()
-mtext('b', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
 Localizations(passive_localization, terminal_localization, exposure_localization)
 mtext('a', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
 plotpassiveprop4points()
 mtext('b', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
+neuromatchReaches()
+mtext('c', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
+plotREAANOVA()
+mtext('d', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
+dev.off()
+
+plotSaturation()
+
+svglite('figs/regression plot.svg', width = 6, height = 6, system_fonts=list(sans = "Arial"))
+RegressionPLot()
 dev.off()
 
 svglite('figs/Schedule.svg', width = 6, height = 2, system_fonts=list(sans = "Arial"))

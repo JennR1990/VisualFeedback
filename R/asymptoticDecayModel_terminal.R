@@ -760,7 +760,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
          xlab='trials completed in rotated phase',ylab='percentage of saturation',
          main='modeled process speeds',
          xlim=c(0,20),ylim=c(0,1.1),
-         bty='n',ax=F)
+         bty='n',ax=F, cex.lab = 1.25)
     TIME <- seq(0,160,.1)  
     xcoords <- TIME
     
@@ -891,10 +891,10 @@ plotSaturation <- function(xscale='normal', target='svg') {
     lines(c(0,20),c(1,1),col='black',lty=1,lw=2)
     text(20,1.05,'asymptote lower bound',adj=c(1,0.5))
     
-    legend(11,.3,legend=c('Continuous-Localization',"Continuous-Reaches",  'Terminal-Localization',"Terminal-Reaches", 'Exposure-Localization'),col=groupcolors,lty=c(1,1,1,1,1),bty='n', cex = .85)
+    legend(11,.3,legend=c('Continuous-Localization',"Continuous-Reaches",  'Terminal-Localization',"Terminal-Reaches", 'Exposure-Localization'),col=groupcolors,lty=c(1,1,1,1,1),bty='n')
     
-    axis(side=1, at=c(0,5,10,15,20), labels=c('baseline',sprintf('%d',c(5,10,15,20))))
-    axis(side=2, at=seq(0,1,0.2), labels=sprintf('%d',round(seq(0,1,0.2)*100)),las = 2)
+    axis(side=1, at=c(0,5,10,15,20), labels=c('baseline',sprintf('%d',c(5,10,15,20))), cex = 1.25)
+    axis(side=2, at=seq(0,1,0.2), labels=sprintf('%d',round(seq(0,1,0.2)*100)),las = 2, cex = 1.25)
     
   }
   
