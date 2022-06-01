@@ -703,7 +703,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
   fonts <- list(sans = "Arial", mono = "Arial")
   if (target == 'svg') {
     library('svglite')
-    svglite::svglite(file='figs/AbstractFig.svg', width=8, height=6, bg='white', system_fonts=fonts)
+    svglite::svglite(file='figs/AbstractFig_june1st.svg', width=8, height=6, bg='white', system_fonts=fonts)
     
   }
   if (target == 'pdf') {
@@ -727,8 +727,8 @@ plotSaturation <- function(xscale='normal', target='svg') {
   settings <- asymptoticDecaySettings()
   
   groupsignals <- list(
-    'passive'       = c('reaches','localization'),
-    'terminal'   = c('reaches','localization'),
+    'passive'       = c('reaches','slowprocess',   'localization'),
+    'terminal'   = c('reaches','slowprocess','localization'),
     'exposure'         = c('localization')
   )
   
@@ -767,8 +767,10 @@ plotSaturation <- function(xscale='normal', target='svg') {
   }
   
   groupcolors <- c(styles$passive$solid,
+                   'brown',
                    styles$passive$solid,
                    styles$terminal$solid,
+                   'black',
                    styles$terminal$solid,
                    styles$exposure$solid
                     )
@@ -891,7 +893,7 @@ plotSaturation <- function(xscale='normal', target='svg') {
     lines(c(0,20),c(1,1),col='black',lty=1,lw=2)
     text(20,1.05,'asymptote lower bound',adj=c(1,0.5))
     
-    legend(11,.3,legend=c('Continuous-Localization',"Continuous-Reaches",  'Terminal-Localization',"Terminal-Reaches", 'Exposure-Localization'),col=groupcolors,lty=c(1,1,1,1,1),bty='n')
+    legend(11,.4,legend=c('Continuous-Localization',"Continuous-slowprocess","Continuous-Reaches",  'Terminal-Localization',"Terminal-slowprocess","Terminal-Reaches", 'Exposure-Localization'),col=groupcolors,lty=c(1,2,1,1,2,1,1),bty='n')
     
     axis(side=1, at=c(0,5,10,15,20), labels=c('baseline',sprintf('%d',c(5,10,15,20))), cex = 1.25)
     axis(side=2, at=seq(0,1,0.2), labels=sprintf('%d',round(seq(0,1,0.2)*100)),las = 2, cex = 1.25)

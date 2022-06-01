@@ -289,6 +289,7 @@ RegressionPLot <- function() {
     abline(v = c(0), lty = 3)
     lm<-plotRegressionWithCI(PRRm, PPec, colors = c(colorPA_trans, colorPA))
     pr<-summary(lm)$r.squared
+    ps<-summary(lm)$coefficients[2,1]
     print(summary(lm)$coefficients[2,4])
     
     Arm <- TCombine(terminal_reaches)
@@ -298,6 +299,7 @@ RegressionPLot <- function() {
     points(APec ~ ARm, col = colorT)
     tm<-plotRegressionWithCI(ARm, APec, colors = c(colorT_trans, colorT))
     tr<-summary(tm)$r.squared
+    ts<-summary(tm)$coefficients[2,1]
     print(summary(tm)$coefficients[2,4])
     
     PARRm <- as.numeric(unlist(colMeans(exposure_reaches[33:48,2:33], na.rm = TRUE)))
@@ -306,11 +308,12 @@ RegressionPLot <- function() {
     points(PAPec ~ PARRm, col = colorE)
     em<-plotRegressionWithCI(PARRm, PAPec, colors = c(colorE_trans, colorE))
     er<-summary(em)$r.squared
+    es<-summary(em)$coefficients[2,1]
     print(summary(em)$coefficients[2,4])
     
-    label1<- sprintf("Continuous, r2=%.2f", pr)
-    label2<- sprintf("Terminal, r2=%.2f", tr)
-    label3<- sprintf("Exposure, r2=%.2f", er)
+    label1<- sprintf("Continuous, r2=%.2f, β=%.2f", pr,ps)
+    label2<- sprintf("Terminal, r2=%.2f, β=%.2f", tr,ts)
+    label3<- sprintf("Exposure, r2=%.2f, β=%.2f", er,es)
     legend(
       -35,
       20,
