@@ -52,6 +52,9 @@ dev.off()
 ```
 
 
+
+
+
 ```{r Analysis}
 library(ez)
 ANOVAdata<- PrepdataforANOVA(passive_reaches,terminal_reaches)
@@ -141,4 +144,72 @@ Passive_PropMetrics<-LocalizationModelCompare(passive_localization, passive_reac
 Active_PropMetrics<-LocalizationModelCompare(active_localization, active_reaches, colorA)
 Exposure_PropMetrics<-ExpoLocalizationModelCompare(exposure_localization, exposure_reaches, colorE)
 Terminal_PropMetrics<-LocalizationModelCompare(terminal_localization, terminal_reaches, colorT)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r }
+#Prepare data for stats
+ANOVAdata<- PrepdataforANOVA(passive_reaches,terminal_reaches)
+Ttestdata<- PrepdataforT(passive_reaches,terminal_reaches)
+Rebounds<- PrepANOVARebounds(passive_reaches,terminal_reaches,exposure_reaches)
+ANOVAPdata<- PrepdataforPropANOVA(passive_localization, terminal_localization, exposure_localization)
+TtestPdata<- PrepdataforPropT(passive_localization, terminal_localization, exposure_localization)
+Rebounds$Experiment<- as.factor(Rebounds$Experiment)
+TtestPdata$Experiment<- as.factor(TtestPdata$Experiment)
+Ttestdata$Experiment<- as.factor(Ttestdata$Experiment)
+
+##Localizations
+#are they different from zero?
+ttestBF(x = TtestPdata$R1_Late[TtestPdata$Experiment == "Passive"],  paired=FALSE)
+ttestBF(x = TtestPdata$R1_Late[TtestPdata$Experiment == "Terminal"],  paired=FALSE)
+ttestBF(x = TtestPdata$R1_Late[TtestPdata$Experiment == "Exposure"],  paired=FALSE)
+#are they different from each other?
+anovaBF(EC_Late~Experiment, TtestPdata)
+
+
+
+###Reaches
+anovaBF(R1_Late~Experiment, Ttestdata)
+
+
+###Rebounds
+
+#Are they different from zero?
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
+
+#Are they different from each other?
+anovaBF(EC_Late~Experiment, Rebounds)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
+ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], paired = FALSE)
+
+
+
 ```
