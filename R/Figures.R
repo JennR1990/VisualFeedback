@@ -189,12 +189,12 @@ fitPropModel<- function(reachdata, locadata, exp = 1) {
   if (exp == 2){
     meanreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)
     distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
-    schedule<- c(distortion,meanreaches)
+    schedule<<- c(distortion,meanreaches)
   } else {
     meanreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
     meanreaches<- meanreaches*-1
     reachdata$distortion[241:288]<- as.numeric(meanreaches)
-    schedule<- reachdata$distortion
+    schedule<<- reachdata$distortion
   }
   
   #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse. 
@@ -225,7 +225,8 @@ fitPropModel<- function(reachdata, locadata, exp = 1) {
   #return(unlist(pargrid[bestpar]))
   
   #return the output to use for plots
-  return(output)
+  #return(output)
+  return(unlist(pargrid[bestpar]))
   
 }
 
@@ -914,15 +915,17 @@ Plotlocmodel <- function(dataset, name, color, yaxis) {
   lines(dataset$Mean * -1, col = c(rgb(0.44, 0.51, 0.57)))
 }
 
-
-
-
-
-test<- function() {
+plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'exp', exposure = FALSE) {
   
   localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
   distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
-  clampreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+  
+  if (exposure == TRUE) {
+    
+    clampreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)  
+  } else {
+    clampreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+  }
   clampreaches<- clampreaches*-1
   schedule<- c(distortion,clampreaches)
   
@@ -959,11 +962,79 @@ test<- function() {
   output<- PropModel(unlist(pargrid[bestpar]), schedule)
   lines(output, col = 'black')
   #lines(localizations, col = color)
-  proportion<- sprintf('Proportion = %f', unlist(pargrid[bestpar]))
+  proportion<- sprintf('Proportion = %.2f', unlist(pargrid[bestpar]))
   print(proportion)
   legend(0,-5, legend = c('Localization data', 'Proportional output'), col = c(color, 'black'), lty = 1,lwd = 2, bty = 'n')
-
+  #legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
+  text(144, 0, labels = proportion)
+  
+  # reaches <- getreachesformodel(reachdata)
+  # reach_par <-
+  #   fitTwoRateReachModel(
+  #     reaches = reaches$meanreaches,
+  #     schedule = schedule,
+  #     oneTwoRates = 2,
+  #     checkStability = TRUE
+  #   )
+  # reach_model <-
+  #   twoRateReachModel(par = reach_par, schedule = schedule)
+  # Average<- mean(localizations[182:224], na.rm = TRUE)
+  # Scale<- Average/30
+  # reach_model$slow<- reach_model$slow*Scale
+  # reach_model$fast<- reach_model$fast*Scale
+  #lines(reach_model$slow * -1, col = color,lty = 2)
+  #lines(reach_model$fast * -1, col = color,lty = 3)
+  
+  # return(those pars)
   return(unlist(pargrid[bestpar]))
   
 }
+PropModel <- function(par, schedule) {
+  locest<-c()
+  #loop through the perturbations in the schedule:
+  for (t in c(1:length(schedule))) {
+    # first we calculate what the model does, since the model is proportional, we just multiply the one parameters by the schedule to get what the person should do
+    
+    locest[t] <- par * schedule[t]
+  }
+  
+  # after we loop through all trials, we return the model output:
+  return(locest)
+  
+}
+
+PropModelMSE <- function(par, schedule, localizations) {
+  
+  locesti<- PropModel(par, schedule)
+  errors <- locesti - localizations
+  MSE <- mean(errors^2, na.rm=TRUE)
+  
+  
+  
+  return( MSE )
+  
+}
+
+
+gridsearch<- function(localizations, schedule, nsteps=7, topn=4) {
+  
+  
+  cat('doing grid search...\n')
+  
+  steps <- nsteps #say how many points inbetween 0-1 we want
+  pargrid <- seq(0.5*(1/steps),1-(0.5*(1/steps)),by=1/steps) #not sure what exactly this does
+  MSE<- rep(NA, length(pargrid))
+  pargrid<- cbind(pargrid, MSE)
+  
+  for (gridpoint in c(1:nrow(pargrid))) { #for each row 
+    par<-unlist(pargrid[gridpoint,1])    #take that row and take it out of df and make it par 
+    pargrid[gridpoint,2] <- PropModelMSE(par, schedule,localizations)
+  }
+  
+  bestN <- order(pargrid[,2])[1:topn]
+  
+  return(pargrid[bestN,])
+}
+
+
 

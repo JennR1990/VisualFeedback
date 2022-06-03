@@ -1203,11 +1203,17 @@ plotproportionalmodel<- function() {
 }
 
 
-plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'exp') {
+plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'exp', exposure = FALSE) {
   
   localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
   distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
+  
+  if (exposure == TRUE) {
+    
+    clampreaches<-rowMeans(reachdata[,2:ncol(reachdata)], na.rm=TRUE)  
+  } else {
   clampreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+  }
   clampreaches<- clampreaches*-1
   schedule<- c(distortion,clampreaches)
 
@@ -1244,11 +1250,11 @@ plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'exp') {
   output<- PropModel(unlist(pargrid[bestpar]), schedule)
   lines(output, col = 'black')
   #lines(localizations, col = color)
-  proportion<- sprintf('Proportion = %f', unlist(pargrid[bestpar]))
+  proportion<- sprintf('Proportion = %.2f', unlist(pargrid[bestpar]))
   print(proportion)
   legend(0,-5, legend = c('Localization data', 'Proportional output'), col = c(color, 'black'), lty = 1,lwd = 2, bty = 'n')
   #legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
-  #text(144, 0, labels = proportion)
+  text(144, 0, labels = proportion)
   
   # reaches <- getreachesformodel(reachdata)
   # reach_par <-

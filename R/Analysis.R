@@ -269,11 +269,47 @@ print("Equivalance test for terminal vs. exposure rebound")
 
 library('bayestestR')
 
-rope()
-
 
 
 ## Model Comparison ----
+
+Propmodelcomparison<- function(reachdata,locdata, exp){
+  library(RateRate)
+  library(SMCL)
+  ##getMSE for onerate model
+  df<- getreachesformodel(locdata)
+  schedule <- df$distortion
+  Reaches<- df$meanreaches
+  oneRateFit <- fitTwoRateReachModel(reaches=Reaches, schedule=schedule, oneTwoRates=1, grid='restricted', checkStability=TRUE)
+  oneRateMSE <- twoRateReachModelErrors(par=oneRateFit, reaches=Reaches, schedule=schedule)
+  
+  
+  #getMSE for prop model
+  par<-fitPropModel(reachdata, locdata, exp = exp)
+  localizations<- getreachesformodel(locdata)$meanreaches
+  PropModel_MSE<- PropModelMSE(par,schedule, localizations)
+  
+  N <- dim(df)[2] - 1
+  # the median length of a phase is 40 trials,
+  # and there are 7.2 of those in 288 trials
+  InOb <- seriesEffectiveSampleSize(Reaches, method='ac_lag95%CI')
+  print(InOb)
+  # this is then used for C:
+  #C <- InOb*(log(2*pi)+1)
+  #twoRateAIC <- (2*4) + InOb*log(twoRateMSE) + C
+  #oneRateAIC <- (2*2) + InOb*log(oneRateMSE) + C
+  
+  PropModelAIC<-(InOb * log(PropModel_MSE)) + (2 * 4)
+  oneRateAIC<-(InOb * log(oneRateMSE)) + (2 * 2)
+  
+  cat(sprintf('1-rate AIC: %0.2f  %s  PropModel AIC: %0.2f\n',oneRateAIC,c('>=', ' <')[as.numeric(oneRateAIC<PropModelAIC)+1],PropModelAIC))
+  likelihood<-exp((min(c(PropModelAIC, oneRateAIC))-c(PropModelAIC, oneRateAIC))/2)
+  print(likelihood)
+  #pars<- data.frame(twoRateFit)
+  metrics<- data.frame(PropModelAIC, oneRateAIC, likelihood[1], likelihood[2])
+  names(metrics)<- c('PropmodelAIC', 'oneRateAIC', 'PropModellikelihood', 'oneratelikelihood')
+  return(metrics)
+}
 GroupModelAICs <- function(data, group, grid = 'restricted') {
   
   df<- getreachesformodel(data)

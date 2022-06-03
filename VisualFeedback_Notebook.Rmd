@@ -42,14 +42,19 @@ plotSaturation()
 mtext('f', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
 dev.off()
 
-plotSaturation()
-
-svglite('figs/Localization plots.svg', width = 12, height = 6, system_fonts=list(sans = "Arial"))
-layout(matrix(c(1,2), nrow = 1, byrow = TRUE))
+svglite('figs/regression plot.svg', width = 6, height = 6, system_fonts=list(sans = "Arial"))
 RegressionPLot()
-mtext('a', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
-plotpropmodels()
-mtext('b', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2.5)
+mtext('d', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2)
+dev.off()
+
+svglite('figs/Localization plots.svg', width = 4, height = 6.75, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2,3), nrow = 3, byrow = TRUE), heights = c(1,1,1,2))
+plotfitPropModel(passive_reaches, passive_localization, colorPA, 'Continuous Localizations')
+mtext('a', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2)
+plotfitPropModel(terminal_reaches, terminal_localization, colorT, 'Terminal Localizations')
+mtext('b', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2)
+plotfitPropModel(exposure_reaches, exposure_localization, colorE, 'Exposure Localizations', exposure = TRUE)
+mtext('c', outer=FALSE, side=3, las=1, line=1, adj=0, padj=1,cex = 2)
 dev.off()
 
 svglite('figs/Schedule.svg', width = 6, height = 3, system_fonts=list(sans = "Arial"))
@@ -152,6 +157,13 @@ Passive_PropMetrics<-LocalizationModelCompare(passive_localization, passive_reac
 Active_PropMetrics<-LocalizationModelCompare(active_localization, active_reaches, colorA)
 Exposure_PropMetrics<-ExpoLocalizationModelCompare(exposure_localization, exposure_reaches, colorE)
 Terminal_PropMetrics<-LocalizationModelCompare(terminal_localization, terminal_reaches, colorT)
+
+
+#MOdel comparisons for prop vs onerate
+continuousmetrics<-Propmodelcomparison(passive_reaches,passive_localization, 1)
+terminalmetrics<-Propmodelcomparison(terminal_reaches,terminal_localization, 1)
+exposuremetrics<-Propmodelcomparison(exposure_reaches,exposure_localization, 2)
+
 ```
 
 
@@ -217,7 +229,5 @@ anovaBF(EC_Late~Experiment, Rebounds)
 ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
 ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], Rebounds$EC_Late[Rebounds$Experiment == 'Terminal'], paired = FALSE)
 ttestBF(Rebounds$EC_Late[Rebounds$Experiment == 'Passive'], Rebounds$EC_Late[Rebounds$Experiment == 'Exposure'], paired = FALSE)
-
-
 
 ```
