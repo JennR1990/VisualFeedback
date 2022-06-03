@@ -743,12 +743,12 @@ Plotschedule <- function(dataset) {
     type = 'l',
     col = 'white', cex.lab = 1.25
   )
-  rect(65,0,68,30, col = 'grey',border = NA)
-  text(67,33,'early', adj = .5)
+  #rect(65,0,68,30, col = 'grey',border = NA)
+  #text(67,33,'early', adj = .5)
   rect(221,0,224,30, col = 'grey',border = NA)
   text(223,33,'late', adj = .5)
-  rect(237,-30,240,0, col = 'grey',border = NA)
-  text(239,-33,'reversed', adj = .5)
+  #rect(237,-30,240,0, col = 'grey',border = NA)
+  #text(239,-33,'reversed', adj = .5)
   rect(273,-15,288,15, col = 'grey',border = NA)
   text(280,18,'clamped', adj = .5)
   lines(c(1, 64, 64, 224, 224, 240, 240),
@@ -1131,6 +1131,76 @@ plotRegressionWithCI <-
     return(this.lm)
   }
 
+
+
+plotproportionalmodel<- function() {
+  
+  localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
+  distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
+  clampreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+  clampreaches<- clampreaches*-1
+  schedule<- c(distortion,clampreaches)
+  
+  
+  
+  
+  #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse. 
+  pargrid <- gridsearch(localizations, schedule, nsteps = 7, topn = 4)
+  cat('optimize best fits...\n')
+  for (gridpoint in c(1:nrow(pargrid))) { #for each row 
+    par<-unlist(pargrid[gridpoint,1]) 
+    
+    control <- list('maxit'=10000, 'ndeps'=1e-9 )
+    fit <- optim(par=par, PropModelMSE, gr=NULL, schedule, localizations, control=control, method = "Brent", lower = 0, upper = 1)
+    optpar<- fit$par
+    
+    
+    # stick optpar back in pargrid
+    pargrid[gridpoint,1] <- optpar
+    
+    pargrid[gridpoint,2]<- fit$value
+    
+  } 
+  # get lowest MSE, and pars that go with that
+  bestpar <- order(pargrid[,2])[1]
+  plot(localizations, type = 'l',  ylim = c(-15,15), axes = FALSE, main = title, ylab = 'Change in Hand Localizations [°]', xlab = "Trial", col = color, cex.lab = 1.5, cex.main = 1.5)
+  axis(
+    1,
+    at = c(1, 64, 224, 240, 288),
+    cex.axis = 1.5,
+    las = 2
+  )
+  axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
+  output<- PropModel(unlist(pargrid[bestpar]), schedule)
+  lines(output, col = 'black')
+  #lines(localizations, col = color)
+  proportion<- sprintf('Proportion = %f', unlist(pargrid[bestpar]))
+  print(proportion)
+  legend(0,-5, legend = c('Localization data', 'Proportional output'), col = c(color, 'black'), lty = 1,lwd = 2, bty = 'n')
+  #legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
+  #text(144, 0, labels = proportion)
+  
+  # reaches <- getreachesformodel(reachdata)
+  # reach_par <-
+  #   fitTwoRateReachModel(
+  #     reaches = reaches$meanreaches,
+  #     schedule = schedule,
+  #     oneTwoRates = 2,
+  #     checkStability = TRUE
+  #   )
+  # reach_model <-
+  #   twoRateReachModel(par = reach_par, schedule = schedule)
+  # Average<- mean(localizations[182:224], na.rm = TRUE)
+  # Scale<- Average/30
+  # reach_model$slow<- reach_model$slow*Scale
+  # reach_model$fast<- reach_model$fast*Scale
+  #lines(reach_model$slow * -1, col = color,lty = 2)
+  #lines(reach_model$fast * -1, col = color,lty = 3)
+  
+  # return(those pars)
+  return(unlist(pargrid[bestpar]))
+  
+}
 
 
 plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'exp') {

@@ -913,3 +913,57 @@ Plotlocmodel <- function(dataset, name, color, yaxis) {
   axis(2, at = c(-30, -15, 0, 15, 30), cex.axis = 1.5, las = 2)
   lines(dataset$Mean * -1, col = c(rgb(0.44, 0.51, 0.57)))
 }
+
+
+
+
+
+test<- function() {
+  
+  localizations<-rowMeans(locadata[,2:ncol(locadata)], na.rm=TRUE)
+  distortion<- c(rep(0, 64), rep(30, 160), rep (-30,16))
+  clampreaches<-rowMeans(reachdata[241:288,2:ncol(reachdata)], na.rm=TRUE)
+  clampreaches<- clampreaches*-1
+  schedule<- c(distortion,clampreaches)
+  
+  
+  
+  
+  #this function will take the dataframe made in the last function (dogridsearch) and use the list of parameters to make a new model then compare to output and get a new mse. 
+  pargrid <- gridsearch(localizations, schedule, nsteps = 7, topn = 4)
+  cat('optimize best fits...\n')
+  for (gridpoint in c(1:nrow(pargrid))) { #for each row 
+    par<-unlist(pargrid[gridpoint,1]) 
+    
+    control <- list('maxit'=10000, 'ndeps'=1e-9 )
+    fit <- optim(par=par, PropModelMSE, gr=NULL, schedule, localizations, control=control, method = "Brent", lower = 0, upper = 1)
+    optpar<- fit$par
+    
+    
+    # stick optpar back in pargrid
+    pargrid[gridpoint,1] <- optpar
+    
+    pargrid[gridpoint,2]<- fit$value
+    
+  } 
+  # get lowest MSE, and pars that go with that
+  bestpar <- order(pargrid[,2])[1]
+  plot(localizations, type = 'l',  ylim = c(-15,15), axes = FALSE, main = title, ylab = 'Change in Hand Localizations [°]', xlab = "Trial", col = color, cex.lab = 1.5, cex.main = 1.5)
+  axis(
+    1,
+    at = c(1, 64, 224, 240, 288),
+    cex.axis = 1.5,
+    las = 2
+  )
+  axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
+  output<- PropModel(unlist(pargrid[bestpar]), schedule)
+  lines(output, col = 'black')
+  #lines(localizations, col = color)
+  proportion<- sprintf('Proportion = %f', unlist(pargrid[bestpar]))
+  print(proportion)
+  legend(0,-5, legend = c('Localization data', 'Proportional output'), col = c(color, 'black'), lty = 1,lwd = 2, bty = 'n')
+
+  return(unlist(pargrid[bestpar]))
+  
+}
+
