@@ -1881,18 +1881,27 @@ etaSquaredTtest(parsforttest$Lf[parsforttest$Experiment == &quot;Continuous&quot
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhwb3N1cmVtZXRyaWNzPC1Qcm9wbW9kZWxjb21wYXJpc29uKGV4cG9zdXJlX3JlYWNoZXMsZXhwb3N1cmVfbG9jYWxpemF0aW9uLCAyKVxuXG5gYGAifQ== -->
-<pre class="r"><code>exposuremetrics&lt;-Propmodelcomparison(exposure_reaches,exposure_localization, 2)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuUmVncmVzc2lvblBMb3QoKVxucGxvdHByb3Btb2RlbHMoKVxuXG5cbnBsb3RmaXRQcm9wTW9kZWwodGVybWluYWxfcmVhY2hlcywgdGVybWluYWxfbG9jYWxpemF0aW9uLCBjb2xvclQsICdUZXJtaW5hbCBQcm9wIE1vZGVsJylcbnBsb3RmaXRQcm9wTW9kZWwocGFzc2l2ZV9yZWFjaGVzLCBwYXNzaXZlX2xvY2FsaXphdGlvbiwgY29sb3JQQSwgJ0NvbnRpbnVvdXMgUHJvcCBNb2RlbCcpXG5wbG90Zml0UHJvcE1vZGVsKGV4cG9zdXJlX3JlYWNoZXMsIGV4cG9zdXJlX2xvY2FsaXphdGlvbiwgY29sb3JFLCAnRXhwb3N1cmUgUHJvcCBNb2RlbCcsIGV4cCA9ICdleHAnKVxuZGV2Lm9mZigpXG5QYXNzaXZlX1Byb3BNZXRyaWNzPC1Mb2NhbGl6YXRpb25Nb2RlbENvbXBhcmUocGFzc2l2ZV9sb2NhbGl6YXRpb24sIHBhc3NpdmVfcmVhY2hlcywgY29sb3JQQSlcbkFjdGl2ZV9Qcm9wTWV0cmljczwtTG9jYWxpemF0aW9uTW9kZWxDb21wYXJlKGFjdGl2ZV9sb2NhbGl6YXRpb24sIGFjdGl2ZV9yZWFjaGVzLCBjb2xvckEpXG5FeHBvc3VyZV9Qcm9wTWV0cmljczwtRXhwb0xvY2FsaXphdGlvbk1vZGVsQ29tcGFyZShleHBvc3VyZV9sb2NhbGl6YXRpb24sIGV4cG9zdXJlX3JlYWNoZXMsIGNvbG9yRSlcblRlcm1pbmFsX1Byb3BNZXRyaWNzPC1Mb2NhbGl6YXRpb25Nb2RlbENvbXBhcmUodGVybWluYWxfbG9jYWxpemF0aW9uLCB0ZXJtaW5hbF9yZWFjaGVzLCBjb2xvclQpXG5cblxuI01PZGVsIGNvbXBhcmlzb25zIGZvciBwcm9wIHZzIG9uZXJhdGVcbmNvbnRpbnVvdXNtZXRyaWNzPC1Qcm9wbW9kZWxjb21wYXJpc29uKHBhc3NpdmVfcmVhY2hlcyxwYXNzaXZlX2xvY2FsaXphdGlvbiwgMSlcbnRlcm1pbmFsbWV0cmljczwtUHJvcG1vZGVsY29tcGFyaXNvbih0ZXJtaW5hbF9yZWFjaGVzLHRlcm1pbmFsX2xvY2FsaXphdGlvbiwgMSlcbmV4cG9zdXJlbWV0cmljczwtUHJvcG1vZGVsY29tcGFyaXNvbihleHBvc3VyZV9yZWFjaGVzLGV4cG9zdXJlX2xvY2FsaXphdGlvbiwgMilcblxuYGBgIn0= -->
+<pre class="r"><code>RegressionPLot()
+plotpropmodels()
+
+
+plotfitPropModel(terminal_reaches, terminal_localization, colorT, &#39;Terminal Prop Model&#39;)
+plotfitPropModel(passive_reaches, passive_localization, colorPA, &#39;Continuous Prop Model&#39;)
+plotfitPropModel(exposure_reaches, exposure_localization, colorE, &#39;Exposure Prop Model&#39;, exp = &#39;exp&#39;)
+dev.off()
+Passive_PropMetrics&lt;-LocalizationModelCompare(passive_localization, passive_reaches, colorPA)
+Active_PropMetrics&lt;-LocalizationModelCompare(active_localization, active_reaches, colorA)
+Exposure_PropMetrics&lt;-ExpoLocalizationModelCompare(exposure_localization, exposure_reaches, colorE)
+Terminal_PropMetrics&lt;-LocalizationModelCompare(terminal_localization, terminal_reaches, colorT)
+
+
+#MOdel comparisons for prop vs onerate
+continuousmetrics&lt;-Propmodelcomparison(passive_reaches,passive_localization, 1)
+terminalmetrics&lt;-Propmodelcomparison(terminal_reaches,terminal_localization, 1)
+exposuremetrics&lt;-Propmodelcomparison(exposure_reaches,exposure_localization, 2)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiZG9pbmcgZ3JpZCBzZWFyY2guLi5cbm9wdGltaXplIGJlc3QgZml0cy4uLlxuWzFdIDAuMTYwMjIyM1xuWzFdIDYuNjk3Njc0XG4xLXJhdGUgQUlDOiAyMi43MyAgPj0gIFByb3BNb2RlbCBBSUM6IDEyLjE1XG5bMV0gMS4wMDAwMDAwMDAgMC4wMDUwMzAyNTNcbiJ9 -->
-<pre><code>doing grid search...
-optimize best fits...
-[1] 0.1602223
-[1] 6.697674
-1-rate AIC: 22.73  &gt;=  PropModel AIC: 12.15
-[1] 1.000000000 0.005030253</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->

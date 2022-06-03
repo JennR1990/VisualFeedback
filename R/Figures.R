@@ -951,20 +951,20 @@ plotfitPropModel<- function(reachdata, locadata, color, title, exp = 'exp', expo
   } 
   # get lowest MSE, and pars that go with that
   bestpar <- order(pargrid[,2])[1]
-  plot(localizations, type = 'l',  ylim = c(-15,15), axes = FALSE, main = title, ylab = 'Change in Hand Localizations [°]', xlab = "Trial", col = color, cex.lab = 1.5, cex.main = 1.5)
+  plot(localizations, type = 'l',  ylim = c(-10,10), axes = FALSE, main = title, ylab = 'Change in Hand Localizations [°]', xlab = "Trial", col = color, cex.lab = 1.5, cex.main = 1.5)
   axis(
     1,
     at = c(1, 64, 224, 240, 288),
     cex.axis = 1.5,
     las = 2
   )
-  axis(2, at = c(-15, -10,-5,0, 5,10,15), cex.axis = 1.5, las = 2)
+  axis(2, at = c( -10,-5,0, 5,10), cex.axis = 1.5, las = 2)
   output<- PropModel(unlist(pargrid[bestpar]), schedule)
   lines(output, col = 'black')
   #lines(localizations, col = color)
   proportion<- sprintf('Proportion = %.2f', unlist(pargrid[bestpar]))
   print(proportion)
-  legend(0,-5, legend = c('Localization data', 'Proportional output'), col = c(color, 'black'), lty = 1,lwd = 2, bty = 'n')
+  legend(0,0, legend = c('Localization data', 'Proportional output'), col = c(color, 'black'), lty = 1,lwd = 2, bty = 'n')
   #legend(-10, -2, legend = c('Localization data', 'proportional', 'fast', 'slow'), col = c(color, "black", color, color), lty = c(1,1,3,2), lwd = 2, bty = 'n', cex = 1.5, ncol =  2)
   text(144, 0, labels = proportion)
   
