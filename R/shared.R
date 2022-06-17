@@ -7,7 +7,7 @@ getreachesformodel<- function(data) {
 Loaddata<- function (group='passive', task='reaches') {
   # filename <- sprintf('data/%s_%s.csv',group,task)
   # df <- read.csv(filename, stringsAsFactors=F)
-  return(read.csv(sprintf('data/%s_%s.csv',group,task), stringsAsFactors=F))
+  return(read.csv(sprintf('data1/%s_%s.csv',group,task), stringsAsFactors=F))
 }
  
 loadalldata<- function () {

@@ -48,7 +48,7 @@ asymptoticDecayMSE <- function(par, schedule, signal, N0=FALSE) {
   
 }
 
-asymptoticDecayFit <- function(schedule, signal, gridpoints=11, gridfits=10, setAsymptote=FALSE, useOptimx=FALSE) {
+asymptoticDecayFit <- function(schedule, signal, gridpoints=11, gridfits=10, setAsymptote=FALSE, useOptimx=TRUE) {
   
   # set the search grid:
   parvals <- seq(1/gridpoints/2,1-(1/gridpoints/2),1/gridpoints)
