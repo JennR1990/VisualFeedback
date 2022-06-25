@@ -1,5 +1,5 @@
 
-
+schedule<- rep(-1, times = 161)
 
 pars<-c()
 for (i in 2:33){
@@ -29,3 +29,15 @@ pars$experiment<- c(rep("Continuous", times = 32),rep("Terminal", times = 32),re
 
 ttestBF(pars$lambda[pars$experiment == 'Continuous'], pars$lambda[pars$experiment == 'Terminal'], paired = FALSE)
 ttestBF(pars$lambda[pars$experiment == 'Continuous'], pars$lambda[pars$experiment == 'Exposure'], paired = FALSE)
+
+pars$experiment<- as.factor(pars$experiment)
+anovaBF(lambda ~ experiment, data= pars)
+anovaBF(N0 ~ experiment, data= pars)
+
+ttestBF(pars$N0[pars$experiment == 'Continuous'], pars$N0[pars$experiment == 'Terminal'], paired = FALSE)
+ttestBF(pars$N0[pars$experiment == 'Continuous'], pars$N0[pars$experiment == 'Exposure'], paired = FALSE)
+ttestBF(pars$N0[pars$experiment == 'Terminal'], pars$N0[pars$experiment == 'Exposure'], paired = FALSE)
+
+ttestBF(pars$N0[pars$experiment == 'Continuous'], paired = FALSE)
+ttestBF(pars$N0[pars$experiment == 'Exposure'], paired = FALSE)
+ttestBF(pars$N0[pars$experiment == 'Terminal'], paired = FALSE)
