@@ -140,16 +140,6 @@ etaSquaredTtest(parsforttest$Lf[parsforttest$Experiment == "Continuous"],parsfor
 
 
 
-#Bayesian Test between learning rates for localizatins
-
-cLR<- read.csv("data/passive_localization_main_semi.csv", header = TRUE)
-TLR<- read.csv("data/terminal_localization_main_semi.csv", header = TRUE)
-ELR<- read.csv("data/exposure_localization_main_semi.csv", header = TRUE)
-LRdata<- rbind(cLR,TLR,ELR)
-LRdata$experiment<- c(rep("Continuous", times = 1000),rep("Terminal", times = 1000),rep("Exposure", times = 1000))
-ttestBF(LRdata$lambda[LRdata$experiment == 'Continuous'], LRdata$lambda[LRdata$experiment == 'Terminal'], paired = FALSE)
-ttestBF(LRdata$lambda[LRdata$experiment == 'Continuous'], LRdata$lambda[LRdata$experiment == 'Exposure'], paired = FALSE)
-
 
 ```
 
