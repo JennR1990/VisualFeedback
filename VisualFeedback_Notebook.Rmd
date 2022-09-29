@@ -131,6 +131,12 @@ getSaturationTrials()
 
 #Fast process comparison between terminal and continuous
 parsforttest<-ParticipantReachmodels2(passive_reaches, terminal_reaches)
+ttestBF(parsforttest$Lf[parsforttest$Experiment == 'Continuous'], parsforttest$Lf[parsforttest$Experiment == 'Terminal'], paired = FALSE)
+ttestBF(parsforttest$Rf[parsforttest$Experiment == 'Continuous'], parsforttest$Rf[parsforttest$Experiment == 'Terminal'], paired = FALSE)
+ttestBF(parsforttest$Rs[parsforttest$Experiment == 'Continuous'], parsforttest$Rs[parsforttest$Experiment == 'Terminal'], paired = FALSE)
+ttestBF(parsforttest$Ls[parsforttest$Experiment == 'Continuous'], parsforttest$Ls[parsforttest$Experiment == 'Terminal'], paired = FALSE)
+
+
 t.test(parsforttest$Rf[parsforttest$Experiment == "Continuous"],parsforttest$Rf[parsforttest$Experiment == "Terminal"]) 
 cohen.d(parsforttest$Rf[parsforttest$Experiment == "Continuous"],parsforttest$Rf[parsforttest$Experiment == "Terminal"], na.rm = TRUE)
 etaSquaredTtest(parsforttest$Rf[parsforttest$Experiment == "Continuous"],parsforttest$Rf[parsforttest$Experiment == "Terminal"], na.rm = TRUE)
@@ -140,6 +146,15 @@ etaSquaredTtest(parsforttest$Lf[parsforttest$Experiment == "Continuous"],parsfor
 
 
 
+
+
+mean(TtestPdata$R1_Late[TtestPdata$Experiment=="Terminal"], na.rm=TRUE)
+mean(TtestPdata$R1_Late[TtestPdata$Experiment=="Passive"], na.rm=TRUE)
+mean(TtestPdata$R1_Late[TtestPdata$Experiment=="Exposure"], na.rm=TRUE)
+
+mean(TtestPdata$R2[TtestPdata$Experiment=="Terminal"], na.rm=TRUE)
+mean(TtestPdata$R2[TtestPdata$Experiment=="Passive"], na.rm=TRUE)
+mean(TtestPdata$R2[TtestPdata$Experiment=="Exposure"], na.rm=TRUE)
 
 ```
 
