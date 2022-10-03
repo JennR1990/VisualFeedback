@@ -45,11 +45,11 @@ ttestBF(ppars$N0[ppars$experiment == 'Terminal'], paired = FALSE)
 
 
 
-schedule<- rep(1, times = 161)
+schedule<- rep(1, times = 160)
 
 pars<-c()
 for (i in 2:33){
-  setdata<- c(0,passive_reaches[65:224,i])
+  setdata<- c(passive_reaches[65:224,i])
   par<- asymptoticDecayFit(schedule = schedule, signal = setdata, setAsymptote = FALSE )
   pars<- rbind(pars,par)
 }
@@ -57,7 +57,7 @@ for (i in 2:33){
 
 
 for (i in 2:33){
-  setdata<- c(0,terminal_reaches[65:224,i])
+  setdata<- c(terminal_reaches[65:224,i])
   par<- asymptoticDecayFit(schedule = schedule, signal = setdata, setAsymptote = FALSE )
   pars<- rbind(pars,par)
 }
