@@ -48,21 +48,24 @@ asymptoticDecayMSE <- function(par, schedule, signal, N0=FALSE) {
   
 }
 
-asymptoticDecayFit <- function(schedule, signal, gridpoints=11, gridfits=10, setAsymptote=FALSE, useOptimx=FALSE) {
+asymptoticDecayFit <- function(schedule, signal, gridpoints=11, gridfits=10, setAsymptote=FALSE, useOptimx=TRUE) {
   
   # set the search grid:
   parvals <- seq(1/gridpoints/2,1-(1/gridpoints/2),1/gridpoints)
   
   maxAsymptote <- 2*max(abs(signal), na.rm=TRUE)
+  MinAsymptote <- -1*max(abs(signal), na.rm = TRUE)
   
   # define the search grid:
   if (setAsymptote) {
     searchgrid <- expand.grid('lambda' = parvals)
   } else {
     searchgrid <- expand.grid('lambda' = parvals, 
-                              'N0'     = parvals * maxAsymptote)
+                              'N0'     = (parvals * (maxAsymptote - MinAsymptote)) + MinAsymptote )
   }
   
+  print(MinAsymptote)
+  print(maxAsymptote)
   # evaluate starting positions:
   MSE <- apply(searchgrid, FUN=asymptoticDecayMSE, MARGIN=c(1), schedule=schedule, signal=signal, N0=setAsymptote)
   
@@ -72,7 +75,7 @@ asymptoticDecayFit <- function(schedule, signal, gridpoints=11, gridfits=10, set
     upper <- c(1)
   } else {
     df <- data.frame(searchgrid[order(MSE)[1:gridfits],])
-    lower <- c(0,0)
+    lower <- c(0,MinAsymptote)
     upper <- c(1,maxAsymptote)
   }
   

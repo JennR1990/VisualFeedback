@@ -11,14 +11,14 @@ ppars<- rbind(ppars,par)
 
 
 for (i in 2:33){
-  setdata<- c(0,terminal_localization[65:224,i])
+  setdata<- unlist(c(0,terminal_localization[65:224,i]))
   par<- asymptoticDecayFit(schedule = schedule, signal = setdata, setAsymptote = FALSE )
   ppars<- rbind(ppars,par)
 }
 
 
 for (i in 2:33){
-  setdata<- c(0,exposure_localization[65:224,i])
+  setdata<- unlist(c(0,exposure_localization[65:224,i]))
   par<- asymptoticDecayFit(schedule = schedule, signal = setdata, setAsymptote = FALSE )
   ppars<- rbind(ppars,par)
 }
